@@ -36,8 +36,8 @@ open class BaseViewController: UIViewController, BaseViewControllerProtocol, UIG
     // MARK: - Lifecycle
     open override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationProperties()
         configureInterface()
+        setNavigationProperties()
         observeContent()
     }
 

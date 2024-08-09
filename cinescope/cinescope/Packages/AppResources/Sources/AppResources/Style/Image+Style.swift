@@ -31,4 +31,17 @@ public extension UIImage {
     static var iconClose: UIImage? {
         return UIImage(named: "iconClose", in: Bundle.module, compatibleWith: .current)
     }
+    
+    // MARK: - Logo
+    static var appLogo: UIImage? {
+        return UIImage(named: "appLogo", in: Bundle.module, compatibleWith: .current)
+    }
+    
+    static var logoNamed: UIImage? {
+        return UIImage(named: "logoNamed", in: Bundle.module, compatibleWith: .current)
+    }
+    
+    static var patternBase: UIImage? {
+        return UIImage(named: "patternBase", in: Bundle.module, compatibleWith: .current)
+    }
 }
