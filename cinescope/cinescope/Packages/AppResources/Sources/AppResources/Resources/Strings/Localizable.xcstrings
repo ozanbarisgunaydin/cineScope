@@ -1,0 +1,94 @@
+{
+    "sourceLanguage" : "en",
+    "strings" : {
+        "generic.cancel" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "Cancel"
+                    }
+                }
+            }
+        },
+        "generic.continue" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "Continue"
+                    }
+                }
+            }
+        },
+        "generic.okay" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "Okay"
+                    }
+                }
+            }
+        },
+        "error.title" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "Error Occurred"
+                    }
+                }
+            }
+        },
+        "error.message" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "Please try again later."
+                    }
+                }
+            }
+        },
+        "error.timeoutMessage" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "The operation timed out. Please try again later."
+                    }
+                }
+            }
+        },
+        "error.connectionTitle" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "Connection Problem"
+                    }
+                }
+            }
+        },
+        "error.connectionMessage" : {
+            "extractionState" : "manual",
+            "localizations" : {
+                "en" : {
+                    "stringUnit" : {
+                        "state" : "translated",
+                        "value" : "We detected an issue with your internet connection. Please check your settings and try to reconnect."
+                    }
+                }
+            }
+        }
+    },
+    "version" : "1.0"
+}

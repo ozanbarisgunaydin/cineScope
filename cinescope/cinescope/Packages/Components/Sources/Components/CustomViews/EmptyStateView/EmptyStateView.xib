@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Inter-ExtraBold.ttf">
+            <string>Inter-ExtraBold</string>
+        </array>
+        <array key="Inter-Regular.ttf">
+            <string>Inter-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyStateView" customModule="Components">
+            <connections>
+                <outlet property="backgroundColorView" destination="57K-tg-Tub" id="fZb-FV-cZl"/>
+                <outlet property="imageContainerView" destination="Ols-4g-loW" id="ja8-Zo-NjM"/>
+                <outlet property="imageView" destination="IcG-Ym-7aY" id="h4j-pm-8JQ"/>
+                <outlet property="messageLabel" destination="9C7-Mc-hNk" id="qNT-L5-SBm"/>
+                <outlet property="titleLabel" destination="olY-xH-ldN" id="cCh-qG-2Er"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="167"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ols-4g-loW">
+                    <rect key="frame" x="128.66666666666666" y="0.0" width="70" height="70"/>
+                    <subviews>
+                        <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57K-tg-Tub">
+                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                            <color key="backgroundColor" name="royalBlueSwitch"/>
+                        </view>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IcG-Ym-7aY">
+                            <rect key="frame" x="17" y="17" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="APE-bd-8mJ"/>
+                                <constraint firstAttribute="height" constant="36" id="Cd0-le-TgC"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="57K-tg-Tub" firstAttribute="top" secondItem="Ols-4g-loW" secondAttribute="top" id="12y-20-gFd"/>
+                        <constraint firstAttribute="bottom" secondItem="57K-tg-Tub" secondAttribute="bottom" id="CzX-3k-0nM"/>
+                        <constraint firstAttribute="width" constant="70" id="Kdm-X1-UZm"/>
+                        <constraint firstItem="57K-tg-Tub" firstAttribute="leading" secondItem="Ols-4g-loW" secondAttribute="leading" id="TVR-ri-gL0"/>
+                        <constraint firstAttribute="height" constant="70" id="j05-HJ-vVB"/>
+                        <constraint firstItem="IcG-Ym-7aY" firstAttribute="centerY" secondItem="Ols-4g-loW" secondAttribute="centerY" id="qcJ-IS-OeK"/>
+                        <constraint firstItem="IcG-Ym-7aY" firstAttribute="centerX" secondItem="Ols-4g-loW" secondAttribute="centerX" id="vBl-LZ-P4g"/>
+                        <constraint firstAttribute="trailing" secondItem="57K-tg-Tub" secondAttribute="trailing" id="vvT-vF-KVD"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uEo-JG-cLF">
+                    <rect key="frame" x="12" y="95" width="303" height="72"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Veri Bulunamadı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olY-xH-ldN">
+                            <rect key="frame" x="0.0" y="0.0" width="303" height="23.333333333333332"/>
+                            <fontDescription key="fontDescription" name="Inter-ExtraBold" family="Inter" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9C7-Mc-hNk">
+                            <rect key="frame" x="0.0" y="39.333333333333343" width="303" height="32.666666666666657"/>
+                            <string key="text">Seçilen tarihe ait muhtemeller 
+bulunmamaktadır.</string>
+                            <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="uEo-JG-cLF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="3Aj-yo-8Jr"/>
+                <constraint firstItem="Ols-4g-loW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LX6-Yf-t6L"/>
+                <constraint firstItem="Ols-4g-loW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="X2S-Ur-Jva"/>
+                <constraint firstItem="uEo-JG-cLF" firstAttribute="top" secondItem="Ols-4g-loW" secondAttribute="bottom" constant="25" id="X6I-5B-Jc6"/>
+                <constraint firstAttribute="trailing" secondItem="uEo-JG-cLF" secondAttribute="trailing" constant="12" id="b4J-Hn-1Uc"/>
+                <constraint firstAttribute="bottom" secondItem="uEo-JG-cLF" secondAttribute="bottom" id="tRv-bf-ph9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-16.030534351145036" y="-201.05633802816902"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="royalBlueSwitch">
+            <color red="0.058823529411764705" green="0.30980392156862746" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

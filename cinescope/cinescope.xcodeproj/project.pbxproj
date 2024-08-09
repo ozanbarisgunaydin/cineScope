@@ -7,25 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0630AF162C63AFC3002BF2CA /* Utility in Resources */ = {isa = PBXBuildFile; fileRef = 0630AF152C63AFC3002BF2CA /* Utility */; };
+		0630AF192C63BDD2002BF2CA /* Splash in Resources */ = {isa = PBXBuildFile; fileRef = 0630AF182C63BDD2002BF2CA /* Splash */; };
+		0630AF1D2C64202C002BF2CA /* Router in Resources */ = {isa = PBXBuildFile; fileRef = 0630AF1C2C64202C002BF2CA /* Router */; };
+		0630AF1F2C64263A002BF2CA /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 0630AF1E2C64263A002BF2CA /* Router */; };
+		0630AF222C642C2E002BF2CA /* Home in Resources */ = {isa = PBXBuildFile; fileRef = 0630AF212C642C2E002BF2CA /* Home */; };
+		069710992C6397C600A705C7 /* AppManagers in Resources */ = {isa = PBXBuildFile; fileRef = 0697108F2C6397C500A705C7 /* AppManagers */; };
+		0697109A2C6397C600A705C7 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = 069710902C6397C500A705C7 /* Components */; };
+		0697109B2C6397C600A705C7 /* AppResources in Resources */ = {isa = PBXBuildFile; fileRef = 069710912C6397C500A705C7 /* AppResources */; };
+		0697109C2C6397C600A705C7 /* Database in Resources */ = {isa = PBXBuildFile; fileRef = 069710922C6397C500A705C7 /* Database */; };
+		0697109F2C6397C600A705C7 /* Network in Resources */ = {isa = PBXBuildFile; fileRef = 069710952C6397C500A705C7 /* Network */; };
+		069710A02C6397C600A705C7 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = 069710962C6397C600A705C7 /* Common */; };
 		06E48DF32C63898A000A0BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48DF22C63898A000A0BAE /* AppDelegate.swift */; };
 		06E48DF52C63898A000A0BAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48DF42C63898A000A0BAE /* SceneDelegate.swift */; };
 		06E48DFC2C63898D000A0BAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFB2C63898D000A0BAE /* Assets.xcassets */; };
 		06E48DFF2C63898D000A0BAE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFE2C63898D000A0BAE /* Base */; };
-		06E48E0F2C639411000A0BAE /* AppDelegate+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48E0B2C639411000A0BAE /* AppDelegate+Route.swift */; };
 		06E48E112C639411000A0BAE /* AppDelegate+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */; };
-		06E48E122C639411000A0BAE /* AppDelegate+DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48E0E2C639411000A0BAE /* AppDelegate+DeepLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0630AF152C63AFC3002BF2CA /* Utility */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utility; sourceTree = "<group>"; };
+		0630AF182C63BDD2002BF2CA /* Splash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Splash; sourceTree = "<group>"; };
+		0630AF1C2C64202C002BF2CA /* Router */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Router; sourceTree = "<group>"; };
+		0630AF212C642C2E002BF2CA /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
+		0697108F2C6397C500A705C7 /* AppManagers */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppManagers; sourceTree = "<group>"; };
+		069710902C6397C500A705C7 /* Components */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Components; sourceTree = "<group>"; };
+		069710912C6397C500A705C7 /* AppResources */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppResources; sourceTree = "<group>"; };
+		069710922C6397C500A705C7 /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Database; sourceTree = "<group>"; };
+		069710952C6397C500A705C7 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
+		069710962C6397C600A705C7 /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Common; sourceTree = "<group>"; };
 		06E48DEF2C63898A000A0BAE /* cinescope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cinescope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06E48DF22C63898A000A0BAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06E48DF42C63898A000A0BAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		06E48DFB2C63898D000A0BAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06E48DFE2C63898D000A0BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		06E48E002C63898D000A0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06E48E0B2C639411000A0BAE /* AppDelegate+Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Route.swift"; sourceTree = "<group>"; };
+		06E48E002C63898D000A0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = cinescope/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Init.swift"; sourceTree = "<group>"; };
-		06E48E0E2C639411000A0BAE /* AppDelegate+DeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+DeepLink.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +50,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0630AF1F2C64263A002BF2CA /* Router in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0630AF122C63AD83002BF2CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0630AF172C63BDA6002BF2CA /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0630AF212C642C2E002BF2CA /* Home */,
+				0630AF182C63BDD2002BF2CA /* Splash */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		06E48DE62C63898A000A0BAE = {
 			isa = PBXGroup;
 			children = (
 				06E48DF12C63898A000A0BAE /* cinescope */,
 				06E48DF02C63898A000A0BAE /* Products */,
+				0630AF122C63AD83002BF2CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,8 +107,6 @@
 			children = (
 				06E48DF22C63898A000A0BAE /* AppDelegate.swift */,
 				06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */,
-				06E48E0E2C639411000A0BAE /* AppDelegate+DeepLink.swift */,
-				06E48E0B2C639411000A0BAE /* AppDelegate+Route.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -81,6 +114,7 @@
 		06E48E072C6393BB000A0BAE /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				0630AF172C63BDA6002BF2CA /* Scenes */,
 				06E48E132C6395F4000A0BAE /* Core */,
 			);
 			path = Packages;
@@ -114,6 +148,14 @@
 		06E48E132C6395F4000A0BAE /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0630AF1C2C64202C002BF2CA /* Router */,
+				0630AF152C63AFC3002BF2CA /* Utility */,
+				0697108F2C6397C500A705C7 /* AppManagers */,
+				069710912C6397C500A705C7 /* AppResources */,
+				069710962C6397C600A705C7 /* Common */,
+				069710902C6397C500A705C7 /* Components */,
+				069710922C6397C500A705C7 /* Database */,
+				069710952C6397C500A705C7 /* Network */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -134,6 +176,9 @@
 			dependencies = (
 			);
 			name = cinescope;
+			packageProductDependencies = (
+				0630AF1E2C64263A002BF2CA /* Router */,
+			);
 			productName = cinescope;
 			productReference = 06E48DEF2C63898A000A0BAE /* cinescope.app */;
 			productType = "com.apple.product-type.application";
@@ -176,8 +221,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0697109B2C6397C600A705C7 /* AppResources in Resources */,
+				069710992C6397C600A705C7 /* AppManagers in Resources */,
+				0697109A2C6397C600A705C7 /* Components in Resources */,
+				0630AF162C63AFC3002BF2CA /* Utility in Resources */,
 				06E48DFC2C63898D000A0BAE /* Assets.xcassets in Resources */,
+				0630AF222C642C2E002BF2CA /* Home in Resources */,
+				0630AF1D2C64202C002BF2CA /* Router in Resources */,
+				0630AF192C63BDD2002BF2CA /* Splash in Resources */,
+				0697109F2C6397C600A705C7 /* Network in Resources */,
+				0697109C2C6397C600A705C7 /* Database in Resources */,
 				06E48DFF2C63898D000A0BAE /* Base in Resources */,
+				069710A02C6397C600A705C7 /* Common in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,11 +243,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06E48E0F2C639411000A0BAE /* AppDelegate+Route.swift in Sources */,
 				06E48E112C639411000A0BAE /* AppDelegate+Init.swift in Sources */,
 				06E48DF32C63898A000A0BAE /* AppDelegate.swift in Sources */,
 				06E48DF52C63898A000A0BAE /* SceneDelegate.swift in Sources */,
-				06E48E122C639411000A0BAE /* AppDelegate+DeepLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +391,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 225AXALHQ4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = cinescope/Info.plist;
+				INFOPLIST_FILE = cinescope/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -370,7 +423,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 225AXALHQ4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = cinescope/Info.plist;
+				INFOPLIST_FILE = cinescope/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -415,6 +468,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0630AF1E2C64263A002BF2CA /* Router */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Router;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 06E48DE72C63898A000A0BAE /* Project object */;
 }
