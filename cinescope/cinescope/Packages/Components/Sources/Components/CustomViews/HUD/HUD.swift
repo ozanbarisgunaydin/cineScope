@@ -59,7 +59,7 @@ internal extension UIViewController {
 }
 
 internal extension UIView {
-    func showHUD(isUserInteractionEnabled: Bool = false, widthHeight: CGFloat = 50) {
+    func showHUD(isUserInteractionEnabled: Bool = false, widthHeight: CGFloat = 128) {
         guard viewWithTag(1967) == nil else { return }
         let widthHeight: CGFloat = widthHeight
         let frame = CGRect(
@@ -80,7 +80,7 @@ internal extension UIView {
         let animation = LottieAnimation.named("hudLoader", bundle: AppResources.bundle)
         let indicatorView = LottieAnimationView(animation: animation)
         indicatorView.loopMode = .loop
-        indicatorView.animationSpeed = 1.0
+        indicatorView.animationSpeed = 3.0
         indicatorView.backgroundBehavior = .pauseAndRestore
         indicatorView.frame = frame
 
