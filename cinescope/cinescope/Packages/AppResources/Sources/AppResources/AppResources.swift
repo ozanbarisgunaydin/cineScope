@@ -14,14 +14,7 @@ public final class AppResources {
         return Bundle(for: AppResources.self)
 #endif
     }()
-
-    // MARK: - Properties
-    public var baseURL: String
-    public var cdnURL: String
-
+    
     // MARK: - Init
-    private init() {
-        baseURL = ""
-        cdnURL = ""
-    }
+    private init() { }
 }
