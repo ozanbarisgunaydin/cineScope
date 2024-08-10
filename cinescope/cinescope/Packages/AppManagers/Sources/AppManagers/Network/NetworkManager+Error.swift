@@ -35,7 +35,8 @@ public extension BaseResponseError {
         guard let fetchedMessage = response?.friendlyMessage?.message else {
             switch error {
             case .decoding(let error):
-                return String(describing: error.underlyingError)
+                print("⭕️ \(String(describing: error.underlyingError))")
+                return defaultMessage
             case .timeout:
                 return L10nError.timeoutMessage.localized()
             case .noInternetConnection:

@@ -12,17 +12,21 @@ import AppResources
 
 public enum MovieAPI: MovieRouter {
     case getPopularMovies
+    case getMovieGenreList
 
     public var path: String? {
         switch self {
         case .getPopularMovies:
             return "discover/movie"
+        case .getMovieGenreList:
+            return "genre/movie/list"
         }
     }
 
     public var method: HTTPMethod {
         switch self {
-        case .getPopularMovies:
+        case .getPopularMovies,
+             .getMovieGenreList:
             return .get
         }
     }
@@ -40,6 +44,8 @@ public enum MovieAPI: MovieRouter {
                 parameters: queryParameters,
                 encoding: URLEncoding(arrayEncoding: .noBrackets)
             )
+        case .getMovieGenreList:
+            return .requestPlain
         }
     }
 }

@@ -44,6 +44,9 @@ final class HomePresenter: HomePresenterProtocol {
         self.router = router
     }
     
+    // MARK: - Private Variables
+    private var movieGenreList: [Genre]?
+
     // MARK: - Published Variables
     @Published var banners: [String] = []
     var bannerPublisher: Published<[String]>.Publisher { $banners }
@@ -53,6 +56,7 @@ final class HomePresenter: HomePresenterProtocol {
 extension HomePresenter {
     final func fetchContent() {
         fetchPopularMovies()
+        fetchMovieGenreList()
     }
 }
 
@@ -66,7 +70,6 @@ private extension HomePresenter {
             case .finished:
                 isLoading.send(false)
             case .failure(let error):
-                isLoading.send(false)
                 showServiceFailure(errorMessage: error.friendlyMessage)
             }
         }, receiveValue: { [weak self] popularMovies in
@@ -82,5 +85,22 @@ private extension HomePresenter {
         let bannerPathList = movieList.compactMap { $0.backdropPath }
         guard !bannerPathList.isEmpty else { return }
         banners = bannerPathList.map { "\(NetworkingConstants.BaseURL.image)\($0)" }
+    }
+    
+    final func fetchMovieGenreList() {
+        isLoading.send(true)
+        interactor.fetchMovieGenres().sink(receiveCompletion: { [weak self] completion in
+            guard let self else { return }
+            switch completion {
+            case .finished:
+                isLoading.send(false)
+            case .failure(let error):
+                showServiceFailure(errorMessage: error.friendlyMessage)
+            }
+        }, receiveValue: { [weak self] movieGenres in
+            guard let self else { return }
+            movieGenreList = movieGenres
+        })
+        .store(in: &cancellables)
     }
 }

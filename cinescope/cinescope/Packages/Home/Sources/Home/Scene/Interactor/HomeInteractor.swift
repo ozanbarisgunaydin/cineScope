@@ -14,10 +14,11 @@ import Network
 protocol HomeInteractorProtocol {
     /// Functions
     func fetchPopularMovies() -> AnyPublisher<[Movie]?, BaseError>
+    func fetchMovieGenres() -> AnyPublisher<[Genre]?, BaseError>
 }
 
 // MARK: - HomeInteractor
-class HomeInteractor: HomeInteractorProtocol {
+final class HomeInteractor: HomeInteractorProtocol {
     // MARK: - Private Variables
     private let network = NetworkManager.shared
 
@@ -32,6 +33,24 @@ class HomeInteractor: HomeInteractorProtocol {
                 switch result {
                 case .success(let response):
                     promise(.success(response.results))
+                case .failure(let error):
+                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func fetchMovieGenres() -> AnyPublisher<[Genre]?, BaseError> {
+        return Future<[Genre]?, BaseError> { [weak self] promise in
+            guard let self else { return }
+            self.network.request(
+                router: MovieAPI.getPopularMovies,
+                model: GenreListResponse.self
+            ) { result in
+                switch result {
+                case .success(let response):
+                    promise(.success(response.genres))
                 case .failure(let error):
                     promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
                 }
