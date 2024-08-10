@@ -5,8 +5,9 @@
 //  Created by Ozan Barış Günaydın on 28.12.2023.
 //
 
-import UIKit
 import AppResources
+import UIKit
+import Utility
 
 // MARK: - StackedPageControl
 final public class StackedPageControl: UIView {
@@ -15,7 +16,7 @@ final public class StackedPageControl: UIView {
     private var otherPageColor: UIColor?
     private var dotSpacing: CGFloat?
     private var alignment: UIRectEdge = .left
-    private let dotHeight: CGFloat = 3
+    private let dotHeight: CGFloat = 4
 
     private var stackView = UIStackView()
     private var oldCurentPageIndex: Int = 0
@@ -42,9 +43,9 @@ final public class StackedPageControl: UIView {
     final func configureWith(
         currentPageColor: UIColor? = .primaryColor,
         otherPageColor: UIColor? = .clear,
-        spacing: CGFloat = 0,
+        spacing: CGFloat = 4,
         alignment: UIRectEdge = .left,
-        backgroundColor: UIColor = .black.withAlphaComponent(0.2)
+        backgroundColor: UIColor = .white.withAlphaComponent(0.2)
     ) {
         self.currentPageColor = currentPageColor
         self.otherPageColor = otherPageColor

@@ -40,26 +40,26 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-uV-DBE" customClass="LogoPatternView" customModule="Home">
-                    <rect key="frame" x="0.0" y="0.0" width="218.66666666666666" height="218.66666666666666"/>
+                    <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="196.66666666666666"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ebh-uV-DBE" secondAttribute="height" multiplier="1:1" id="te7-Ds-mQh"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hg-9H-5bD" customClass="BannerView" customModule="Home">
-                    <rect key="frame" x="0.0" y="107.00000000000001" width="393" height="201.33333333333337"/>
+                    <rect key="frame" x="0.0" y="110.99999999999999" width="393" height="239.66666666666663"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="2hg-9H-5bD" secondAttribute="height" multiplier="375:192" id="AH2-tS-ziR"/>
+                        <constraint firstAttribute="width" secondItem="2hg-9H-5bD" secondAttribute="height" multiplier="500:305" priority="249" id="AH2-tS-ziR"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="GcR-7u-Xe5"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="2hg-9H-5bD" firstAttribute="top" secondItem="GcR-7u-Xe5" secondAttribute="top" constant="48" id="2eg-p2-TVu"/>
+                <constraint firstItem="2hg-9H-5bD" firstAttribute="top" secondItem="GcR-7u-Xe5" secondAttribute="top" constant="52" id="2eg-p2-TVu"/>
                 <constraint firstItem="ebh-uV-DBE" firstAttribute="leading" secondItem="GcR-7u-Xe5" secondAttribute="leading" id="ByG-Of-2Vj"/>
-                <constraint firstItem="ebh-uV-DBE" firstAttribute="width" secondItem="Z08-s8-CVE" secondAttribute="width" multiplier="0.556" id="C3f-hp-IGX"/>
+                <constraint firstItem="ebh-uV-DBE" firstAttribute="width" secondItem="Z08-s8-CVE" secondAttribute="width" multiplier="0.5" id="C3f-hp-IGX"/>
                 <constraint firstItem="2hg-9H-5bD" firstAttribute="leading" secondItem="GcR-7u-Xe5" secondAttribute="leading" id="MTy-Fq-mWw"/>
                 <constraint firstItem="zce-T8-7Tf" firstAttribute="leading" secondItem="GcR-7u-Xe5" secondAttribute="leading" id="OzN-zt-RdF"/>
                 <constraint firstItem="Yq9-Dz-rQ4" firstAttribute="top" secondItem="GcR-7u-Xe5" secondAttribute="top" constant="40" id="ZX0-cY-vSa"/>

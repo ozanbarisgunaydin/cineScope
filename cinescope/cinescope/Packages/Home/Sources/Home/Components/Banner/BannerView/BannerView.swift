@@ -29,9 +29,9 @@ final public class BannerView: UIView, NibOwnerLoadable {
     }
 
     // MARK: - Constants
-    private lazy var pageMultiplierConstant = 100
-    private lazy var autoScrollWaitingSecond: Double = 10
-    private lazy var widthToHeightRatio: CGFloat = 1 / 1.971
+    private let pageMultiplierConstant = 100
+    private let autoScrollWaitingSecond: Double = 10
+    private let widthToHeightRatio: CGFloat = 281 / 500
 
     // MARK: - Data
     private var bannerDeeplinkCallback: ((String) -> Void)?
@@ -80,8 +80,8 @@ public extension BannerView {
     ///   - shouldAutoScroll: Optional Boolean value for auto scroll
     ///   - shouldInfiniteScroll: Optional Boolean value for infinite scroll
     final func configureWith(
-        shouldAutoScroll: Bool = true,
-        shouldInfiniteScroll: Bool = true
+        shouldAutoScroll: Bool = false,
+        shouldInfiniteScroll: Bool = false
     ) {
         self.shouldAutoScroll = shouldAutoScroll
         self.shouldInfiniteScroll = shouldInfiniteScroll
@@ -112,17 +112,21 @@ private extension BannerView {
         flowLayout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = flowLayout
         collectionView.backgroundColor = .clear
-        collectionView.register(nibWithCellClass: Cell.self, at: Bundle.module)
+        collectionView.register(
+            nibWithCellClass: Cell.self,
+            at: Bundle.module
+        )
 
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
 
         collectionView.layer.masksToBounds = false
-        collectionView.layer.shadowColor = UIColor.pearlBlack.withAlphaComponent(0.42).cgColor
+        collectionView.layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
         collectionView.layer.shadowOpacity = 1.0
-        collectionView.layer.shadowOffset = CGSize(width: 0, height: 16)
-        collectionView.layer.shadowRadius = 16
+        collectionView.layer.shadowOffset = CGSize(width: 0, height: 8)
+        collectionView.layer.shadowRadius = 8
     }
 
     final func configurePageControl() {
@@ -176,7 +180,8 @@ private extension BannerView {
 
     /// If the auto scroll is enabled then trigger the timer for starting auto scroll.
     final func configureTimer() {
-        guard shouldAutoScroll else { return }
+        guard !banners.isEmpty,
+              shouldAutoScroll else { return }
         invalidateTimer()
         timer = Timer.scheduledTimer(
             timeInterval: autoScrollWaitingSecond,
