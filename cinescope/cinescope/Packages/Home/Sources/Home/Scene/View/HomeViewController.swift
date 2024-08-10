@@ -22,12 +22,17 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
     @IBOutlet weak var bannerView: BannerView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet private weak var collectionFadeOutView: UIView!
-
-    var presenter: HomePresenterProtocol?
+    
+    // MARK: - Components
+    public var presenter: HomePresenterProtocol? {
+        get { return basePresenter as? HomePresenterProtocol }
+        set { basePresenter = newValue }
+    }
 
     // MARK: - Life Cycles
     override public func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.fetchContent()
     }
     
     // MARK: - Interface Configuration
@@ -35,11 +40,13 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
         super.configureInterface()
         configureNavigationBar()
         configureContainerView()
+        configureBannerView()
     }
     
     // MARK: - Observe
     override func observeContent() {
         super.observeContent()
+        observeBanners()
     }
     
     // MARK: - Init
@@ -52,6 +59,19 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
     }
 }
 
+// MARK: - Observers
+private extension HomeViewController {
+    final func observeBanners() {
+        presenter?.bannerPublisher.sink(receiveCompletion: { completion in
+            print(completion)
+        }, receiveValue: { [weak self] banners in
+            guard let self else { return }
+            bannerView.setContentWith(banners: banners)
+        })
+        .store(in: &cancellables)
+    }
+}
+
 // MARK: - Confguration
 private extension HomeViewController {
     final func configureNavigationBar() {
@@ -60,5 +80,22 @@ private extension HomeViewController {
     
     final func configureContainerView() {
         view.backgroundColor = .backgroundPrimary
+    }
+    
+    final func configureBannerView() {
+        bannerView.configureWith(
+            shouldAutoScroll: true,
+            shouldInfiniteScroll: true
+        )
+    }
+}
+
+// MARK: - Helpers
+private extension HomeViewController {
+    final func applyBannerScrollOffset(on scrollDistance: CGFloat) {
+        bannerView.transform = CGAffineTransform(
+            translationX: 0,
+            y: scrollDistance
+        )
     }
 }

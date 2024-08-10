@@ -10,8 +10,8 @@ import Combine
 import Network
 import UIKit
 
-// MARK: - BaseViewModel
-public protocol BaseViewModel: AnyObject {
+// MARK: - BasePresenterProtocol
+public protocol BasePresenterProtocol: AnyObject {
     /// Variables
     var isLoading: PassthroughSubject<Bool, Error> { get set }
     var alert: PassthroughSubject<AlertContent?, Error> { get set }
@@ -25,7 +25,7 @@ public protocol BaseViewModel: AnyObject {
 }
 
 // MARK: - Defaults
-extension BaseViewModel {
+extension BasePresenterProtocol {
     public func showServiceFailure(
         errorMessage: FriendlyMessage?,
         shouldGoBackOnDismiss: Bool = false

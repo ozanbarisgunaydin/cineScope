@@ -15,14 +15,21 @@ public protocol MovieRouter: RouterProtocol { }
 // MARK: - Defaults
 public extension MovieRouter {
     var baseURL: URL {
-        guard let url = URL(string: AppResources.shared.baseURL) else {
+        guard let url = URL(string: NetworkingConstants.BaseURL.service) else {
             fatalError("Failed to create baseURL")
         }
         return url
     }
 
     var headers: HTTPHeaders {
-        return HTTPHeaders.default
+        var defaultHeaders = HTTPHeaders.default
+        defaultHeaders.add(
+            HTTPHeader(
+                name: NetworkConstants.HTTPHeaderFieldKey.authorization,
+                value: NetworkingConstants.Authorization.apiKey
+            )
+        )
+        return defaultHeaders
     }
 
     var cachePolicy: URLRequest.CachePolicy {

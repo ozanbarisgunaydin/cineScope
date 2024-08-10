@@ -19,7 +19,7 @@ public extension BaseResponseError {
         return L10nError.message.localized()
     }
     private var defaultButton: String {
-        return L10nGeneric.ok.localized()
+        return L10nGeneric.okay.localized()
     }
 
     private var title: String? {
@@ -67,7 +67,7 @@ public extension BaseResponse {
         return L10nError.message.localized()
     }
     private var defaultButton: String {
-        return L10nGeneric.ok.localized()
+        return L10nGeneric.okay.localized()
     }
 
     private var title: String? {

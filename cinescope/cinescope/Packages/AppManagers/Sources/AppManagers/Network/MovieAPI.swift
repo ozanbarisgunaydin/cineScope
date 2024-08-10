@@ -11,26 +11,35 @@ import Alamofire
 import AppResources
 
 public enum MovieAPI: MovieRouter {
-    case getUserInfo
+    case getPopularMovies
 
     public var path: String? {
         switch self {
-        case .getUserInfo:
-            return "core/user/info"
+        case .getPopularMovies:
+            return "discover/movie"
         }
     }
 
     public var method: HTTPMethod {
         switch self {
-        case .getUserInfo:
+        case .getPopularMovies:
             return .get
         }
     }
 
     public var task: HTTPTask {
         switch self {
-        case .getUserInfo:
-            return .requestPlain
+        case .getPopularMovies:
+            let queryParameters: [String: Any] = [
+                "include_adult": "false",
+                "include_video": "false",
+                "page": "1",
+                "sort_by": "popularity"
+            ]
+            return .requestParameters(
+                parameters: queryParameters,
+                encoding: URLEncoding(arrayEncoding: .noBrackets)
+            )
         }
     }
 }

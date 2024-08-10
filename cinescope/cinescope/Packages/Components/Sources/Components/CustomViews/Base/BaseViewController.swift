@@ -13,7 +13,7 @@ import UIKit
 // MARK: - BaseViewController
 open class BaseViewController: UIViewController, BaseViewControllerProtocol, UIGestureRecognizerDelegate {
     // MARK: - Base Components
-    public var basePresenter: BaseViewModel?
+    public var basePresenter: BasePresenterProtocol?
     
     // MARK: - Data
     public var cancellables: [AnyCancellable] = []
@@ -60,7 +60,7 @@ open class BaseViewController: UIViewController, BaseViewControllerProtocol, UIG
             .sink { _ in } receiveValue: { [weak self] isLoading in
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
-                    self.set(isLoading, isInteractionEnabled: true)
+                    set(isLoading, isInteractionEnabled: true)
                 }
             }
             .store(in: &cancellables)
@@ -71,7 +71,8 @@ open class BaseViewController: UIViewController, BaseViewControllerProtocol, UIG
             .sink { _ in } receiveValue: { [weak self] alertContent in
                 guard let self,
                       var alertContent else { return }
-                
+                set(false, isInteractionEnabled: true)
+
                 alertContent.selectedActionCompletionHandler = { [weak self] alertAction in
                     guard let self else { return }
                     self.alertSelectedActionHandler?(alertAction)

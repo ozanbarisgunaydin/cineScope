@@ -1,26 +1,34 @@
 //
-//  File.swift
+//  HomePresenter.swift
 //
 //
 //  Created by Ozan Barış Günaydın on 8.08.2024.
 //
 
+import AppManagers
 import Combine
+import Components
 import Foundation
 
 // MARK: - HomePresenterProtocol
-protocol HomePresenterProtocol {
-    /// Variables
+protocol HomePresenterProtocol: BasePresenterProtocol {
+    /// Components
     var view: HomeViewProtocol? { get set }
     var interactor: HomeInteractorProtocol { get set }
     var router: HomeRouterProtocol { get set }
-    var todoPublisher: Published<String?>.Publisher { get }
+    /// Variables
+    var bannerPublisher: Published<[String]>.Publisher { get }
     /// Functions
-    func fetch()
+    func fetchContent()
 }
 
 // MARK: - HomePresenter
 final class HomePresenter: HomePresenterProtocol {
+    // MARK: - Base Variables
+    public var isLoading = PassthroughSubject<Bool, Error>()
+    public var alert = PassthroughSubject<AlertContent?, Error>()
+    public var cancellables: [AnyCancellable] = []
+    
     // MARK: - Components
     weak var view: HomeViewProtocol?
     var interactor: HomeInteractorProtocol
@@ -36,22 +44,43 @@ final class HomePresenter: HomePresenterProtocol {
         self.router = router
     }
     
-    // MARK: - Private Variables
-    private var cancellables: Set<AnyCancellable> = []
-    
     // MARK: - Published Variables
-    @Published var todo: String?
-    var todoPublisher: Published<String?>.Publisher { $todo }
+    @Published var banners: [String] = []
+    var bannerPublisher: Published<[String]>.Publisher { $banners }
+}
+
+// MARK: - Publics
+extension HomePresenter {
+    final func fetchContent() {
+        fetchPopularMovies()
+    }
+}
+
+// MARK: - Helpers
+private extension HomePresenter {
+    final func fetchPopularMovies() {
+        isLoading.send(true)
+        interactor.fetchPopularMovies().sink(receiveCompletion: { [weak self] completion in
+            guard let self else { return }
+            switch completion {
+            case .finished:
+                isLoading.send(false)
+            case .failure(let error):
+                isLoading.send(false)
+                showServiceFailure(errorMessage: error.friendlyMessage)
+            }
+        }, receiveValue: { [weak self] popularMovies in
+            guard let self else { return }
+            setMoviesPosterPaths(with: popularMovies)
+        })
+        .store(in: &cancellables)
+    }
     
-    // MARK: - Functions
-    func fetch() {
-//        interactor?.fetch().sink(
-//            receiveCompletion: { completion in
-//                print(completion)
-//            }, receiveValue: { [weak self] todo in
-//                self?.todo = todo
-//            }
-//        )
-//        .store(in: &cancellables)
+    final func setMoviesPosterPaths(with movieList: [Movie]?)  {
+        guard let movieList,
+              !movieList.isEmpty else { return }
+        let bannerPathList = movieList.compactMap { $0.backdropPath }
+        guard !bannerPathList.isEmpty else { return }
+        banners = bannerPathList.map { "\(NetworkingConstants.BaseURL.image)\($0)" }
     }
 }
