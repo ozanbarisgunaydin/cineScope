@@ -7,6 +7,4 @@
 
 import Foundation
 
-public protocol UserManagerProtocol {
-    var isInDarkTheme: Bool { get set }
-}
+public protocol UserManagerProtocol { }
