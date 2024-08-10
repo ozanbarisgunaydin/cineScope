@@ -5,6 +5,7 @@
 //  Created by Ozan Barış Günaydın on 8.12.2023.
 //
 
+import Atlantis
 import Foundation
 import UIKit
 import IQKeyboardManagerSwift
@@ -15,6 +16,7 @@ extension AppDelegate {
     func commonInit(
         _ application: UIApplication
     ) {
+        Atlantis.start()
         initializeImageCache()
         initializeKeyboardManager()
     }

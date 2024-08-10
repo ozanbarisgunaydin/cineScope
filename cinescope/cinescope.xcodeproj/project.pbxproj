@@ -23,6 +23,7 @@
 		06E48DFC2C63898D000A0BAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFB2C63898D000A0BAE /* Assets.xcassets */; };
 		06E48DFF2C63898D000A0BAE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFE2C63898D000A0BAE /* Base */; };
 		06E48E112C639411000A0BAE /* AppDelegate+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */; };
+		06E5B3A82C68093500AD38CD /* Atlantis in Frameworks */ = {isa = PBXBuildFile; productRef = 06E5B3A72C68093500AD38CD /* Atlantis */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E5B3A82C68093500AD38CD /* Atlantis in Frameworks */,
 				0630AF1F2C64263A002BF2CA /* Router in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +180,7 @@
 			name = cinescope;
 			packageProductDependencies = (
 				0630AF1E2C64263A002BF2CA /* Router */,
+				06E5B3A72C68093500AD38CD /* Atlantis */,
 			);
 			productName = cinescope;
 			productReference = 06E48DEF2C63898A000A0BAE /* cinescope.app */;
@@ -207,6 +210,9 @@
 				Base,
 			);
 			mainGroup = 06E48DE62C63898A000A0BAE;
+			packageReferences = (
+				06E5B3A62C68093500AD38CD /* XCRemoteSwiftPackageReference "atlantis" */,
+			);
 			productRefGroup = 06E48DF02C63898A000A0BAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -469,10 +475,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		06E5B3A62C68093500AD38CD /* XCRemoteSwiftPackageReference "atlantis" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ProxymanApp/atlantis.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.24.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		0630AF1E2C64263A002BF2CA /* Router */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Router;
+		};
+		06E5B3A72C68093500AD38CD /* Atlantis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06E5B3A62C68093500AD38CD /* XCRemoteSwiftPackageReference "atlantis" */;
+			productName = Atlantis;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
