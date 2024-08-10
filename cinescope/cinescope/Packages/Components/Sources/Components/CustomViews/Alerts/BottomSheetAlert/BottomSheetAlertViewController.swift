@@ -114,7 +114,7 @@ private extension BottomSheetAlertViewController {
     
     final func configureTitleLabel() {
         labelTitle.font = AlertConstants.Font.title
-        labelTitle.textColor = .pearlBlack
+        labelTitle.textColor = .white
         labelTitle.numberOfLines = 0
         labelTitle.text = ""
         labelTitle.textAlignment = .center
@@ -122,7 +122,7 @@ private extension BottomSheetAlertViewController {
     
     final func configureMessageLabel() {
         labelMessage.font = AlertConstants.Font.message
-        labelMessage.textColor = .pearlBlack
+        labelMessage.textColor = .white
         labelMessage.numberOfLines = 0
         labelMessage.text = ""
         labelMessage.textAlignment = .center
