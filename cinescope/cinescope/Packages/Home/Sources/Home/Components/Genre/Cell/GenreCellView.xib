@@ -13,6 +13,10 @@
             <rect key="frame" x="0.0" y="0.0" width="128" height="54"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Owb-I7-vcV">
+                    <rect key="frame" x="0.0" y="0.0" width="228" height="54"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nmD-IL-MPb">
                     <rect key="frame" x="12" y="11" width="88.666666666666671" height="32"/>
                     <subviews>
@@ -43,11 +47,16 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="nmD-IL-MPb" secondAttribute="bottom" constant="11" id="0ud-5y-TQQ"/>
                 <constraint firstItem="nmD-IL-MPb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="DaW-3z-xk8"/>
+                <constraint firstItem="Owb-I7-vcV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Dm0-ES-eji"/>
                 <constraint firstAttribute="trailing" secondItem="nmD-IL-MPb" secondAttribute="trailing" priority="249" constant="12" id="Qir-5C-FjN"/>
+                <constraint firstAttribute="bottom" secondItem="Owb-I7-vcV" secondAttribute="bottom" id="bHx-I2-bLw"/>
                 <constraint firstItem="nmD-IL-MPb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="e04-ga-lcI"/>
+                <constraint firstAttribute="trailing" secondItem="Owb-I7-vcV" secondAttribute="trailing" constant="-100" id="hjF-hy-TYH"/>
+                <constraint firstItem="Owb-I7-vcV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sjf-kK-pPE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="gradientView" destination="Owb-I7-vcV" id="t6P-Lh-jwO"/>
                 <outlet property="imageView" destination="dGV-zD-bad" id="ULj-uG-KOn"/>
                 <outlet property="titleLabel" destination="4Xx-YY-5vZ" id="A2N-eA-FkY"/>
             </connections>

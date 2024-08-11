@@ -10,7 +10,7 @@ import Components
 import AppResources
 
 // MARK: - BannerView
-final public class BannerView: UIView, NibOwnerLoadable {
+final class BannerView: UIView, NibOwnerLoadable {
     // MARK: - Module
     public static var module = Bundle.module
 
@@ -37,7 +37,7 @@ final public class BannerView: UIView, NibOwnerLoadable {
     private var bannerDeeplinkCallback: ((String) -> Void)?
     private var shouldAutoScroll = false
     private var shouldInfiniteScroll = false
-    private var banners: [String] = [] {
+    private var banners: [BannerContent] = [] {
         didSet {
             collectionView.reloadData { [weak self] in
                 guard let self else { return }
@@ -74,7 +74,7 @@ final public class BannerView: UIView, NibOwnerLoadable {
 }
 
 // MARK: - Public
-public extension BannerView {
+extension BannerView {
     /// Configures view with giving properies
     /// - Parameters:
     ///   - shouldAutoScroll: Optional Boolean value for auto scroll
@@ -91,7 +91,7 @@ public extension BannerView {
     /// - Parameters:
     ///   - banners: Array of Banner's model value for banner items.
     final func setContentWith(
-        banners: [String]
+        banners: [BannerContent]
     ) {
         self.banners = banners
         pageControl.numberOfPages = banners.count
@@ -123,7 +123,7 @@ private extension BannerView {
         collectionView.isPagingEnabled = true
 
         collectionView.layer.masksToBounds = false
-        collectionView.layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
+        collectionView.layer.shadowColor = UIColor.darkGray.withAlphaComponent(0.1).cgColor
         collectionView.layer.shadowOpacity = 1.0
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 8)
         collectionView.layer.shadowRadius = 8
@@ -263,9 +263,7 @@ extension BannerView: UICollectionViewDataSource {
         let reducedIndexPathRow = getIndexRow(indexPath.row)
         guard let banner = banners[safe: reducedIndexPathRow] else { return cell }
 
-        cell.configureWith(
-            imageUrlString: banner
-        )
+        cell.configureWith(content: banner)
 
         return cell
     }

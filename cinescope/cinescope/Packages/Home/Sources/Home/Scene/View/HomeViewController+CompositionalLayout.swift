@@ -38,7 +38,7 @@ extension HomeViewController {
         case .categories:
             return createCategoriesSection()
         case .reviews:
-            return createReviewsSection()
+            return createPersonsSection()
         }
     }
 
@@ -136,11 +136,11 @@ extension HomeViewController {
         return section
     }
 
-    final func createReviewsSection() -> NSCollectionLayoutSection {
-        let popularMatchItemSize = ReviewCell.viewSize
+    final func createPersonsSection() -> NSCollectionLayoutSection {
+        let wantedItemSize = PersonCell.viewSize
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(popularMatchItemSize.width),
-            heightDimension: .absolute(popularMatchItemSize.height)
+            widthDimension: .absolute(wantedItemSize.width),
+            heightDimension: .absolute(wantedItemSize.height)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(

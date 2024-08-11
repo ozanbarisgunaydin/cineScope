@@ -22,9 +22,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoNamed" translatesAutoresizingMaskIntoConstraints="NO" id="Pxw-I9-B39">
-                    <rect key="frame" x="20" y="55.333333333333258" width="248" height="49.666666666666742"/>
+                    <rect key="frame" x="12" y="57" width="144" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="Pxw-I9-B39" secondAttribute="height" multiplier="5" id="zOQ-lB-d3B"/>
+                        <constraint firstAttribute="height" constant="48" id="5gr-ij-8zW"/>
+                        <constraint firstAttribute="width" secondItem="Pxw-I9-B39" secondAttribute="height" multiplier="3" id="zOQ-lB-d3B"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -32,11 +33,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="W8N-I3-GzK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7Vq-dn-F3y"/>
-                <constraint firstAttribute="trailing" secondItem="Pxw-I9-B39" secondAttribute="trailing" constant="-12" id="9XP-Vn-gs2"/>
                 <constraint firstItem="W8N-I3-GzK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EOr-Lh-wCF"/>
                 <constraint firstItem="Pxw-I9-B39" firstAttribute="bottom" secondItem="GSF-5T-z5S" secondAttribute="top" constant="46" id="Ncy-hB-glG"/>
                 <constraint firstAttribute="bottom" secondItem="W8N-I3-GzK" secondAttribute="bottom" id="dni-FX-dzf"/>
-                <constraint firstItem="Pxw-I9-B39" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="evd-ud-iFy"/>
+                <constraint firstItem="Pxw-I9-B39" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="evd-ud-iFy"/>
                 <constraint firstAttribute="trailing" secondItem="W8N-I3-GzK" secondAttribute="trailing" id="nGa-bV-qNM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -44,7 +44,7 @@
         </view>
     </objects>
     <resources>
-        <image name="logoNamed" width="6559" height="972"/>
+        <image name="logoNamed" width="293" height="81"/>
         <image name="patternBase" width="514" height="514"/>
     </resources>
 </document>

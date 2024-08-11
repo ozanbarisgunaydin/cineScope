@@ -18,7 +18,7 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
     var interactor: HomeInteractorProtocol { get set }
     var router: HomeRouterProtocol { get set }
     /// Variables
-    var bannerPublisher: Published<[String]>.Publisher { get }
+    var bannerPublisher: Published<[BannerContent]>.Publisher { get }
     var contentPublisher: Published<[HomeContent]>.Publisher { get }
 
     /// Functions
@@ -49,8 +49,8 @@ final class HomePresenter: HomePresenterProtocol {
     }
 
     // MARK: - Published Variables
-    @Published var banners: [String] = []
-    var bannerPublisher: Published<[String]>.Publisher { $banners }
+    @Published var banners: [BannerContent] = []
+    var bannerPublisher: Published<[BannerContent]>.Publisher { $banners }
     @Published var content: [HomeContent] = []
     var contentPublisher: Published<[HomeContent]>.Publisher { $content }
 }
@@ -60,6 +60,7 @@ extension HomePresenter {
     final func fetchContent() {
         fetchPopularMovies()
         fetchMovieGenreList()
+        fetchPeopleList()
     }
     
     
@@ -96,9 +97,12 @@ private extension HomePresenter {
     final func setMoviesPosterPaths(with movieList: [Movie]?)  {
         guard let movieList,
               !movieList.isEmpty else { return }
-        let bannerPathList = movieList.compactMap { $0.backdropPath }
-        guard !bannerPathList.isEmpty else { return }
-        banners = bannerPathList.map { "\(NetworkingConstants.BaseURL.image)\($0)" }
+        banners = movieList.compactMap { movie in
+            return BannerContent(
+                title: movie.originalTitle,
+                imageURL: "\(NetworkingConstants.BaseURL.image)\(movie.backdropPath ?? "")"
+            )
+        }
     }
     
     final func fetchMovieGenreList() {
@@ -116,6 +120,46 @@ private extension HomePresenter {
             prepareContent(with: movieGenres)
         })
         .store(in: &cancellables)
+    }
+    
+    final func fetchPeopleList() {
+        isLoading.send(true)
+        interactor.fetchPeopleList().sink(receiveCompletion: { [weak self] completion in
+            guard let self else { return }
+            switch completion {
+            case .finished:
+                isLoading.send(false)
+            case .failure(let error):
+                showServiceFailure(errorMessage: error.friendlyMessage)
+            }
+        }, receiveValue: { [weak self] people in
+            guard let self else { return }
+            preparePersonContent(with: people)
+        })
+        .store(in: &cancellables)
+    }
+    
+    final func preparePersonContent(with peopleList: [PeopleContent]?) {
+        let items: [HomeItemType] = peopleList?.compactMap { people in
+            let personContent = PersonContent(
+                artistName: people.name,
+                profileImageURL: "\(NetworkingConstants.BaseURL.image)\(people.profilePath ?? "")",
+                knownedMoviePosters: people.knownFor?.compactMap {
+                    "\(NetworkingConstants.BaseURL.image)\($0.backdropPath ?? "")"
+                } ?? []
+            )
+            return HomeItemType.person(cellContent: personContent)
+        } ?? []
+        
+        let personContent = HomeContent(
+            sectionType: .reviews(headerTitle: L10nHome.celebrities.localized()),
+            items: items
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self else { return }
+            content.append(personContent)
+        }
     }
     
     final func prepareContent(with movieGenres: [Genre]?) {

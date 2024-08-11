@@ -52,6 +52,7 @@ extension GenreHeaderView {
 private extension GenreHeaderView {
     final func setupViews() {
         configureContainerView()
+        configureImageView()
         configureTitle()
         configureContentButton()
         configureGradientView()
@@ -59,14 +60,23 @@ private extension GenreHeaderView {
 
     final func configureContainerView() {
         backgroundColor = .clear
-
         backgroundView.backgroundColor = .backgroundPrimary
-
-        containerView.backgroundColor = .pearlBlack.withAlphaComponent(0.1)
+        
+        containerView.backgroundColor = .primaryColor
+        containerView.setGradientBackground(
+            colors: [
+                .black,
+                .primaryColor.withAlphaComponent(0.2),
+                .black
+            ],
+            locations: [0, 0.5, 1]
+        )
         containerView.borderColor = .separator
         containerView.borderWidth = 1
         containerView.cornerRadius = 14
-        
+    }
+    
+    final func configureImageView() {
         imageView.image = .genres
     }
 

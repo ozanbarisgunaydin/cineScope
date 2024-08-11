@@ -10,13 +10,14 @@ import Components
 import AppResources
 
 // MARK: - BannerCellView
-final public class BannerCellView: UICollectionViewCell, NibLoadable {
+final class BannerCellView: UICollectionViewCell, NibLoadable {
     // MARK: - Module
     public static var module = Bundle.module
 
     // MARK: - UI Components
     @IBOutlet private weak var contentImageView: UIImageView!
-
+    @IBOutlet private weak var titleLabel: CustomLabel!
+    
     // MARK: - Data
     private var index: Int?
 
@@ -28,11 +29,12 @@ final public class BannerCellView: UICollectionViewCell, NibLoadable {
 }
 
 // MARK: - Publics
-public extension BannerCellView {
+extension BannerCellView {
     final func configureWith(
-        imageUrlString: String?
+        content: BannerContent?
     ) {
-        setImage(with: imageUrlString)
+        setImage(with: content?.imageURL)
+        titleLabel.text = content?.title
     }
 }
 
@@ -40,11 +42,17 @@ public extension BannerCellView {
 private extension BannerCellView {
     final func setupViews() {
         configureImageView()
+        configureTitleLabel()
     }
     
     final func configureImageView() {
         contentImageView.contentMode = .scaleAspectFit
         contentImageView.cornerRadius = 20
+    }
+    
+    final func configureTitleLabel() {
+        titleLabel.font = .bold(16)
+        titleLabel.textColor = .white.withAlphaComponent(0.8)
     }
 }
 

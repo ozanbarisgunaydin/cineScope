@@ -23,6 +23,8 @@ public enum HomeLocalizableKey: String, LocalizableProtocol {
     case genres = "home.genres"
     /// Discover
     case discover = "home.discover"
+    /// Celebrities
+    case celebrities = "home.celebrities"
     
     // MARK: - Category
     public enum Category: String, LocalizableProtocol {

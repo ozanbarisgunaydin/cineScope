@@ -47,9 +47,9 @@ extension HomeViewController {
                 gameUniverseCell.configureWith(type: content)
                 return gameUniverseCell
 
-            case .review(let content):
+            case .person(let content):
                 let populerMatchCell = collectionView.dequeueReusableCell(
-                    withClass: ReviewCell.self,
+                    withClass: PersonCell.self,
                     for: indexPath
                 )
                 populerMatchCell.configureWith(content: content)

@@ -14,6 +14,6 @@ public enum NetworkingConstants {
     
     public enum BaseURL {
         public static let service = "https://api.themoviedb.org/3"
-        public static let image = "https://image.tmdb.org/t/p/w400"
+        public static let image = "https://image.tmdb.org/t/p/w500"
     }
 }

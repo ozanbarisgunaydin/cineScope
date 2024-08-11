@@ -21,7 +21,7 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
     typealias TitleHeader = TitleHeaderView
     typealias GenreCell = GenreCellView
     typealias CategoryCell = CategoryCellView
-    typealias ReviewCell = ReviewCellView
+    typealias PersonCell = PersonCellView
     
     // MARK: - Outlets
     @IBOutlet private weak var logoPatternView: LogoPatternView!
@@ -146,7 +146,7 @@ private extension HomeViewController {
             at: Bundle.module
         )
         collectionView.register(
-            nibWithCellClass: ReviewCell.self,
+            nibWithCellClass: PersonCell.self,
             at: Bundle.module
         )
         

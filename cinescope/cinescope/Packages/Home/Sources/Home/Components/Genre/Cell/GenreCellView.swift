@@ -17,6 +17,7 @@ final class GenreCellView: UICollectionViewCell, NibLoadable {
     // MARK: - UI Components
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: CustomLabel!
+    @IBOutlet private weak var gradientView: UIView!
     
     // MARK: - Initialization
     public override func awakeFromNib() {
@@ -43,7 +44,18 @@ private extension GenreCellView {
     }
 
     final func configureContainerView() {
-        backgroundColor = .pearlBlack.withAlphaComponent(0.2)
+        backgroundColor = .backgroundPrimary
+        
+        gradientView.setGradientBackground(
+            colors: [
+                .white.withAlphaComponent(0.1),
+                .white.withAlphaComponent(0.2),
+                .white.withAlphaComponent(0.1)
+            ],
+            locations: [0, 0.5, 1]
+        )
+        
+        
         borderColor = .separator
         borderWidth = 1
         cornerRadius = 14

@@ -15,6 +15,7 @@ protocol HomeInteractorProtocol {
     /// Functions
     func fetchPopularMovies() -> AnyPublisher<[Movie]?, BaseError>
     func fetchMovieGenres() -> AnyPublisher<[Genre]?, BaseError>
+    func fetchPeopleList() -> AnyPublisher<[PeopleContent]?, BaseError>
 }
 
 // MARK: - HomeInteractor
@@ -51,6 +52,24 @@ final class HomeInteractor: HomeInteractorProtocol {
                 switch result {
                 case .success(let response):
                     promise(.success(response.genres))
+                case .failure(let error):
+                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func fetchPeopleList() -> AnyPublisher<[PeopleContent]?, BaseError> {
+        return Future<[PeopleContent]?, BaseError> { [weak self] promise in
+            guard let self else { return }
+            self.network.request(
+                router: MovieAPI.getPeopleList,
+                model: PeopleListResponse.self
+            ) { result in
+                switch result {
+                case .success(let response):
+                    promise(.success(response.results))
                 case .failure(let error):
                     promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
                 }

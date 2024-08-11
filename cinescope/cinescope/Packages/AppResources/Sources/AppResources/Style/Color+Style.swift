@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIColor {
     // MARK: - Theme
-    /// #6FC8D8
+    /// #690000
     static var primaryColor: UIColor {
         return UIColor(named: "primaryColor", in: Bundle.module, compatibleWith: .current) ?? UIColor.white
     }

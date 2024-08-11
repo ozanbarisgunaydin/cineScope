@@ -45,6 +45,17 @@
         }
       }
     },
+    "home.celebrities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Celebrities"
+          }
+        }
+      }
+    },
     "home.discover" : {
       "extractionState" : "manual",
       "localizations" : {
