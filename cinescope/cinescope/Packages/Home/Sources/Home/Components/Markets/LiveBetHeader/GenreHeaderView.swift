@@ -20,8 +20,6 @@ final public class GenreHeaderView: UICollectionReusableView, NibLoadable {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: CustomLabel!
-    @IBOutlet private weak var badgeView: UIView!
-    @IBOutlet private weak var countLabel: CustomLabel!
     @IBOutlet private weak var contentButton: UIButton!
     @IBOutlet private weak var gradientView: UIView!
 
@@ -42,12 +40,10 @@ final public class GenreHeaderView: UICollectionReusableView, NibLoadable {
 // MARK: - Configuration
 extension GenreHeaderView {
     final func configureWith(
-        content: HomeGenreListContent?,
+        title: String?,
         selectionCallback: (() -> Void)?
     ) {
-        imageView.image = content?.image
-        titleLabel.text = content?.title
-        countLabel.text = content?.badge
+        titleLabel.text = title
         self.selectionCallback = selectionCallback
     }
 }
@@ -57,7 +53,6 @@ private extension GenreHeaderView {
     final func setupViews() {
         configureContainerView()
         configureTitle()
-        configureBadge()
         configureContentButton()
         configureGradientView()
     }
@@ -67,27 +62,17 @@ private extension GenreHeaderView {
 
         backgroundView.backgroundColor = .backgroundPrimary
 
-        containerView.backgroundColor = .black
+        containerView.backgroundColor = .pearlBlack.withAlphaComponent(0.1)
         containerView.borderColor = .separator
         containerView.borderWidth = 1
         containerView.cornerRadius = 14
+        
+        imageView.image = .genres
     }
 
     final func configureTitle() {
-        titleLabel.font = .bold(14)
+        titleLabel.font = .bold(16)
         titleLabel.textColor = .white
-    }
-
-    final func configureBadge() {
-        badgeView.setCapsuleCornerRadius()
-        badgeView.backgroundColor = .systemRed
-
-        countLabel.font = .bold(12)
-        countLabel.textColor = .white
-    }
-
-    final func makeThemeUpdates() {
-        containerView.borderColor = .separator
     }
 
     final func configureContentButton() {

@@ -121,26 +121,31 @@ private extension HomePresenter {
     final func prepareContent(with movieGenres: [Genre]?) {
         let genreItems: [HomeItemType] = (movieGenres ?? []).compactMap{ genre in
                 .genre(
-                    cellContent: HomeGenreListContent(
-                        image: .actions,
-                        title: genre.name,
-                        badge: "\(genre.id ?? 0)"
-                    )
+                    cellContent: genre.name ?? .unknown
                 )
         }
         let preparedContent = [
             HomeContent(
-                sectionType: .genreList(
-                    headerContent: HomeGenreListContent(
-                        image: .actions,
-                        title: "Header",
-                        badge: "5"
-                    )
-                ),
+                sectionType: .genreList(headerTitle: L10nHome.genres.localized()),
                 items: genreItems
-            )
+            ),
+            getCategoryContent()
         ]
         
         content = preparedContent
+    }
+    
+    final func getCategoryContent() -> HomeContent {
+        return HomeContent(
+            sectionType: .categories(
+                headerTitle: L10nHome.discover.localized()
+            ),
+            items: [
+                .category(cellContent: .nowPlaying),
+                .category(cellContent: .topRated),
+                .category(cellContent: .upComing),
+                .category(cellContent: .popular)
+            ]
+        )
     }
 }

@@ -46,5 +46,6 @@ private extension TitleHeaderView {
 
     final func configureTitle() {
         titleLabel.font = .bold(16)
+        titleLabel.textColor = .white
     }
 }

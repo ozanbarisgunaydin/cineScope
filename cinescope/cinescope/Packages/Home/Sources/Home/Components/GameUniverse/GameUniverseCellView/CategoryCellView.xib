@@ -16,17 +16,27 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yUI-jb-qWH">
                     <rect key="frame" x="0.0" y="0.0" width="170" height="64"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V07-iI-s0a" customClass="CustomLabel" customModule="Components">
+                    <rect key="frame" x="36" y="21.666666666666671" width="122" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="V07-iI-s0a" secondAttribute="trailing" constant="12" id="SBy-zD-2Zb"/>
                 <constraint firstItem="yUI-jb-qWH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SWE-9s-ee8"/>
                 <constraint firstItem="yUI-jb-qWH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZbM-0p-JlG"/>
                 <constraint firstAttribute="trailing" secondItem="yUI-jb-qWH" secondAttribute="trailing" id="aj4-d8-Ogn"/>
+                <constraint firstItem="V07-iI-s0a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hb2-sG-Ofo"/>
                 <constraint firstAttribute="bottom" secondItem="yUI-jb-qWH" secondAttribute="bottom" id="o4V-H5-rbG"/>
+                <constraint firstItem="V07-iI-s0a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="36" id="xSc-g7-wye"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="imageView" destination="yUI-jb-qWH" id="Fel-NR-3FX"/>
+                <outlet property="titleLabel" destination="V07-iI-s0a" id="bqw-Ha-2e3"/>
             </connections>
             <point key="canvasLocation" x="82" y="-11"/>
         </view>

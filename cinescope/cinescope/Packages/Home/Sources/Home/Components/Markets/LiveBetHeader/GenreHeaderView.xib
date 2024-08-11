@@ -24,48 +24,27 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncj-tX-dXz">
                     <rect key="frame" x="12" y="0.0" width="104" height="114"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hPv-3d-Sr7">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hPv-3d-Sr7">
                             <rect key="frame" x="12" y="12" width="80" height="90"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZh-oe-XuH">
-                                    <rect key="frame" x="17.666666666666664" y="0.0" width="45" height="45"/>
+                                    <rect key="frame" x="10" y="0.0" width="60" height="60"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="45" id="UWa-NE-bpH"/>
-                                        <constraint firstAttribute="height" constant="45" id="YYr-6C-AGn"/>
+                                        <constraint firstAttribute="width" constant="60" id="UWa-NE-bpH"/>
+                                        <constraint firstAttribute="height" constant="60" id="YYr-6C-AGn"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D2-4v-UK8" customClass="CustomLabel" customModule="Components">
-                                    <rect key="frame" x="0.0" y="51" width="80" height="16"/>
+                                    <rect key="frame" x="0.0" y="70" width="80" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="Vnn-Tr-WdR"/>
+                                        <constraint firstAttribute="height" constant="20" id="Vnn-Tr-WdR"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPZ-SC-jWW">
-                                    <rect key="frame" x="0.0" y="73" width="80" height="17"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y77-Th-cgI" customClass="CustomLabel" customModule="Components">
-                                            <rect key="frame" x="8" y="0.0" width="64" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="y77-Th-cgI" secondAttribute="trailing" constant="8" id="3IC-x9-NTr"/>
-                                        <constraint firstAttribute="bottom" secondItem="y77-Th-cgI" secondAttribute="bottom" id="9FF-zG-Uha"/>
-                                        <constraint firstItem="y77-Th-cgI" firstAttribute="top" secondItem="vPZ-SC-jWW" secondAttribute="top" id="A4h-vR-cAM"/>
-                                        <constraint firstAttribute="height" constant="17" id="djE-JI-6hc"/>
-                                        <constraint firstItem="y77-Th-cgI" firstAttribute="leading" secondItem="vPZ-SC-jWW" secondAttribute="leading" constant="8" id="kJc-pB-Hbk"/>
-                                    </constraints>
-                                </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="vPZ-SC-jWW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hPv-3d-Sr7" secondAttribute="leading" id="1YD-ul-V2c"/>
-                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vPZ-SC-jWW" secondAttribute="trailing" id="dW5-ka-oFb"/>
                                 <constraint firstAttribute="trailing" secondItem="6D2-4v-UK8" secondAttribute="trailing" id="qoi-Pt-5aq"/>
                                 <constraint firstItem="6D2-4v-UK8" firstAttribute="leading" secondItem="hPv-3d-Sr7" secondAttribute="leading" id="y7S-us-cbu"/>
                             </constraints>
@@ -107,10 +86,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="backgroundView" destination="wFw-Zp-dVB" id="RlV-RR-gmT"/>
-                <outlet property="badgeView" destination="vPZ-SC-jWW" id="lCm-YC-1RN"/>
                 <outlet property="containerView" destination="Ncj-tX-dXz" id="EKc-7i-dib"/>
                 <outlet property="contentButton" destination="0zJ-Yi-5HY" id="yec-Ax-u5H"/>
-                <outlet property="countLabel" destination="y77-Th-cgI" id="jGN-fe-bb4"/>
                 <outlet property="gradientView" destination="5lc-Wx-xqi" id="3rZ-yR-Epr"/>
                 <outlet property="imageView" destination="QZh-oe-XuH" id="vO5-lF-L9T"/>
                 <outlet property="titleLabel" destination="6D2-4v-UK8" id="15R-mh-ljl"/>
@@ -119,7 +96,7 @@
         </view>
     </objects>
     <designables>
-        <designable name="y77-Th-cgI"/>
+        <designable name="6D2-4v-UK8"/>
     </designables>
     <resources>
         <systemColor name="systemBackgroundColor">

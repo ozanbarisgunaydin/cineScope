@@ -25,7 +25,7 @@ class HomeContent {
 // MARK: - HomeSectionType
 enum HomeSectionType: Hashable {
     // MARK: - Cases
-    case genreList(headerContent: HomeGenreListContent? = nil)
+    case genreList(headerTitle: String? = nil)
     case categories(headerTitle: String? = nil)
     case reviews(headerTitle: String? = nil)
     
@@ -52,8 +52,8 @@ enum HomeSectionType: Hashable {
 
 // MARK: - HomeItemType
 enum HomeItemType: Hashable {
-    case genre(cellContent: HomeGenreListContent)
-    case category(cellContent: HomeCategoryModel)
+    case genre(cellContent: HomeGenreType)
+    case category(cellContent: CategoryType)
     case review(cellContent: MovieReview)
 }
 
@@ -81,31 +81,43 @@ struct HomeGenreListContent: Hashable {
     }
 }
 
-// MARK: - HomeCategoryModel
-struct HomeCategoryModel: Hashable {
-    public let image: UIImage?
-    public let type: CategoryType?
-    
-    init(
-        image: UIImage? = nil,
-        type: CategoryType? = nil
-    ) {
-        self.image = image
-        self.type = type
-    }
-    
-    // MARK: - Hashable
-    let identifier = UUID()
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(identifier)
-    }
-}
-
 // MARK: - CategoryType
-enum CategoryType {
-    case nowPlaying
-    case popular
-    case topRated
-    case upComing
+enum CategoryType: Int, Hashable {
+    // MARK: - Cases
+    case nowPlaying = 0
+    case popular = 1
+    case topRated = 2
+    case upComing = 3
+    
+    // MARK: - Propeties
+    var coverImage: UIImage? {
+        switch self {
+        case .nowPlaying:
+            return .nowPlayingCover
+        case .popular:
+            return .popularCover
+        case .topRated:
+            return .topRatedCover
+        case .upComing:
+            return .upComingCover
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .nowPlaying:
+            L10nHomeCategory.nowPlaying.localized()
+        case .popular:
+            L10nHomeCategory.popular.localized()
+        case .topRated:
+            L10nHomeCategory.topRated.localized()
+        case .upComing:
+            L10nHomeCategory.upComing.localized()
+        }
+    }    
+    
+    // MARK: - Hashable    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(rawValue)
+    }
 }

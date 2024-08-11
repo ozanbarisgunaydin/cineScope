@@ -17,9 +17,7 @@ final class GenreCellView: UICollectionViewCell, NibLoadable {
     // MARK: - UI Components
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: CustomLabel!
-    @IBOutlet private weak var badgeView: UIView!
-    @IBOutlet private weak var countLabel: CustomLabel!
-
+    
     // MARK: - Initialization
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,11 +28,10 @@ final class GenreCellView: UICollectionViewCell, NibLoadable {
 // MARK: - Publics
 extension GenreCellView {
     final func configureWith(
-        content: HomeGenreListContent
+        content: HomeGenreType
     ) {
         imageView.image = content.image
-        titleLabel.text = content.title
-        countLabel.text = content.badge
+        titleLabel.text = content.rawValue
     }
 }
 
@@ -43,11 +40,10 @@ private extension GenreCellView {
     final func setupViews() {
         configureContainerView()
         configureTitle()
-        configureBadge()
     }
 
     final func configureContainerView() {
-        backgroundColor = .backgroundPrimary
+        backgroundColor = .pearlBlack.withAlphaComponent(0.2)
         borderColor = .separator
         borderWidth = 1
         cornerRadius = 14
@@ -55,14 +51,6 @@ private extension GenreCellView {
 
     final func configureTitle() {
         titleLabel.font = .bold(14)
-        titleLabel.textColor = .lightText
-    }
-
-    final func configureBadge() {
-        badgeView.setCapsuleCornerRadius()
-        badgeView.backgroundColor = .systemRed
-
-        countLabel.font = .bold(10)
-        countLabel.textColor = .lightText
+        titleLabel.textColor = .white
     }
 }

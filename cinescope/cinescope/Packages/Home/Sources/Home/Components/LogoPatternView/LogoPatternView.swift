@@ -38,6 +38,6 @@ private extension LogoPatternView {
 
     final func configureImageViews() {
         baseImageView.image = .patternBase
-        logoImageView.image = .appLogo
+        logoImageView.image = .logoNamed
     }
 }

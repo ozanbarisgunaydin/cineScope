@@ -44,7 +44,7 @@ extension HomeViewController {
                     withClass: CategoryCell.self,
                     for: indexPath
                 )
-                gameUniverseCell.configureWith(image: content.image)
+                gameUniverseCell.configureWith(type: content)
                 return gameUniverseCell
 
             case .review(let content):
@@ -72,7 +72,7 @@ extension HomeViewController {
                     withClass: GenreHeader.self,
                     for: indexPath
                 )
-                headerView.configureWith(content: content) { [weak self] in
+                headerView.configureWith(title: content) { [weak self] in
                     guard let self else { return }
                     // TODO: - Live Bet Header selection can handled with this block.
                     print("Live bet selected on \(self)")

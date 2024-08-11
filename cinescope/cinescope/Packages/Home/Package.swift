@@ -23,6 +23,9 @@ let package = Package(
             name: "Home",
             dependencies: [
                 "Common"
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(
