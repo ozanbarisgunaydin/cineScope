@@ -75,7 +75,7 @@ extension HomeViewController {
                 headerView.configureWith(title: content) { [weak self] in
                     guard let self else { return }
                     // TODO: - Live Bet Header selection can handled with this block.
-                    print("Live bet selected on \(self)")
+                    print("Genre selected on \(self)")
                 }
                 return headerView
 
