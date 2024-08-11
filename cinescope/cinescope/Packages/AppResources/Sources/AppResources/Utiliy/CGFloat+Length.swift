@@ -24,7 +24,12 @@ public extension CGFloat {
     /// 24
     static let paddingLarge: CGFloat = 24
     
-    // MARK: - Length
+    
+    // MARK: - Screen
+    /// UIScreen.main.bounds
+    static let screenBounds: CGRect = UIScreen.main.bounds
     /// UIScreen.main.bounds.width
-    static let lengthScreenWidth: CGFloat = UIScreen.main.bounds.width
+    static let screenWidth: CGFloat = UIScreen.main.bounds.width
+    /// UIScreen.main.bounds.height
+    static let screenHeight: CGFloat = UIScreen.main.bounds.height
 }

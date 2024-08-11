@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CategoryCellView" customModule="Home">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yUI-jb-qWH">
+                    <rect key="frame" x="0.0" y="0.0" width="170" height="64"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="yUI-jb-qWH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SWE-9s-ee8"/>
+                <constraint firstItem="yUI-jb-qWH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZbM-0p-JlG"/>
+                <constraint firstAttribute="trailing" secondItem="yUI-jb-qWH" secondAttribute="trailing" id="aj4-d8-Ogn"/>
+                <constraint firstAttribute="bottom" secondItem="yUI-jb-qWH" secondAttribute="bottom" id="o4V-H5-rbG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="yUI-jb-qWH" id="Fel-NR-3FX"/>
+            </connections>
+            <point key="canvasLocation" x="82" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

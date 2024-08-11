@@ -278,7 +278,7 @@ extension BannerView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let width: CGFloat = .lengthScreenWidth - (.spacingLarge * 2)
+        let width: CGFloat = .screenWidth - (.spacingLarge * 2)
         let height = width * widthToHeightRatio
 
         return CGSize(width: width, height: height)

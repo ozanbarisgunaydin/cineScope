@@ -9,6 +9,7 @@ import AppManagers
 import Combine
 import Components
 import Foundation
+import UIKit
 
 // MARK: - HomePresenterProtocol
 protocol HomePresenterProtocol: BasePresenterProtocol {
@@ -18,8 +19,11 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
     var router: HomeRouterProtocol { get set }
     /// Variables
     var bannerPublisher: Published<[String]>.Publisher { get }
+    var contentPublisher: Published<[HomeContent]>.Publisher { get }
+
     /// Functions
     func fetchContent()
+    func getSectionProperties(for index: Int) -> (type: HomeSectionType, itemCount: Int)?
 }
 
 // MARK: - HomePresenter
@@ -43,13 +47,12 @@ final class HomePresenter: HomePresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-    
-    // MARK: - Private Variables
-    private var movieGenreList: [Genre]?
 
     // MARK: - Published Variables
     @Published var banners: [String] = []
     var bannerPublisher: Published<[String]>.Publisher { $banners }
+    @Published var content: [HomeContent] = []
+    var contentPublisher: Published<[HomeContent]>.Publisher { $content }
 }
 
 // MARK: - Publics
@@ -57,6 +60,17 @@ extension HomePresenter {
     final func fetchContent() {
         fetchPopularMovies()
         fetchMovieGenreList()
+    }
+    
+    
+    final func getSectionProperties(
+        for index: Int
+    ) -> (type: HomeSectionType, itemCount: Int)? {
+        guard let section = content[safe: index] else { return nil }
+        return (
+            type: section.sectionType,
+            itemCount: section.items.count
+        )
     }
 }
 
@@ -99,8 +113,34 @@ private extension HomePresenter {
             }
         }, receiveValue: { [weak self] movieGenres in
             guard let self else { return }
-            movieGenreList = movieGenres
+            prepareContent(with: movieGenres)
         })
         .store(in: &cancellables)
+    }
+    
+    final func prepareContent(with movieGenres: [Genre]?) {
+        let genreItems: [HomeItemType] = (movieGenres ?? []).compactMap{ genre in
+                .genre(
+                    cellContent: HomeGenreListContent(
+                        image: .actions,
+                        title: genre.name,
+                        badge: "\(genre.id ?? 0)"
+                    )
+                )
+        }
+        let preparedContent = [
+            HomeContent(
+                sectionType: .genreList(
+                    headerContent: HomeGenreListContent(
+                        image: .actions,
+                        title: "Header",
+                        badge: "5"
+                    )
+                ),
+                items: genreItems
+            )
+        ]
+        
+        content = preparedContent
     }
 }

@@ -45,7 +45,7 @@ final class HomeInteractor: HomeInteractorProtocol {
         return Future<[Genre]?, BaseError> { [weak self] promise in
             guard let self else { return }
             self.network.request(
-                router: MovieAPI.getPopularMovies,
+                router: MovieAPI.getMovieGenreList,
                 model: GenreListResponse.self
             ) { result in
                 switch result {

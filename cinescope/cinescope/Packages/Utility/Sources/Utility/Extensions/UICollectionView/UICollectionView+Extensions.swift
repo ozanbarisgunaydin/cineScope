@@ -45,4 +45,32 @@ public extension UICollectionView {
         }
         return cell
     }
+    
+    func registerReusableView<T: UICollectionReusableView>(nibWithViewClass name: T.Type, forSupplementaryViewOfKind kind: String, at bundle: Bundle? = nil) {
+        let identifier = String(describing: name)
+        
+        register(
+            UINib(nibName: identifier, bundle: bundle),
+            forSupplementaryViewOfKind: kind,
+            withReuseIdentifier: identifier
+        )
+    }
+    
+    func dequeueReusableSupplementaryView<T: UICollectionReusableView>(
+        ofKind kind: String,
+        withClass name: T.Type,
+        for indexPath: IndexPath
+    ) -> T {
+        guard let cell = dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: String(describing: name),
+            for: indexPath) as? T else {
+            fatalError(
+                """
+                Couldn't find UICollectionReusableView for \(String(describing: name)),
+                make sure the view is registered with collection view
+                """)
+        }
+        return cell
+    }
 }

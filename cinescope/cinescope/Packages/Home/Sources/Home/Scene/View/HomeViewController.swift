@@ -16,6 +16,12 @@ protocol HomeViewProtocol: AnyObject  {
 
 // MARK: - HomeViewController
 class HomeViewController: BaseViewController, HomeViewProtocol {
+    // MARK: - Typealias
+    typealias GenreHeader = GenreHeaderView
+    typealias TitleHeader = TitleHeaderView
+    typealias GenreCell = GenreCellView
+    typealias CategoryCell = CategoryCellView
+    typealias ReviewCell = ReviewCellView
     
     // MARK: - Outlets
     @IBOutlet private weak var logoPatternView: LogoPatternView!
@@ -28,11 +34,23 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
         get { return basePresenter as? HomePresenterProtocol }
         set { basePresenter = newValue }
     }
+    
+    // MARK: - Data
+    var dataSource: UICollectionViewDiffableDataSource<HomeSectionType, AnyHashable>?
+    
+    // MARK: - Global Variables
+    private var shouldGiveScrollOffset = false
+    private var scrollOffset: CGFloat = 0
 
     // MARK: - Life Cycles
     override public func viewDidLoad() {
         super.viewDidLoad()
         presenter?.fetchContent()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        shouldGiveScrollOffset = true
     }
     
     // MARK: - Interface Configuration
@@ -41,12 +59,14 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
         configureNavigationBar()
         configureContainerView()
         configureBannerView()
+        configureCollectionView()
     }
     
     // MARK: - Observe
     override func observeContent() {
         super.observeContent()
         observeBanners()
+        observeCollectionContent()
     }
     
     // MARK: - Init
@@ -70,6 +90,20 @@ private extension HomeViewController {
         })
         .store(in: &cancellables)
     }
+    
+    final func observeCollectionContent() {
+        presenter?.contentPublisher
+            .sink { [weak self] content in
+                guard let self,
+                      !content.isEmpty else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    guard let self else { return }
+                    applySnapshot(with: content)
+                }
+         
+            }
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: - Confguration
@@ -88,6 +122,50 @@ private extension HomeViewController {
             shouldInfiniteScroll: true
         )
     }
+    
+    final func configureCollectionView() {
+        collectionView.collectionViewLayout = createLayout()
+        collectionView.delegate = self
+        
+        collectionView.registerReusableView(
+            nibWithViewClass: GenreHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            at: Bundle.module
+        )
+        collectionView.registerReusableView(
+            nibWithViewClass: TitleHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            at: Bundle.module
+        )
+        collectionView.register(
+            nibWithCellClass: GenreCell.self,
+            at: Bundle.module
+        )
+        collectionView.register(
+            nibWithCellClass: CategoryCell.self,
+            at: Bundle.module
+        )
+        collectionView.register(
+            nibWithCellClass: ReviewCell.self,
+            at: Bundle.module
+        )
+        
+        collectionView.backgroundColor = .backgroundPrimary
+        collectionView.contentInsetAdjustmentBehavior = .never
+        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        configureDataSource()
+        
+        collectionFadeOutView.setGradientBackground(
+            colors: [
+                .backgroundPrimary,
+                .backgroundPrimary.withAlphaComponent(0.1)
+            ],
+            locations: [0, 1]
+        )
+    }
 }
 
 // MARK: - Helpers
@@ -97,5 +175,49 @@ private extension HomeViewController {
             translationX: 0,
             y: scrollDistance
         )
+    }
+    
+    final func applyBannerGradientMask(on scrollDistance: CGFloat) {
+        let shadowPadding: CGFloat = 32
+        let gradientHeight: CGFloat = 8
+        let scrollRatio = (-scrollDistance + shadowPadding - gradientHeight) / (bannerView.height + (2 * shadowPadding))
+        let gradientRatio = gradientHeight / bannerView.height
+        let lastPoint = scrollRatio >= 1 ? 1 : scrollRatio
+        let absLastPoint = lastPoint > 0 ? lastPoint : 0
+        let middleColor: UIColor = absLastPoint == 0 ? .backgroundPrimary : .clear
+        let gradient = CAGradientLayer(layer: bannerView.layer)
+        gradient.frame = .init(
+            x: bannerView.bounds.minX,
+            y: bannerView.bounds.minY - shadowPadding,
+            width: bannerView.bounds.width,
+            height: bannerView.bounds.height + (2 * shadowPadding)
+        )
+        gradient.colors = [
+            UIColor.clear.cgColor,
+            middleColor.cgColor,
+            UIColor.backgroundPrimary.cgColor,
+            UIColor.backgroundPrimary.cgColor
+        ]
+        gradient.locations = [
+            0,
+            NSNumber(value: absLastPoint),
+            NSNumber(value: absLastPoint + gradientRatio),
+            1
+        ]
+        bannerView.layer.mask = gradient
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard shouldGiveScrollOffset else {
+            scrollOffset = scrollView.contentOffset.y
+            return
+        }
+        
+        let scrollDistance = -(scrollView.contentOffset.y) + scrollOffset
+        applyBannerScrollOffset(on: scrollDistance)
+        applyBannerGradientMask(on: scrollDistance)
     }
 }
