@@ -13,8 +13,7 @@ extension AppRouter {
     public func routeToSplash() {
         let splashRouter = SplashRouter(navigationController)
         splashRouter.delegate = self
-        let splashViewController = splashRouter.createModule()
-        navigationController.setViewControllers([splashViewController], animated: false)
-        window?.switchRootViewController(to: navigationController)
+        let splashModule = splashRouter.createModule()
+        window?.switchRootViewController(to: splashModule)
     }
 }

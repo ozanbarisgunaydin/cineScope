@@ -7,17 +7,12 @@
 
 import Foundation
 
+// MARK: - SplashInteractorProtocol
 protocol SplashInteractorProtocol: AnyObject {
-    
+    /* no - op */
 }
 
-protocol SplashInteractorOutputProtocol: AnyObject {
-    
-}
-
-final class SplashInteractor {
-    var output: SplashInteractorOutputProtocol?
-}
-
-extension SplashInteractor: SplashInteractorProtocol {
+// MARK: - SplashInteractor
+final class SplashInteractor: SplashInteractorProtocol {
+    /* no - op */
 }

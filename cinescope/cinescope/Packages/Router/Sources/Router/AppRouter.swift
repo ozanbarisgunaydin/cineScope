@@ -39,4 +39,11 @@ public extension AppRouter {
     func navigate(_ route: HomeRoutes) {
         /* no - op*/
     }
+    
+    func navigate(_ route: SplashRoutes) {
+        switch route {
+        case .tabBar:
+            routeToTabBar()
+        }
+    }
 }

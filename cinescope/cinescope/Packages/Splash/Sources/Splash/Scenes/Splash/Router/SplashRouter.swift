@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - SplashRouterProtocol
 public protocol SplashRouterProtocol: AnyObject {
-    func routeToTabBar()
+    func navigate(_ route: SplashRoutes)
 }
 
 // MARK: - SplashRoutes
@@ -20,19 +20,32 @@ public enum SplashRoutes {
 
 // MARK: - SplashRouter
 final public class SplashRouter: BaseRouter {
-    // MARK: - Publics
+    // MARK: - Variables
+    weak var viewController: SplashViewController?
     public weak var delegate: SplashRouterProtocol?
     
-    weak var viewController: SplashViewController?
-    
-    public override func createModule() -> BaseViewController {
+    // MARK: - Module
+    public override func createModule() -> UIViewController {
         let view = SplashViewController()
         let interactor = SplashInteractor()
         let router = self
-        let presenter = SplashPresenter(view: view, router: delegate, interactor: interactor)
+        let presenter = SplashPresenter(
+            view: view,
+            interactor: interactor,
+            router: router
+        )
+        
         view.presenter = presenter
-        interactor.output = presenter
         router.viewController = view
-        return view
+        navigationController.setViewControllers([view], animated: false)
+
+        return navigationController
+    }
+}
+
+// MARK: - Navigates
+extension SplashRouter: SplashRouterProtocol {
+    public func navigate(_ route: SplashRoutes) {
+        delegate?.navigate(route)
     }
 }

@@ -5,48 +5,40 @@
 //  Created by Ozan Barış Günaydın on 7.08.2024.
 //
 
+import Combine
+import Components
 import Foundation
 
-protocol SplashPresenterProtocol: AnyObject {
-    func viewDidAppear()
+// MARK: - SplashPresenterProtocol
+protocol SplashPresenterProtocol: BasePresenterProtocol {
+    /// Functions
     func routeToTabBar()
 }
 
+// MARK: - SplashPresenter
 final class SplashPresenter: SplashPresenterProtocol {
-    unowned var view: SplashViewControllerProtocol?
-    let router: SplashRouterProtocol?
-    let interactor: SplashInteractorProtocol?
+    // MARK: - Base Variables
+    public var isLoading = PassthroughSubject<Bool, Error>()
+    public var alert = PassthroughSubject<AlertContent?, Error>()
+    public var cancellables: [AnyCancellable] = []
     
+    // MARK: - Components
+    weak var view: SplashViewProtocol?
+    var interactor: SplashInteractorProtocol
+    var router: SplashRouterProtocol
+    
+    // MARK: - Init
     init(
-        view: SplashViewControllerProtocol,
-        router: SplashRouterProtocol?,
-        interactor: SplashInteractorProtocol
+        view: SplashViewProtocol,
+        interactor: SplashInteractorProtocol,
+        router: SplashRouterProtocol
     ) {
         self.view = view
-        self.router = router
         self.interactor = interactor
-    }
-    
-    func viewDidAppear() {
-
+        self.router = router
     }
     
     func routeToTabBar() {
-        router?.routeToTabBar()
+        router.navigate(.tabBar)
     }
 }
-
-
-extension SplashPresenter: SplashInteractorOutputProtocol {
-    
-    func internetConnection(status: Bool) {
-        if status {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.routeToTabBar()
-            }
-        } else {
-            
-        }
-    }
-}
-

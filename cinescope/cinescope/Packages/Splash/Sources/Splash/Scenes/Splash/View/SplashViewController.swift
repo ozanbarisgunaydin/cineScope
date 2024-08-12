@@ -10,8 +10,8 @@ import Lottie
 import Components
 import UIKit
 
-// MARK: - SplashViewControllerProtocol
-protocol SplashViewControllerProtocol: AnyObject {
+// MARK: - SplashViewProtocol
+protocol SplashViewProtocol: AnyObject {
 }
 
 // MARK: - SplashViewController
@@ -80,6 +80,6 @@ private extension SplashViewController {
 }
 
 // MARK: - SplashViewControllerProtocol
-extension SplashViewController: SplashViewControllerProtocol {
-
+extension SplashViewController: SplashViewProtocol {
+    /* no - op */
 }
