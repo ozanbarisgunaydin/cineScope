@@ -27,7 +27,6 @@ public final class TabBarRouter {
     private let selectedTintColor = UIColor.white
     private let unselectedTintColor = UIColor.lightGray
     
-
     // MARK: - Publics
     public weak var delegate: TabBarRouterProtocol? {
         didSet {
