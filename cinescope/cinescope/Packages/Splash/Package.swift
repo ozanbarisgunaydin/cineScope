@@ -22,6 +22,9 @@ let package = Package(
             name: "Splash",
             dependencies: [
                 "Common"
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(

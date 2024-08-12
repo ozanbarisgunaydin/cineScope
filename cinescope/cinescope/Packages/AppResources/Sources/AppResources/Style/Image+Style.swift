@@ -5,8 +5,7 @@
 //  Created by Ozan Barış Günaydın on 8.12.2023.
 //
 
-import Foundation
-import UIKit
+import UIKit.UIImage
 
 public extension UIImage {
     // MARK: - Circle Icon

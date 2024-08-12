@@ -56,7 +56,7 @@ private extension SplashViewController {
     }
     
     final func configureWelcomeAnimation() {
-        let animation = LottieAnimation.named("splashWelcome", bundle: AppResources.bundle)
+        let animation = LottieAnimation.named("splashAnimation", bundle: AppResources.bundle)
         
         let animationView = LottieAnimationView(animation: animation)
         animationView.loopMode = .loop

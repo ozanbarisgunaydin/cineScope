@@ -17,12 +17,24 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashBackground" translatesAutoresizingMaskIntoConstraints="NO" id="5AA-WZ-jzU">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                </imageView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="5AA-WZ-jzU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Hf0-Y3-CLD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5AA-WZ-jzU" secondAttribute="trailing" id="g6r-ZC-1kc"/>
+                <constraint firstAttribute="bottom" secondItem="5AA-WZ-jzU" secondAttribute="bottom" id="nB0-Rv-dEf"/>
+                <constraint firstItem="5AA-WZ-jzU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pZi-kQ-2vl"/>
+            </constraints>
             <point key="canvasLocation" x="50" y="-11"/>
         </view>
     </objects>
     <resources>
+        <image name="splashBackground" width="500" height="1000"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
