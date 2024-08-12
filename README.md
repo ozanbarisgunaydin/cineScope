@@ -1,13 +1,16 @@
-# Advanced iOS Project - VIPER Architecture
+# cineScope
 
 ## Overview
 
-This repository contains an advanced iOS project that demonstrates the implementation of the VIPER architecture alongside modern iOS development techniques. The project is designed with a modular structure using Swift Package Manager (SPM), making it highly scalable and maintainable.
+This repository contains an iOS project that uses TMDB ([The Movie Database](https://developer.themoviedb.org/docs/getting-started)) API.
+User can discover movies, search contents and manage favorites in this app. 
+This project demonstrates the implementation of the VIPER with a modular structure using Swift Package Manager (SPM).
 
 ## Features
 
 - **VIPER Architecture**: The project follows the VIPER design pattern to ensure a clean separation of concerns.
 - **Combine Framework**: Utilizes Combine for handling asynchronous events and data binding.
+- **Alamofire** based Network layer.
 - **Compositional Layout**: Implements modern collection view layouts for complex UI designs.
 - **Diffable Data Source**: Uses Diffable Data Source to manage collection view data with ease and efficiency.
 - **Modular Design**: The project is structured using Swift Package Manager (SPM) for better modularity and reusability.
@@ -17,8 +20,9 @@ This repository contains an advanced iOS project that demonstrates the implement
 ### Completed
 
 - **Splash Module**: Handles the initial loading sequence of the application.
-- https://github.com/user-attachments/assets/95a84df1-5ea6-4a88-88e7-5ab129bca7e7
+- 
 - **Home Module**: The main interface displaying a list of items using Compositional Layout and Diffable Data Source.
+https://github.com/user-attachments/assets/994472dc-a90f-412e-8a81-21034d136bd9
 
 ### Work In Progress
 
