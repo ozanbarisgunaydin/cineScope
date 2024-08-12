@@ -10,12 +10,12 @@ import UIKit
 
 // MARK: - SplashRouterProtocol
 public protocol SplashRouterProtocol: AnyObject {
-    func routeToHome()
+    func routeToTabBar()
 }
 
 // MARK: - SplashRoutes
 public enum SplashRoutes {
-    case home
+    case tabBar
 }
 
 // MARK: - SplashRouter

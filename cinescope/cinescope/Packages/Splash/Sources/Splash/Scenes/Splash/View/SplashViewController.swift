@@ -74,7 +74,7 @@ private extension SplashViewController {
 
         animationView.play { [weak self] _ in
             guard let self else { return }
-            presenter.routeToHome()
+            presenter.routeToTabBar()
         }
     }
 }

@@ -4,36 +4,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "Router",
+    name: "TabBar",
     platforms: [.iOS(.v17)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Router",
-            targets: ["Router"]
-        )
+            name: "TabBar",
+            targets: ["TabBar"])
     ],
     dependencies: [
-        .package(path: "../Components"),
-        .package(path: "../Splash"),
-        .package(path: "../Home"),
-        .package(path: "../TabBar")
+        .package(path: "../Common"),
+        .package(path: "../Home")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Router",
+            name: "TabBar",
             dependencies: [
-                "Components",
-                "Splash",
-                "Home",
-                "TabBar"
+                "Common",
+                "Home"
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(
-            name: "RouterTests",
-            dependencies: ["Router"]
-        )
+            name: "TabBarTests",
+            dependencies: ["TabBar"])
     ]
 )

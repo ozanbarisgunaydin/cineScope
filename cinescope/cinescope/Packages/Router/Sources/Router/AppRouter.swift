@@ -7,9 +7,13 @@
 
 import Components
 import Splash
+import Home
+import TabBar
 import UIKit
 
 typealias Routes = SplashRouterProtocol
+& HomeRouterProtocol
+& TabBarRouterProtocol
 
 public final class AppRouter: BaseRouter, Routes {
     weak var window: UIWindow?
@@ -27,5 +31,12 @@ public final class AppRouter: BaseRouter, Routes {
     
     public func start() {
         routeToSplash()
+    }
+}
+
+// MARK: - HomeRouterProtocol
+public extension AppRouter {
+    func navigate(_ route: HomeRoutes) {
+        /* no - op*/
     }
 }

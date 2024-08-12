@@ -29,5 +29,9 @@ public enum Constants {
     public enum TabBarIndex: Int {
         /// 0
         case home = 0
+        /// 1
+        case search = 1
+        /// 2
+        case favorites = 2
     }
 }

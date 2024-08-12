@@ -22,15 +22,17 @@ public enum HomeRoutes {
 final public class HomeRouter: BaseRouter {
     
     weak var viewController: HomeViewController?
-    
-    public override func createModule() -> BaseViewController {
+    public weak var delegate: HomeRouterProtocol?
+
+    public override func createModule() -> UIViewController {
         let view = HomeViewController()
         let interactor = HomeInteractor()
         let router = HomeRouter(navigationController)
         let presenter = HomePresenter(view: view, interactor: interactor, router: router)
         view.presenter = presenter
         router.viewController = view
-        return view
+        navigationController.setViewControllers([view], animated: false)
+        return navigationController
     }
 }
 

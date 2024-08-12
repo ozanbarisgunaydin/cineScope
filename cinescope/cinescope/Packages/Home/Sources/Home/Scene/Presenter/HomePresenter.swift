@@ -91,7 +91,7 @@ extension HomePresenter {
         Publishers.Zip3(popularMoviesPublisher, genresPublisher, peopleListPublisher)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self else { return }
-                self.isLoading.send(false)
+                isLoading.send(false)
             }, receiveValue: { [weak self] popularMovies, genres, peopleList in
                 guard let self else { return }
                 setMoviesPosterPaths(with: popularMovies)
@@ -121,7 +121,7 @@ private extension HomePresenter {
               !movieList.isEmpty else { return }
         banners = movieList.compactMap { movie in
             return BannerContent(
-                title: movie.originalTitle,
+                title: movie.title,
                 imageURL: "\(NetworkingConstants.BaseURL.image)\(movie.backdropPath ?? "")"
             )
         }

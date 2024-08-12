@@ -9,7 +9,7 @@ import Foundation
 
 protocol SplashPresenterProtocol: AnyObject {
     func viewDidAppear()
-    func routeToHome()
+    func routeToTabBar()
 }
 
 final class SplashPresenter: SplashPresenterProtocol {
@@ -31,8 +31,8 @@ final class SplashPresenter: SplashPresenterProtocol {
 
     }
     
-    func routeToHome() {
-        router?.routeToHome()
+    func routeToTabBar() {
+        router?.routeToTabBar()
     }
 }
 
@@ -42,7 +42,7 @@ extension SplashPresenter: SplashInteractorOutputProtocol {
     func internetConnection(status: Bool) {
         if status {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.routeToHome()
+                self.routeToTabBar()
             }
         } else {
             

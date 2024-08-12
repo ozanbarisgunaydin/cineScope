@@ -154,7 +154,9 @@ extension HomeViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [getTitleHeaderItem()]
-        section.contentInsets = getSectionInsets()
+        var sectionInsets = getSectionInsets()
+        sectionInsets.bottom = 2 * CGFloat.spacingLarge
+        section.contentInsets = sectionInsets
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = .spacingLarge
 

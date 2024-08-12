@@ -12,7 +12,7 @@ import Home
 extension AppRouter {
     public func routeToHome() {
         let homeRouter = HomeRouter(navigationController)
-        //        homeRouter.delegate = self
+        homeRouter.delegate = self
         let homeViewController = homeRouter.createModule()
         navigationController.setViewControllers([homeViewController], animated: false)
         window?.switchRootViewController(to: navigationController)

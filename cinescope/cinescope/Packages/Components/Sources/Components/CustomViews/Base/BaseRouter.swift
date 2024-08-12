@@ -29,7 +29,7 @@ open class BaseRouter: NSObject {
     }
     
     // MARK: - Create Module
-    open func createModule() -> BaseViewController {
+    open func createModule() -> UIViewController {
         fatalError("\(#function) should be implemented.")
     }
     
