@@ -49,8 +49,6 @@ extension HomeViewController {
         let headerHeight = GenreHeader.viewSize.height
         let itemPadding: CGFloat = 6
         let headerOffset = headerWidth
-        let bannerMaxY = bannerView.convert(CGPoint(x: 0, y: bannerView.bounds.maxY), to: view).y + .paddingMedium
-        let bannerYOffset = bannerMaxY - collectionView.frame.minY
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .absolute(headerWidth),
@@ -63,9 +61,9 @@ extension HomeViewController {
         )
         header.extendsBoundary = false
         header.contentInsets = NSDirectionalEdgeInsets(
-            top: bannerYOffset,
+            top: 0,
             leading: -headerOffset,
-            bottom: -bannerYOffset,
+            bottom: 0,
             trailing: headerOffset
         )
 
@@ -101,7 +99,7 @@ extension HomeViewController {
         let section = NSCollectionLayoutSection(group: nestedGroup)
         section.boundarySupplementaryItems = [header]
         section.contentInsets = NSDirectionalEdgeInsets(
-            top: bannerYOffset,
+            top: 0,
             leading: headerOffset,
             bottom: 0,
             trailing: .spacingLarge
@@ -154,9 +152,7 @@ extension HomeViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [getTitleHeaderItem()]
-        var sectionInsets = getSectionInsets()
-        sectionInsets.bottom = 2 * CGFloat.spacingLarge
-        section.contentInsets = sectionInsets
+        section.contentInsets = getSectionInsets()
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = .spacingLarge
 

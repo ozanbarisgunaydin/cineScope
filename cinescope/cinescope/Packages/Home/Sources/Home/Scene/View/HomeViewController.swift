@@ -60,6 +60,7 @@ class HomeViewController: BaseViewController, HomeViewProtocol {
         configureContainerView()
         configureBannerView()
         configureCollectionView()
+        configureFadeOutView()
     }
     
     // MARK: - Observe
@@ -124,9 +125,24 @@ private extension HomeViewController {
     }
     
     final func configureCollectionView() {
+        setCollectionViewPropeties()
+        registerCells()
+        configureDataSource()
+        setScrollInsets()  
+    }
+    
+    final func setCollectionViewPropeties() {
         collectionView.collectionViewLayout = createLayout()
         collectionView.delegate = self
         
+        collectionView.backgroundColor = .backgroundPrimary
+        collectionView.contentInsetAdjustmentBehavior = .never
+        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    final func registerCells() {
         collectionView.registerReusableView(
             nibWithViewClass: GenreHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -149,15 +165,26 @@ private extension HomeViewController {
             nibWithCellClass: PersonCell.self,
             at: Bundle.module
         )
-        
-        collectionView.backgroundColor = .backgroundPrimary
-        collectionView.contentInsetAdjustmentBehavior = .never
-        
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        configureDataSource()
-        
+    }
+    
+    final func setScrollInsets() {
+        let bannerMaxY = bannerView.convert(
+            CGPoint(
+                x: 0,
+                y: bannerView.bounds.maxY
+            ),
+            to: view
+        ).y + .paddingMedium
+        let bannerYOffset = bannerMaxY - collectionView.frame.minY
+        collectionView.contentInset = .init(
+            top: bannerYOffset,
+            left: 0,
+            bottom: 2 * CGFloat.spacingLarge,
+            right: 0
+        )
+    }
+    
+    final func configureFadeOutView() {
         collectionFadeOutView.setGradientBackground(
             colors: [
                 .backgroundPrimary,
@@ -165,6 +192,7 @@ private extension HomeViewController {
             ],
             locations: [0, 1]
         )
+        
     }
 }
 

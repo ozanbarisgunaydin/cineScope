@@ -17,10 +17,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="170" height="64"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V07-iI-s0a" customClass="CustomLabel" customModule="Components">
-                    <rect key="frame" x="36" y="21.666666666666671" width="122" height="21"/>
+                    <rect key="frame" x="12" y="21.333333333333336" width="146" height="21.333333333333336"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.0" alpha="0.31676841887417218" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <size key="shadowOffset" width="-1" height="1"/>
                 </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -31,7 +33,7 @@
                 <constraint firstAttribute="trailing" secondItem="yUI-jb-qWH" secondAttribute="trailing" id="aj4-d8-Ogn"/>
                 <constraint firstItem="V07-iI-s0a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hb2-sG-Ofo"/>
                 <constraint firstAttribute="bottom" secondItem="yUI-jb-qWH" secondAttribute="bottom" id="o4V-H5-rbG"/>
-                <constraint firstItem="V07-iI-s0a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="36" id="xSc-g7-wye"/>
+                <constraint firstItem="V07-iI-s0a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="xSc-g7-wye"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -41,6 +43,11 @@
             <point key="canvasLocation" x="82" y="-11"/>
         </view>
     </objects>
+    <designables>
+        <designable name="V07-iI-s0a">
+            <size key="intrinsicContentSize" width="42.333333333333336" height="21.333333333333332"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
