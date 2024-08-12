@@ -9,7 +9,6 @@ import AppManagers
 import Combine
 import Components
 import Foundation
-import UIKit
 
 // MARK: - HomePresenterProtocol
 protocol HomePresenterProtocol: BasePresenterProtocol {

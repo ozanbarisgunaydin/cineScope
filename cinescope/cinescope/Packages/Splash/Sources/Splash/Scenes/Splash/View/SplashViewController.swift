@@ -15,10 +15,12 @@ protocol SplashViewProtocol: AnyObject {
 }
 
 // MARK: - SplashViewController
-public class SplashViewController: BaseViewController {
+final class SplashViewController: BaseViewController {
     // MARK: - Components
-    var presenter: SplashPresenterProtocol!
-    
+    var presenter: SplashPresenterProtocol? {
+        get { return basePresenter as? SplashPresenterProtocol }
+        set { basePresenter = newValue }
+    }
     // MARK: - Constants
     private let length: CGFloat = 256
 
@@ -74,7 +76,7 @@ private extension SplashViewController {
 
         animationView.play { [weak self] _ in
             guard let self else { return }
-            presenter.routeToTabBar()
+            presenter?.routeToTabBar()
         }
     }
 }

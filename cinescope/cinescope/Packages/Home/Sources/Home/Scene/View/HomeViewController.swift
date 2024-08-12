@@ -15,7 +15,7 @@ protocol HomeViewProtocol: AnyObject  {
 }
 
 // MARK: - HomeViewController
-class HomeViewController: BaseViewController, HomeViewProtocol {
+final class HomeViewController: BaseViewController, HomeViewProtocol {
     // MARK: - Typealias
     typealias GenreHeader = GenreHeaderView
     typealias TitleHeader = TitleHeaderView
