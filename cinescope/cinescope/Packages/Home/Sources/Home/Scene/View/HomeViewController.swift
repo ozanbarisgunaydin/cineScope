@@ -121,7 +121,10 @@ private extension HomeViewController {
         bannerView.configureWith(
             shouldAutoScroll: true,
             shouldInfiniteScroll: true
-        )
+        ) { [weak self] movieID in
+            guard let self else { return }
+            presenter?.routeToMovieDetail(for: movieID)
+        }
     }
     
     final func configureCollectionView() {

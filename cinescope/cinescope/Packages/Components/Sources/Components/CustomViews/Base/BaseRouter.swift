@@ -13,7 +13,8 @@ public protocol BaseRouterProtocol: AnyObject {
     /// Variables
     var navigationController: UINavigationController { get set }
     /// Functions
-    func createModule() -> BaseViewController
+    func createModule()
+    func getModule() -> UIViewController
     func back()
 }
 
@@ -28,8 +29,12 @@ open class BaseRouter: NSObject {
         super.init()
     }
     
-    // MARK: - Create Module
-    open func createModule() -> UIViewController {
+    // MARK: - Module
+    open func createModule() {
+        fatalError("\(#function) should be implemented.")
+    }    
+    
+    open func getModule() -> UIViewController {
         fatalError("\(#function) should be implemented.")
     }
     

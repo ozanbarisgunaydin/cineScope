@@ -34,7 +34,7 @@ final class BannerView: UIView, NibOwnerLoadable {
     private let widthToHeightRatio: CGFloat = 281 / 500
 
     // MARK: - Data
-    private var bannerDeeplinkCallback: ((String) -> Void)?
+    private var bannerSelectionCallback: ((Int) -> Void)?
     private var shouldAutoScroll = false
     private var shouldInfiniteScroll = false
     private var banners: [BannerContent] = [] {
@@ -79,12 +79,15 @@ extension BannerView {
     /// - Parameters:
     ///   - shouldAutoScroll: Optional Boolean value for auto scroll
     ///   - shouldInfiniteScroll: Optional Boolean value for infinite scroll
+    ///   - bannerSelectionCallback: Optinal block value for selection of banner
     final func configureWith(
         shouldAutoScroll: Bool = false,
-        shouldInfiniteScroll: Bool = false
+        shouldInfiniteScroll: Bool = false,
+        bannerSelectionCallback: ((Int) -> Void)? = nil
     ) {
         self.shouldAutoScroll = shouldAutoScroll
         self.shouldInfiniteScroll = shouldInfiniteScroll
+        self.bannerSelectionCallback = bannerSelectionCallback
     }
 
     /// Sets the needed datas of view.
@@ -239,6 +242,14 @@ private extension BannerView {
 
         remainPage = detectedPageNumber
         return detectedPageNumber
+    }
+}
+// MARK: - UICollectionViewDelegate
+extension BannerView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let bannerSelectionCallback,
+              let movieID = banners[safe: getModedRow(indexPath.row)]?.movieID else { return }
+        bannerSelectionCallback(movieID)
     }
 }
 

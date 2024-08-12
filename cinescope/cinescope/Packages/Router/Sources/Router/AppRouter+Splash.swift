@@ -11,9 +11,8 @@ import Splash
 
 extension AppRouter {
     public func routeToSplash() {
-        let splashRouter = SplashRouter(navigationController)
-        splashRouter.delegate = self
-        let splashModule = splashRouter.createModule()
+        let splashRouter = SplashRouter(delegate: self, navigationController)
+        let splashModule = splashRouter.getModule()
         window?.switchRootViewController(to: splashModule)
     }
 }

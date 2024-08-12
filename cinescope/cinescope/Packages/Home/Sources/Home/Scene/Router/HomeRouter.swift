@@ -16,16 +16,28 @@ public protocol HomeRouterProtocol: AnyObject {
 // MARK: - HomeRoutes
 public enum HomeRoutes {
     case listScreen
+    case detail(id: Int)
 }
 
 // MARK: - HomeRouter
 final public class HomeRouter: BaseRouter {
-    // MARK: - Variables
-    weak var viewController: HomeViewController?
+    // MARK: - Publics
     public weak var delegate: HomeRouterProtocol?
+    
+    // MARK: - Privates
+    private weak var viewController: HomeViewController?
+    
+    // MARK: - Init
+    public init(
+        delegate: HomeRouterProtocol? = nil,
+        _ navigationController: UINavigationController
+    ) {
+        self.delegate = delegate
+        super.init(navigationController)
+    }
 
-    // MARK: - Module
-    public override func createModule() -> UIViewController {
+    // MARK: - Module    
+    public override func getModule() -> UIViewController {
         let view = HomeViewController()
         let interactor = HomeInteractor()
         let router = self
@@ -37,6 +49,7 @@ final public class HomeRouter: BaseRouter {
         
         view.presenter = presenter
         router.viewController = view
+        
         navigationController.setViewControllers([view], animated: false)
         return navigationController
     }
@@ -44,5 +57,7 @@ final public class HomeRouter: BaseRouter {
 
 // MARK: - Navigates
 extension HomeRouter: HomeRouterProtocol {
-    public func navigate(_ route: HomeRoutes) { }
+    public func navigate(_ route: HomeRoutes) {
+        delegate?.navigate(route)
+    }
 }

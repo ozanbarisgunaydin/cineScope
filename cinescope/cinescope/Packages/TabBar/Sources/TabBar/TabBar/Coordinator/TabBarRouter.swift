@@ -100,8 +100,8 @@ public final class TabBarRouter {
     public func createModule() -> UITabBarController {
         let controller = TabBarViewController(router: self)
         var viewControllers: [UIViewController] = []
-        routers.forEach {
-            viewControllers.append($0.createModule())
+        routers.forEach { viewController in
+            viewControllers.append(viewController.getModule())
         }
         controller.viewControllers = viewControllers
         tabBarController = controller

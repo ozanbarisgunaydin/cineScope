@@ -23,6 +23,7 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
     /// Functions
     func fetchContent()
     func getSectionProperties(for index: Int) -> (type: HomeSectionType, itemCount: Int)?
+    func routeToMovieDetail(for movieID: Int)
 }
 
 // MARK: - HomePresenter
@@ -111,6 +112,10 @@ extension HomePresenter {
             itemCount: section.items.count
         )
     }
+    
+    final func routeToMovieDetail(for movieID: Int) {
+        router.navigate(.detail(id: movieID))
+    }
 }
 
 // MARK: - Helpers
@@ -121,7 +126,8 @@ private extension HomePresenter {
         banners = movieList.compactMap { movie in
             return BannerContent(
                 title: movie.title,
-                imageURL: "\(NetworkingConstants.BaseURL.image)\(movie.backdropPath ?? "")"
+                imageURL: "\(NetworkingConstants.BaseURL.image)\(movie.backdropPath ?? "")",
+                movieID: movie.id
             )
         }
     }

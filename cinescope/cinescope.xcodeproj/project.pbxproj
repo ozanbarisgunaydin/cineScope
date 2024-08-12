@@ -25,6 +25,7 @@
 		06E48DFF2C63898D000A0BAE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFE2C63898D000A0BAE /* Base */; };
 		06E48E112C639411000A0BAE /* AppDelegate+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */; };
 		06E5B3A82C68093500AD38CD /* Atlantis in Frameworks */ = {isa = PBXBuildFile; productRef = 06E5B3A72C68093500AD38CD /* Atlantis */; };
+		06F5823A2C6AB377008A0870 /* Detail in Resources */ = {isa = PBXBuildFile; fileRef = 06F582392C6AB377008A0870 /* Detail */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		06E48DFE2C63898D000A0BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06E48E002C63898D000A0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = cinescope/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Init.swift"; sourceTree = "<group>"; };
+		06F582392C6AB377008A0870 /* Detail */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Detail; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		0630AF172C63BDA6002BF2CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				06F582392C6AB377008A0870 /* Detail */,
 				0630AF212C642C2E002BF2CA /* Home */,
 				0630AF182C63BDD2002BF2CA /* Splash */,
 			);
@@ -243,6 +246,7 @@
 				0697109C2C6397C600A705C7 /* Database in Resources */,
 				06E48DFF2C63898D000A0BAE /* Base in Resources */,
 				069710A02C6397C600A705C7 /* Common in Resources */,
+				06F5823A2C6AB377008A0870 /* Detail in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

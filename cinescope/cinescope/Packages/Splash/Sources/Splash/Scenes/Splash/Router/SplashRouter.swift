@@ -20,12 +20,23 @@ public enum SplashRoutes {
 
 // MARK: - SplashRouter
 final public class SplashRouter: BaseRouter {
-    // MARK: - Variables
-    weak var viewController: SplashViewController?
+    // MARK: - Publics
     public weak var delegate: SplashRouterProtocol?
     
+    // MARK: - Privates
+    private weak var viewController: SplashViewController?
+    
+    // MARK: - Init
+    public init(
+        delegate: SplashRouterProtocol?,
+        _ navigationController: UINavigationController
+    ) {
+        self.delegate = delegate
+        super.init(navigationController)
+    }
+    
     // MARK: - Module
-    public override func createModule() -> UIViewController {
+    public override func getModule() -> UIViewController {
         let view = SplashViewController()
         let interactor = SplashInteractor()
         let router = self
@@ -37,9 +48,8 @@ final public class SplashRouter: BaseRouter {
         
         view.presenter = presenter
         router.viewController = view
-        navigationController.setViewControllers([view], animated: false)
-
-        return navigationController
+        
+        return view
     }
 }
 

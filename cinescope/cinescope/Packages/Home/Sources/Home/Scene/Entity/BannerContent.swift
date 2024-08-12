@@ -10,4 +10,5 @@ import Foundation
 struct BannerContent {
     let title: String?
     let imageURL: String?
+    let movieID: Int?
 }
