@@ -11,15 +11,10 @@ import Components
 import AppResources
 import Home
 
-// MARK: - RoutingProtocols
-public typealias TabBarRoutes = HomeRouterProtocol
-public protocol TabBarRouterProtocol: TabBarRoutes {}
-
 // MARK: - TabBarRouter
-public final class TabBarRouter {
+public final class TabBarRouter: BaseRouter {
     // MARK: - Privates
     private weak var tabBarController: TabBarViewController?
-    private var navigationController: UINavigationController
     
     // MARK: - Constants
     private let tabItemInset = UIEdgeInsets(top: 2, left: 0, bottom: -2, right: 0)
@@ -28,14 +23,6 @@ public final class TabBarRouter {
     private let unselectedTintColor = UIColor.lightGray
     
     // MARK: - Publics
-    public weak var delegate: TabBarRouterProtocol? {
-        didSet {
-            homeRouter.delegate = delegate
-            searchRouter.delegate = delegate
-            favoritesRouter.delegate = delegate
-        }
-    }
-
     public let homeRouter: HomeRouter
     public let searchRouter: HomeRouter
     public let favoritesRouter: HomeRouter
@@ -58,9 +45,10 @@ public final class TabBarRouter {
     }
 
     // MARK: - Init
-    public init(_ navigationController: UINavigationController) {
-        self.navigationController = navigationController
-        
+    public init(
+        delegate: BaseRouterProtocol,
+        _ navigationController: UINavigationController
+    ) {
         /// Home
         let homeNC = BaseNavigationController()
         homeNC.tabBarItem = UITabBarItem(
@@ -69,7 +57,7 @@ public final class TabBarRouter {
             selectedImage: .homeTabSelected
         )
         homeNC.tabBarItem.imageInsets = tabItemInset
-        homeRouter = HomeRouter(homeNC)
+        homeRouter = HomeRouter(delegate: delegate, homeNC)
         homeNC.tabBarItem.tag = Constants.TabBarIndex.home.rawValue
 
         /// Search
@@ -81,7 +69,7 @@ public final class TabBarRouter {
         )
         searchNC.tabBarItem.imageInsets = middleTabtemInset
 
-        searchRouter = HomeRouter(searchNC)
+        searchRouter = HomeRouter(delegate: delegate, searchNC)
         searchNC.tabBarItem.tag = Constants.TabBarIndex.search.rawValue
 
         /// Favorites
@@ -92,12 +80,14 @@ public final class TabBarRouter {
             selectedImage: .favoritesTabSelected
         )
         favoritesNC.tabBarItem.imageInsets = tabItemInset
-        favoritesRouter = HomeRouter(favoritesNC)
+        favoritesRouter = HomeRouter(delegate: delegate, favoritesNC)
         favoritesNC.tabBarItem.tag = Constants.TabBarIndex.favorites.rawValue
+        
+        super.init(delegate: delegate, navigationController)
     }
 
     // MARK: - Module
-    public func createModule() -> UITabBarController {
+    public override func getModule() -> UITabBarController {
         let controller = TabBarViewController(router: self)
         var viewControllers: [UIViewController] = []
         routers.forEach { viewController in

@@ -15,11 +15,9 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
     /// Components
     var view: HomeViewProtocol? { get set }
     var interactor: HomeInteractorProtocol { get set }
-    var router: HomeRouterProtocol { get set }
     /// Variables
     var bannerPublisher: Published<[BannerContent]>.Publisher { get }
     var contentPublisher: Published<[HomeContent]>.Publisher { get }
-
     /// Functions
     func fetchContent()
     func getSectionProperties(for index: Int) -> (type: HomeSectionType, itemCount: Int)?
@@ -27,16 +25,10 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
 }
 
 // MARK: - HomePresenter
-final class HomePresenter: HomePresenterProtocol {
-    // MARK: - Base Variables
-    public var isLoading = PassthroughSubject<Bool, Error>()
-    public var alert = PassthroughSubject<AlertContent?, Error>()
-    public var cancellables: [AnyCancellable] = []
-    
+final class HomePresenter: BasePresenter, HomePresenterProtocol {
     // MARK: - Components
     weak var view: HomeViewProtocol?
     var interactor: HomeInteractorProtocol
-    var router: HomeRouterProtocol
     
     // MARK: - Published Variables
     @Published var banners: [BannerContent] = []
@@ -51,11 +43,11 @@ final class HomePresenter: HomePresenterProtocol {
     init(
         view: HomeViewProtocol,
         interactor: HomeInteractorProtocol,
-        router: HomeRouterProtocol
+        router: BaseRouterProtocol
     ) {
         self.view = view
         self.interactor = interactor
-        self.router = router
+        super.init(router: router)
     }
 }
 
@@ -114,7 +106,7 @@ extension HomePresenter {
     }
     
     final func routeToMovieDetail(for movieID: Int) {
-        router.navigate(.detail(id: movieID))
+        router?.navigate(.detail(id: movieID))
     }
 }
 
@@ -151,7 +143,10 @@ private extension HomePresenter {
     }
     
     final func getGenreContent(with movieGenres: [Genre]?) -> HomeContent? {
-        let genreItems: [HomeItemType] = (movieGenres ?? []).compactMap { genre in
+        let homeTypeGenreList: [HomeGenre] = (movieGenres ?? []).compactMap { genre in
+            return HomeGenre(id: genre.id, name: HomeGenreType(rawValue: genre.name ?? ""))
+        }
+        let genreItems: [HomeItemType] = homeTypeGenreList.compactMap { genre in
                 .genre(cellContent: genre.name ?? .unknown)
         }
         

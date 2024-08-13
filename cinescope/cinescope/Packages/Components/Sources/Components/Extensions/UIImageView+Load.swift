@@ -78,32 +78,4 @@ public extension UIImageView {
             completionHandler: completion
         )
     }
-
-    func loadThumbnailImage(
-        with youTubeURLString: String?,
-        animated: Bool = true,
-        placeholder: String? = nil,
-        placeholderImage: UIImage? = nil,
-        progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) {
-        let url = genarateYoutubeThumbnailImageURL(with: youTubeURLString)
-        loadImage(
-            progressBlock: progressBlock,
-            with: url,
-            animated: animated,
-            placeholder: placeholder,
-            placeholderImage: placeholderImage,
-            completion: completionHandler
-        )
-    }
-
-    private func genarateYoutubeThumbnailImageURL(
-        with youtubeID: String?
-    ) -> URL? {
-        guard let youtubeID else { return nil }
-        let urlString = "http://img.youtube.com/vi/\(youtubeID)/maxresdefault.jpg"
-        let url = URL(string: urlString)
-        return url
-    }
 }

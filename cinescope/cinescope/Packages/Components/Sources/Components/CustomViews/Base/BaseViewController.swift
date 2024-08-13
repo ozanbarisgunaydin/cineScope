@@ -77,12 +77,14 @@ open class BaseViewController: UIViewController, BaseViewControllerProtocol, UIG
                     guard let self else { return }
                     self.alertSelectedActionHandler?(alertAction)
                     guard alertContent.shouldGoBackOnDismiss == true else { return }
+                    basePresenter?.routeBack()
                 }
                 
                 alertContent.outsideTapHandler = { [weak self] in
                     guard let self else { return }
                     self.alertOutsideTapHandler?()
                     guard alertContent.shouldGoBackOnDismiss == true else { return }
+                    basePresenter?.routeBack()
                 }
                 
                 showAlert(with: alertContent)

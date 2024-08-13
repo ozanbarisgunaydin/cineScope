@@ -8,23 +8,29 @@
 import UIKit
 
 // MARK: - BaseRouterProtocol
-@MainActor
 public protocol BaseRouterProtocol: AnyObject {
     /// Variables
     var navigationController: UINavigationController { get set }
+    var delegate: BaseRouterProtocol? { get set }
     /// Functions
     func createModule()
     func getModule() -> UIViewController
     func back()
+    func navigate(_ route: AppRoutes)
 }
 
 // MARK: - BaseRouter
-open class BaseRouter: NSObject {
+open class BaseRouter: NSObject, BaseRouterProtocol {
     // MARK: - Publics
     public var navigationController = UINavigationController()
-    
+    weak public var delegate: BaseRouterProtocol?
+
     // MARK: - Init
-    public init(_ navigationController: UINavigationController) {
+    public init(
+        delegate: BaseRouterProtocol? = nil,
+        _ navigationController: UINavigationController
+    ) {
+        self.delegate = delegate
         self.navigationController = navigationController
         super.init()
     }
@@ -36,6 +42,10 @@ open class BaseRouter: NSObject {
     
     open func getModule() -> UIViewController {
         fatalError("\(#function) should be implemented.")
+    }
+    
+    open func navigate(_ route: AppRoutes) {
+        delegate?.navigate(route)
     }
     
     // MARK: - Generic Back

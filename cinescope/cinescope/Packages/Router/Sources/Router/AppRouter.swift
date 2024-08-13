@@ -12,12 +12,7 @@ import Home
 import TabBar
 import UIKit
 
-typealias Routes = SplashRouterProtocol
-& HomeRouterProtocol
-& TabBarRouterProtocol
-& DetailRouterProtocol
-
-public final class AppRouter: BaseRouter, Routes {
+public final class AppRouter: BaseRouter {
     // MARK: - App
     weak var window: UIWindow?
     
@@ -33,31 +28,20 @@ public final class AppRouter: BaseRouter, Routes {
         super.init(navigationController)
     }
     
+    // MARK: - Start
     public func start() {
         routeToSplash()
     }
     
-}
-
-// MARK: - HomeRouterProtocol
-public extension AppRouter {
-    func navigate(_ route: HomeRoutes) {
+    // MARK: - Route
+    public override func navigate(_ route: AppRoutes) {
         switch route {
+        case .tabBar:
+            routeToTabBar()
         case .listScreen:
             print("⭕️ \(#function) list screen routing")
         case .detail(let id):
             routeToDetail(with: id)
         }
-    }
-    
-    func navigate(_ route: SplashRoutes) {
-        switch route {
-        case .tabBar:
-            routeToTabBar()
-        }
-    }
-    
-    func navigate(_ route: DetailRoutes) {
-        /* no - op*/
     }
 }

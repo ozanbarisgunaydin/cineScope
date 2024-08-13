@@ -8,34 +8,20 @@
 import Components
 import UIKit
 
-// MARK: - DetailRouterProtocol
-public protocol DetailRouterProtocol: AnyObject {
-    func navigate(_ route: DetailRoutes)
-}
-
-// MARK: - DetailRoutes
-public enum DetailRoutes {
-    /* no - op */
-}
-
 // MARK: - DetailRouter
 final public class DetailRouter: BaseRouter {
-    // MARK: - Publics
-    public weak var delegate: DetailRouterProtocol?
-    
     // MARK: - Privates
     private weak var viewController: DetailViewController?
     private var movieID: Int
     
     // MARK: - Init
     public init(
-        delegate: DetailRouterProtocol?,
+        delegate: BaseRouterProtocol?,
         movieID: Int,
         _ navigationController: UINavigationController
     ) {
-        self.delegate = delegate
         self.movieID = movieID
-        super.init(navigationController)
+        super.init(delegate: delegate, navigationController)
     }
     
     // MARK: - Module
@@ -46,7 +32,8 @@ final public class DetailRouter: BaseRouter {
         let presenter = DetailPresenter(
             view: view,
             interactor: interactor,
-            router: router
+            router: router,
+            movieID: movieID
         )
         
         view.presenter = presenter
@@ -56,9 +43,3 @@ final public class DetailRouter: BaseRouter {
         navigationController.pushViewController(view, animated: true)
     }
 }
-
-// MARK: - Navigates
-extension DetailRouter: DetailRouterProtocol {
-    public func navigate(_ route: DetailRoutes) { }
-}
-

@@ -5,6 +5,7 @@
 //  Created by Ozan Barış Günaydın on 11.08.2024.
 //
 
+import AppManagers
 import Foundation
 import UIKit.UIImage
 
@@ -13,8 +14,8 @@ struct GenreListResponse: Codable {
     let genres: [Genre]?
 }
 
-// MARK: - Genre
-struct Genre: Codable {
+// MARK: - HomeGenre
+struct HomeGenre: Codable {
     let id: Int?
     let name: HomeGenreType?
 }

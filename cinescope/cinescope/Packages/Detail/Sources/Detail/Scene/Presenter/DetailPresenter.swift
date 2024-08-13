@@ -15,42 +15,80 @@ protocol DetailPresenterProtocol: BasePresenterProtocol {
     /// Components
     var view: DetailViewProtocol? { get set }
     var interactor: DetailInteractorProtocol { get set }
-    var router: DetailRouterProtocol { get set }
     /// Variables
-    
+    var headerPublisher: Published<MovieHeaderContent?>.Publisher { get }
     /// Functions
+    func fetchContent()
 }
 
 // MARK: - DetailPresenter
-final class DetailPresenter: DetailPresenterProtocol {
-    // MARK: - Base Variables
-    public var isLoading = PassthroughSubject<Bool, Error>()
-    public var alert = PassthroughSubject<AlertContent?, Error>()
-    public var cancellables: [AnyCancellable] = []
-    
+final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
     // MARK: - Components
     weak var view: DetailViewProtocol?
     var interactor: DetailInteractorProtocol
-    var router: DetailRouterProtocol
-    
+
     // MARK: - Published Variables
+    @Published var headerContent: MovieHeaderContent?
+    var headerPublisher: Published<MovieHeaderContent?>.Publisher { $headerContent }
+    
+    // MARK: - Privates
+    private var movieID: Int
     
     // MARK: - Init
     init(
         view: DetailViewProtocol,
         interactor: DetailInteractorProtocol,
-        router: DetailRouterProtocol
+        router: BaseRouterProtocol,
+        movieID: Int
     ) {
         self.view = view
         self.interactor = interactor
-        self.router = router
+        self.movieID = movieID
+        super.init(router: router)
     }
 }
 
 // MARK: - Publics
 extension DetailPresenter {
+    final func fetchContent() {
+        fetchMovieDetail()
+    }
 }
 
 // MARK: - Helpers
 private extension DetailPresenter {
+    final func fetchMovieDetail() {
+        isLoading.send(true)
+        interactor.fetchMovieDetail(with: movieID).sink(receiveCompletion: {[weak self] completion in
+            guard let self else { return }
+            switch completion {
+            case .finished:
+                isLoading.send(false)
+            case .failure(let error):
+                showServiceFailure(
+                    errorMessage: error.friendlyMessage,
+                    shouldGoBackOnDismiss: true
+                )
+            }
+        },receiveValue: { [weak self] movie in
+            guard let self else { return }
+            setHeaderContent(with: movie)
+        })
+        .store(in: &cancellables)
+    }
+    
+    final func setHeaderContent(with movie: Movie) {
+        headerContent = MovieHeaderContent(
+            title: movie.title,
+            originalTitle: movie.originalTitle,
+            posterImageURL: movie.posterImageURL,
+            releaseDate: movie.releaseDate?.convertDateFormat(),
+            budget: movie.budget?.toAbbreviatedDollarCurrency(),
+            revenue: movie.revenue?.toAbbreviatedDollarCurrency(),
+            vote: VoteContent(
+                average: String(movie.voteAverage ?? 0.0),
+                count: String(movie.voteCount ?? 0)
+            )
+        )
+    }
 }

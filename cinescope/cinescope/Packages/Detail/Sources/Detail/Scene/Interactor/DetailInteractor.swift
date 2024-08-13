@@ -13,6 +13,7 @@ import Network
 // MARK: - DetailInteractorProtocol
 protocol DetailInteractorProtocol {
     /// Functions
+    func fetchMovieDetail(with movieID: Int) -> AnyPublisher<Movie, BaseError>
 }
 
 // MARK: - DetailInteractor
@@ -21,4 +22,21 @@ final class DetailInteractor: DetailInteractorProtocol {
     private let network = NetworkManager.shared
     
     // MARK: - Functions
+    func fetchMovieDetail(with movieID: Int) -> AnyPublisher<Movie, BaseError> {
+        return Future<Movie, BaseError> { [weak self] promise in
+            guard let self else { return }
+            self.network.request(
+                router: MovieAPI.getDetail(movieID: movieID),
+                model: Movie.self
+            ) { result in
+                switch result {
+                case .success(let response):
+                    promise(.success(response))
+                case .failure(let error):
+                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
 }

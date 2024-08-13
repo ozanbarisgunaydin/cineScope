@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  HomeImage+Style.swift
+//
 //
 //  Created by Ozan Barış Günaydın on 11.08.2024.
 //

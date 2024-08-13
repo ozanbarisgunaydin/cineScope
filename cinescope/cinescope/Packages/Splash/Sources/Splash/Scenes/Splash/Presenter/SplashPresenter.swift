@@ -16,29 +16,23 @@ protocol SplashPresenterProtocol: BasePresenterProtocol {
 }
 
 // MARK: - SplashPresenter
-final class SplashPresenter: SplashPresenterProtocol {
-    // MARK: - Base Variables
-    public var isLoading = PassthroughSubject<Bool, Error>()
-    public var alert = PassthroughSubject<AlertContent?, Error>()
-    public var cancellables: [AnyCancellable] = []
-    
+final class SplashPresenter: BasePresenter, SplashPresenterProtocol {
     // MARK: - Components
     weak var view: SplashViewProtocol?
     var interactor: SplashInteractorProtocol
-    var router: SplashRouterProtocol
     
     // MARK: - Init
     init(
         view: SplashViewProtocol,
         interactor: SplashInteractorProtocol,
-        router: SplashRouterProtocol
+        router: BaseRouterProtocol
     ) {
         self.view = view
         self.interactor = interactor
-        self.router = router
+        super.init(router: router)
     }
     
     func routeToTabBar() {
-        router.navigate(.tabBar)
+        router?.navigate(.tabBar)
     }
 }

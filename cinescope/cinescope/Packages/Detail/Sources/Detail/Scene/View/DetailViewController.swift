@@ -16,6 +16,8 @@ protocol DetailViewProtocol: AnyObject  {
 // MARK: - HomeViewController
 final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Outlets
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var headerView: MovieHeaderView!
     
     // MARK: - Components
     var presenter: DetailPresenterProtocol? {
@@ -26,16 +28,20 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Life Cycles
     override public func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.fetchContent()
     }
     
     // MARK: - Interface Configuration
     override func configureInterface() {
         super.configureInterface()
+        configureNavigationBar()
+        configureScrollView()
     }
     
     // MARK: - Observe
     override func observeContent() {
         super.observeContent()
+        observeMovie()
     }
     
     // MARK: - Init
@@ -48,9 +54,38 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
     }
 }
 
+// MARK: - Observers
+private extension DetailViewController {
+    final func observeMovie() {
+        presenter?.headerPublisher.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { [weak self] headerContent in
+                guard let self,
+                      let headerContent else { return }
+                headerView.configureWith(content: headerContent)
+            })
+        .store(in: &cancellables)
+    }
+}
+
 
 // MARK: - Interface Configuration
 private extension DetailViewController {
     final func configureNavigationBar() {
+        title = L10nDetail.title.localized()
+    }
+    
+    final func configureScrollView() {
+        scrollView.delegate = self
+        scrollView.contentInset.top = 8
+    }
+}
+
+
+// MARK: - Interface Configuration
+extension DetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let isScrollLimitReached = scrollView.contentOffset.y > 16
+        headerView.changeImage(isCollapsedStage: isScrollLimitReached)
     }
 }

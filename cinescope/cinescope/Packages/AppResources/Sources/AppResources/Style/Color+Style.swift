@@ -27,11 +27,11 @@ public extension UIColor {
     }
     
     // MARK: - Background
-    /// #1F222A
+    /// #610000
     static var backgroundNavBar: UIColor {
         return UIColor(named: "backgroundNavBar", in: Bundle.module, compatibleWith: .current) ?? UIColor.white
     }
-    /// #1F222A
+    /// #1D2023
     static var backgroundPrimary: UIColor {
         return UIColor(named: "backgroundPrimary", in: Bundle.module, compatibleWith: .current) ?? UIColor.white
     }

@@ -16,12 +16,14 @@ public protocol BasePresenterProtocol: AnyObject {
     var isLoading: PassthroughSubject<Bool, Error> { get set }
     var alert: PassthroughSubject<AlertContent?, Error> { get set }
     var cancellables: [AnyCancellable] { get set }
+    var router: BaseRouterProtocol? { get set }
 
     /// Functions
     func showServiceFailure(
         errorMessage: FriendlyMessage?,
         shouldGoBackOnDismiss: Bool
     )
+    func routeBack()
 }
 
 // MARK: - Defaults
@@ -39,5 +41,25 @@ extension BasePresenterProtocol {
             shouldGoBackOnDismiss: shouldGoBackOnDismiss
         )
         self.alert.send(alert)
+    }
+    
+    public func routeBack() {
+        router?.back()
+    }
+}
+
+// MARK: - BasePresenter
+open class BasePresenter: BasePresenterProtocol {
+    // MARK: - Base Variables
+    public var isLoading = PassthroughSubject<Bool, Error>()
+    public var alert = PassthroughSubject<AlertContent?, Error>()
+    public var cancellables: [AnyCancellable] = []
+    open var router: BaseRouterProtocol?
+    
+    // MARK: - Init
+    public init(
+        router: BaseRouterProtocol? = nil
+    ) {
+        self.router = router
     }
 }

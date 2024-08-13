@@ -14,6 +14,7 @@ public enum MovieAPI: MovieRouter {
     case getPopularMovies
     case getMovieGenreList
     case getPeopleList
+    case getDetail(movieID: Int)
 
     public var path: String? {
         switch self {
@@ -23,6 +24,8 @@ public enum MovieAPI: MovieRouter {
             return "genre/movie/list"
         case .getPeopleList:
             return "person/popular"
+        case .getDetail(let movieID):
+            return "movie/\(movieID)"
         }
     }
 
@@ -30,7 +33,8 @@ public enum MovieAPI: MovieRouter {
         switch self {
         case .getPopularMovies,
              .getMovieGenreList,
-             .getPeopleList:
+             .getPeopleList,
+             .getDetail:
             return .get
         }
     }
@@ -49,7 +53,8 @@ public enum MovieAPI: MovieRouter {
                 encoding: URLEncoding(arrayEncoding: .noBrackets)
             )
         case .getMovieGenreList,
-             .getPeopleList:
+             .getPeopleList,
+             .getDetail:
             return .requestPlain
         }
     }
