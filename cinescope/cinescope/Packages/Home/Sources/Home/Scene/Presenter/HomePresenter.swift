@@ -126,7 +126,7 @@ private extension HomePresenter {
         banners = movieList.compactMap { movie in
             return BannerContent(
                 title: movie.title,
-                imageURL: "\(NetworkingConstants.BaseURL.image)\(movie.backdropPath ?? "")",
+                imageURL: movie.backDropImageURL,
                 movieID: movie.id
             )
         }
@@ -180,10 +180,8 @@ private extension HomePresenter {
         let items: [HomeItemType] = peopleList?.compactMap { people in
             let personContent = PersonContent(
                 artistName: people.name,
-                profileImageURL: "\(NetworkingConstants.BaseURL.image)\(people.profilePath ?? "")",
-                knownedMoviePosters: people.knownFor?.compactMap {
-                    "\(NetworkingConstants.BaseURL.image)\($0.backdropPath ?? "")"
-                } ?? []
+                profileImageURL: people.profileImageURL,
+                knownedMoviePosters: people.knownFor?.compactMap { $0.backDropImageURL } ?? []
             )
             return HomeItemType.person(cellContent: personContent)
         } ?? []
