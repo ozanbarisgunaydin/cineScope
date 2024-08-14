@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "detail.genres" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categories"
+          }
+        }
+      }
+    },
     "detail.title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12,6 +23,28 @@
         }
       }
     },
+    "movieHeader.budget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget:"
+          }
+        }
+      }
+    },
+    "movieHeader.revenue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenue:"
+          }
+        }
+      }
+    },
     "movieHeader.votes" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,6 +52,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " votes"
+          }
+        }
+      }
+    },
+    "movieLinks.moviePage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movie Page"
+          }
+        }
+      }
+    },
+    "movieLinks.usefulLinks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Useful Links"
+          }
+        }
+      }
+    },
+    "movieOverview.emptyDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview is not added. Please look up late"
+          }
+        }
+      }
+    },
+    "movieOverview.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview"
           }
         }
       }

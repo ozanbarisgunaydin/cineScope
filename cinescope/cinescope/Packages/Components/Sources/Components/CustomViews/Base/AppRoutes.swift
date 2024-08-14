@@ -12,4 +12,5 @@ public enum AppRoutes {
     case tabBar
     case listScreen
     case detail(id: Int)
+    case safariController(url: String)
 }

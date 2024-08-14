@@ -21,4 +21,12 @@ public extension UIImage {
     static var star: UIImage? {
         return UIImage(named: "star", in: Bundle.module, compatibleWith: .current)
     }
+    
+    static var imdbLogo: UIImage? {
+        return UIImage(named: "imdbLogo", in: Bundle.module, compatibleWith: .current)
+    }
+    
+    static var hyperlink: UIImage? {
+        return UIImage(named: "hyperlink", in: Bundle.module, compatibleWith: .current)
+    }
 }

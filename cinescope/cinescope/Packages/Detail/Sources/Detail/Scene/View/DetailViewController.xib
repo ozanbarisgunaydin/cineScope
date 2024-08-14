@@ -10,7 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionView" destination="rX1-wK-dGh" id="xci-IK-8oa"/>
+                <outlet property="genresView" destination="FOc-BY-Nc8" id="D8S-wL-4LR"/>
                 <outlet property="headerView" destination="nsI-St-QpD" id="nVm-Zf-iFd"/>
+                <outlet property="linksView" destination="ba7-wd-Ray" id="Mex-SF-S6c"/>
                 <outlet property="scrollView" destination="0zj-Qx-9aB" id="T4c-Cq-2YR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,15 +27,29 @@
                     <rect key="frame" x="0.0" y="189" width="393" height="629"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Jfd-6p-hoi">
-                            <rect key="frame" x="16" y="16" width="361" height="791.33333333333337"/>
+                            <rect key="frame" x="16" y="16" width="361" height="224"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZg-wo-wWt">
-                                    <rect key="frame" x="0.0" y="0.0" width="361" height="791.33333333333337"/>
-                                    <string key="text">A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine. A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine. A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine. A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine. A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine. A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine. A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine.</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ba7-wd-Ray" customClass="MovieLinksView" customModule="Detail">
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="64"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="249" constant="64" id="IRa-gx-KSh"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-wK-dGh" customClass="MovieDescriptionView" customModule="Detail">
+                                    <rect key="frame" x="0.0" y="80" width="361" height="64"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="249" constant="64" id="eGg-5q-Vcu"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FOc-BY-Nc8" customClass="MovieGenresView" customModule="Detail">
+                                    <rect key="frame" x="0.0" y="160" width="361" height="64"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="249" constant="64" id="Jaq-vU-dYU"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                         </stackView>
                     </subviews>

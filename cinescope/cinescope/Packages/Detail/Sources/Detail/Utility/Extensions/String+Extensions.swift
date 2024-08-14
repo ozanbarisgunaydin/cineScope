@@ -35,3 +35,17 @@ extension String {
         }
     }
 }
+
+extension Optional where Wrapped == String {
+    /// This extension converts an optional IMDB ID string into a full IMDB URL string.
+    /// If the value is nil or empty, it returns the IMDB home page URL.
+    /// Example: "tt6263850" -> "https://www.imdb.com/title/tt6263850/"
+    /// Example: nil or "" -> "https://www.imdb.com/"
+    var imdbURL: String {
+        let imdbBaseURL = "https://www.imdb.com/"
+        guard let id = self, !id.isEmpty else {
+            return imdbBaseURL
+        }
+        return "\(imdbBaseURL)title/\(id)/"
+    }
+}

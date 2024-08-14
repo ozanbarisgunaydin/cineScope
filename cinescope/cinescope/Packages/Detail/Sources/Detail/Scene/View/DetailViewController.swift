@@ -18,7 +18,14 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Outlets
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var headerView: MovieHeaderView!
+    @IBOutlet private weak var linksView: MovieLinksView!
+    @IBOutlet private weak var descriptionView: MovieDescriptionView!
+    @IBOutlet private weak var genresView: MovieGenresView!
     
+    // MARK: - Constants
+    private let scrollCollapseLimit: CGFloat = .spacingMedium
+    private let scrollHorizontalPadding: CGFloat = .spacingMedium
+
     // MARK: - Components
     var presenter: DetailPresenterProtocol? {
         get { return basePresenter as? DetailPresenterProtocol }
@@ -41,7 +48,10 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Observe
     override func observeContent() {
         super.observeContent()
-        observeMovie()
+        observeHeader()
+        observeLinks()
+        observeOverview()
+        observeGenres()
     }
     
     // MARK: - Init
@@ -56,13 +66,51 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
 
 // MARK: - Observers
 private extension DetailViewController {
-    final func observeMovie() {
+    final func observeHeader() {
         presenter?.headerPublisher.sink(
             receiveCompletion: { _ in },
             receiveValue: { [weak self] headerContent in
                 guard let self,
                       let headerContent else { return }
                 headerView.configureWith(content: headerContent)
+            })
+        .store(in: &cancellables)
+    }
+    
+    final func observeLinks() {
+        presenter?.linksPublisher.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { [weak self] linksContent in
+                guard let self,
+                      let linksContent else { return }
+                linksView.configureWith(content: linksContent) { [weak self] url in
+                    guard let self else { return }
+                    presenter?.routeToWeb(with: url)
+                }
+            })
+        .store(in: &cancellables)
+    }
+    
+    final func observeOverview() {
+        presenter?.overviewPublisher.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { [weak self] overviewContent in
+                guard let self else { return }
+                descriptionView.configureWith(overview: overviewContent)
+            })
+        .store(in: &cancellables)
+    }
+    
+    final func observeGenres() {
+        presenter?.genresPublisher.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { [weak self] genres in
+                guard let self,
+                      let genres else { return }
+                genresView.configureWith(genres: genres) { [weak self] genreID in
+                    guard let self else { return }
+                    presenter?.routeToGenre(with: genreID)
+                }
             })
         .store(in: &cancellables)
     }
@@ -77,15 +125,16 @@ private extension DetailViewController {
     
     final func configureScrollView() {
         scrollView.delegate = self
-        scrollView.contentInset.top = 8
+        scrollView.contentInset.top = scrollHorizontalPadding
+        scrollView.contentInset.bottom = self.safeAreaBottomHeight + scrollHorizontalPadding
     }
 }
 
 
-// MARK: - Interface Configuration
+// MARK: - UIScrollViewDelegate
 extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let isScrollLimitReached = scrollView.contentOffset.y > 16
+        let isScrollLimitReached = scrollView.contentOffset.y > scrollCollapseLimit
         headerView.changeImage(isCollapsedStage: isScrollLimitReached)
     }
 }

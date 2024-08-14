@@ -17,8 +17,13 @@ protocol DetailPresenterProtocol: BasePresenterProtocol {
     var interactor: DetailInteractorProtocol { get set }
     /// Variables
     var headerPublisher: Published<MovieHeaderContent?>.Publisher { get }
+    var linksPublisher: Published<MovieLinksContent?>.Publisher { get }
+    var overviewPublisher: Published<String?>.Publisher { get }
+    var genresPublisher: Published<[Genre]?>.Publisher { get }
     /// Functions
     func fetchContent()
+    func routeToWeb(with url: String)
+    func routeToGenre(with id: Int)
 }
 
 // MARK: - DetailPresenter
@@ -30,6 +35,12 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
     // MARK: - Published Variables
     @Published var headerContent: MovieHeaderContent?
     var headerPublisher: Published<MovieHeaderContent?>.Publisher { $headerContent }
+    @Published var linksContent: MovieLinksContent?
+    var linksPublisher: Published<MovieLinksContent?>.Publisher { $linksContent }
+    @Published var overviewContent: String?
+    var overviewPublisher: Published<String?>.Publisher { $overviewContent }
+    @Published var genresContent: [Genre]?
+    var genresPublisher: Published<[Genre]?>.Publisher { $genresContent }
     
     // MARK: - Privates
     private var movieID: Int
@@ -53,6 +64,14 @@ extension DetailPresenter {
     final func fetchContent() {
         fetchMovieDetail()
     }
+    
+    final func routeToWeb(with url: String) {
+        router?.navigate(.safariController(url: url))
+    }
+    
+    final func routeToGenre(with id: Int) {
+        // TODO: - Routing the genre based search screen
+    }
 }
 
 // MARK: - Helpers
@@ -73,6 +92,9 @@ private extension DetailPresenter {
         },receiveValue: { [weak self] movie in
             guard let self else { return }
             setHeaderContent(with: movie)
+            setLinksContent(with: movie)
+            overviewContent = movie.overview
+            genresContent = movie.genres
         })
         .store(in: &cancellables)
     }
@@ -86,9 +108,17 @@ private extension DetailPresenter {
             budget: movie.budget?.toAbbreviatedDollarCurrency(),
             revenue: movie.revenue?.toAbbreviatedDollarCurrency(),
             vote: VoteContent(
-                average: String(movie.voteAverage ?? 0.0),
+                average: movie.voteAverage.roundedStringWithSlashTen,
                 count: String(movie.voteCount ?? 0)
             )
+        )
+    }
+    
+    final func setLinksContent(with movie: Movie) {
+        linksContent = MovieLinksContent(
+            backgroundImageURL: movie.backDropImageURL,
+            imdbURL: movie.imdbID.imdbURL,
+            homePageURL: movie.homepage
         )
     }
 }

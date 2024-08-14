@@ -26,8 +26,10 @@ final class MovieHeaderView: UIView, NibOwnerLoadable {
     @IBOutlet private weak var voteView: VoteView!
     
     @IBOutlet private weak var budgetImageView: UIImageView!
+    @IBOutlet private weak var budgetTitleLabel: UILabel!
     @IBOutlet private weak var budgetLabel: UILabel!
     @IBOutlet private weak var revenueImageView: UIImageView!
+    @IBOutlet private weak var revenueTitleLabel: UILabel!
     @IBOutlet private weak var revenueLabel: UILabel!
     
     // MARK: - Init
@@ -108,7 +110,15 @@ private extension MovieHeaderView {
         budgetLabel.font = .medium(14)
         budgetLabel.textColor = .lightText
         
+        budgetTitleLabel.font = .medium(14)
+        budgetTitleLabel.textColor = .lightText
+        budgetTitleLabel.text = L10nMovieHeader.budget.localized()
+        
         revenueLabel.font = .medium(14)
         revenueLabel.textColor = .lightText
+        
+        revenueTitleLabel.font = .medium(14)
+        revenueTitleLabel.textColor = .lightText
+        revenueTitleLabel.text = L10nMovieHeader.revenue.localized()
     }
 }

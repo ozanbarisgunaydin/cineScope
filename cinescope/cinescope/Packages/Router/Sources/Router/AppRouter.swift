@@ -42,6 +42,8 @@ public final class AppRouter: BaseRouter {
             print("⭕️ \(#function) list screen routing")
         case .detail(let id):
             routeToDetail(with: id)
+        case .safariController(url: let url):
+            routeToSafariController(with: url)
         }
     }
 }

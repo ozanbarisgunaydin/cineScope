@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DetailGenreCellView" customModule="Detail">
+            <rect key="frame" x="0.0" y="0.0" width="108" height="24"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GS5-yM-hX4">
+                    <rect key="frame" x="0.0" y="0.0" width="208" height="24"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DS-0h-QLc">
+                    <rect key="frame" x="8" y="8" width="92" height="8"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="1DS-0h-QLc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="3tT-lg-cOc"/>
+                <constraint firstItem="GS5-yM-hX4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7h1-lc-Oq6"/>
+                <constraint firstAttribute="trailing" secondItem="GS5-yM-hX4" secondAttribute="trailing" constant="-100" id="RuQ-ap-11o"/>
+                <constraint firstAttribute="bottom" secondItem="1DS-0h-QLc" secondAttribute="bottom" constant="8" id="pjU-rS-JM7"/>
+                <constraint firstItem="1DS-0h-QLc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="qZf-Rv-TFL"/>
+                <constraint firstAttribute="trailing" secondItem="1DS-0h-QLc" secondAttribute="trailing" constant="8" id="tbd-bR-hdY"/>
+                <constraint firstItem="GS5-yM-hX4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w0c-t2-xdF"/>
+                <constraint firstAttribute="bottom" secondItem="GS5-yM-hX4" secondAttribute="bottom" id="y1z-80-jm4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="gradientView" destination="GS5-yM-hX4" id="GiW-Vb-pDM"/>
+                <outlet property="typeLabel" destination="1DS-0h-QLc" id="W4A-sl-Pyc"/>
+            </connections>
+            <point key="canvasLocation" x="230" y="-189"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
