@@ -17,14 +17,19 @@ protocol DetailViewProtocol: AnyObject  {
 final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Outlets
     @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollViewTopPadding: NSLayoutConstraint!
     @IBOutlet private weak var headerView: MovieHeaderView!
     @IBOutlet private weak var linksView: MovieLinksView!
     @IBOutlet private weak var descriptionView: MovieDescriptionView!
     @IBOutlet private weak var genresView: MovieGenresView!
+    @IBOutlet private weak var similarsView: MovieSimilarsView!
     
     // MARK: - Constants
     private let scrollCollapseLimit: CGFloat = .spacingMedium
     private let scrollHorizontalPadding: CGFloat = .spacingMedium
+    private var scrollAnimationLength: CGFloat {
+        return MovieHeaderView.expendedHeight - MovieHeaderView.collapsedHeight
+    }
 
     // MARK: - Components
     var presenter: DetailPresenterProtocol? {
@@ -52,6 +57,7 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
         observeLinks()
         observeOverview()
         observeGenres()
+        observeSimilarMovies()
     }
     
     // MARK: - Init
@@ -114,6 +120,20 @@ private extension DetailViewController {
             })
         .store(in: &cancellables)
     }
+    
+    final func observeSimilarMovies() {
+        presenter?.similarMoviesPublisher.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { [weak self] similarMovies in
+                guard let self,
+                      let similarMovies else { return }
+                similarsView.configureWith(movies: similarMovies) { [weak self] movieID in
+                    guard let self else { return }
+                    presenter?.routeToMovieDetail(with: movieID)
+                }
+            })
+        .store(in: &cancellables)
+    }
 }
 
 
@@ -124,8 +144,9 @@ private extension DetailViewController {
     }
     
     final func configureScrollView() {
+        scrollViewTopPadding.constant = MovieHeaderView.collapsedHeight + .paddingLarge
         scrollView.delegate = self
-        scrollView.contentInset.top = scrollHorizontalPadding
+        scrollView.contentInset.top = scrollAnimationLength
         scrollView.contentInset.bottom = self.safeAreaBottomHeight + scrollHorizontalPadding
     }
 }
@@ -134,7 +155,20 @@ private extension DetailViewController {
 // MARK: - UIScrollViewDelegate
 extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let isScrollLimitReached = scrollView.contentOffset.y > scrollCollapseLimit
+        let isScrollLimitReached = scrollView.contentOffset.y > scrollCollapseLimit - scrollAnimationLength
         headerView.changeImage(isCollapsedStage: isScrollLimitReached)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let scrollLength = scrollView.contentOffset.y
+        guard scrollLength > scrollCollapseLimit - scrollAnimationLength,
+              scrollLength < scrollCollapseLimit else { return }
+        scrollView.setContentOffset(
+            CGPoint(
+                x: 0,
+                y: 0
+            ),
+            animated: true
+        )
     }
 }

@@ -59,7 +59,7 @@ public extension BaseResponseError {
 }
 
 // MARK: - BaseResponse + FriendlyMessage
-public extension BaseResponse {
+public extension BaseListResponse {
     // MARK: - Private Variables
     private var defaultTitle: String {
         return L10nError.title.localized()

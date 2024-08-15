@@ -18,8 +18,6 @@ final public class EmptyStateView: UIView, NibOwnerLoadable {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var messageLabel: UILabel!
-    @IBOutlet private weak var imageContainerView: UIView!
-    @IBOutlet private weak var backgroundColorView: UIView!
 
     // MARK: - Init
     required public init?(coder aDecoder: NSCoder) {
@@ -33,8 +31,8 @@ final public class EmptyStateView: UIView, NibOwnerLoadable {
 public extension EmptyStateView {
     final func configureWith(
         icon: UIImage? = .circleInfo,
-        title: String? = nil,
-        message: String? = nil
+        title: String? = L10nEmptyState.title.localized(),
+        message: String? = L10nEmptyState.message.localized()
     ) {
         imageView.image = icon
 
@@ -51,27 +49,17 @@ private extension EmptyStateView {
     final func setupViews() {
         configureContainerView()
         configureLabels()
-        configureImageContainerView()
-        configureBackgroundColorView()
-    }
-
-    final func configureBackgroundColorView() {
-        backgroundColorView.backgroundColor = .gray
     }
 
     final func configureContainerView() {
         backgroundColor = .clear
     }
 
-    final func configureImageContainerView() {
-        imageContainerView.setCapsuleCornerRadius()
-    }
-
     final func configureLabels() {
-        titleLabel.textColor = .pearlBlack
+        titleLabel.textColor = .white
         titleLabel.font = .bold(16)
 
-        messageLabel.textColor = .lightGray
+        messageLabel.textColor = .white.withAlphaComponent(0.8)
         messageLabel.font = .regular(14)
     }
 }

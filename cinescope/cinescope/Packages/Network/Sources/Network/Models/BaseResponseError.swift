@@ -12,7 +12,7 @@ import Alamofire
 public struct BaseResponseError<T: Decodable>: Error {
     // MARK: - Variables
     public let error: NetworkError
-    public let response: BaseResponse<T>?
+    public let response: BaseListResponse<T>?
 
     // MARK: - Init
     public init(error: NetworkError) {
@@ -31,6 +31,6 @@ public struct BaseResponseError<T: Decodable>: Error {
             return
         }
 
-        self.response = BaseResponse<T>(from: data)
+        self.response = BaseListResponse<T>(from: data)
     }
 }

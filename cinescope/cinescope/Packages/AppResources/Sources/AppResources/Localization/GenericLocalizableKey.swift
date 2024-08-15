@@ -37,8 +37,8 @@ public extension LocalizableProtocol {
 // MARK: - Typealias
 public typealias L10nGeneric = GenericLocalizableKey
 public typealias L10nError = L10nGeneric.Error
+public typealias L10nEmptyState = L10nGeneric.EmptyState
 
-// swiftlint: disable identifier_name
 // MARK: - GenericLocalizableKey
 public enum GenericLocalizableKey: String, LocalizableProtocol {
     // MARK: - RawValue
@@ -73,6 +73,20 @@ public enum GenericLocalizableKey: String, LocalizableProtocol {
         /// We detected an issue with your internet connection. Please check your settings and try to reconnect.
         case connectionMessage = "error.connectionMessage"
     }
+    
+    // MARK: - EmptyState
+    public enum EmptyState: String, LocalizableProtocol {
+        // MARK: - RawValue
+        public var stringValue: String {
+            return rawValue
+        }
+        
+        // MARK: - Keys
+        /// Content is not prepared.
+        case title = "emptyState.title"
+        /// The content will be prepared when it is ready.
+        case message = "emptyState.message"
+    }
 }
 
 // MARK: - Functions
@@ -89,4 +103,3 @@ extension LocalizableProtocol {
         return stringValue.localizedPlural(argument: argument, in: AppResources.bundle)
     }
 }
-// swiftlint: enable identifier_name

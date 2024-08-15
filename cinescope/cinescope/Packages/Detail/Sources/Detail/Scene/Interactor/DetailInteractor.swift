@@ -14,6 +14,7 @@ import Network
 protocol DetailInteractorProtocol {
     /// Functions
     func fetchMovieDetail(with movieID: Int) -> AnyPublisher<Movie, BaseError>
+    func fetchSimilarMovies(with movieID: Int) -> AnyPublisher<[Movie]?, BaseError>
 }
 
 // MARK: - DetailInteractor
@@ -32,6 +33,24 @@ final class DetailInteractor: DetailInteractorProtocol {
                 switch result {
                 case .success(let response):
                     promise(.success(response))
+                case .failure(let error):
+                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func fetchSimilarMovies(with movieID: Int) -> AnyPublisher<[Movie]?, BaseError> {
+        return Future<[Movie]?, BaseError> { [weak self] promise in
+            guard let self else { return }
+            self.network.request(
+                router: MovieAPI.getSimilarMovies(movieID: movieID),
+                model: BaseListResponse<[Movie]>.self
+            ) { result in
+                switch result {
+                case .success(let response):
+                    promise(.success(response.results))
                 case .failure(let error):
                     promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
                 }

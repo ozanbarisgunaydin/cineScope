@@ -29,8 +29,6 @@ final class MovieLinksView: UIView, NibOwnerLoadable {
     @IBOutlet private weak var imdbClickImageView: UIImageView!
     @IBOutlet private weak var imdbButton: UIButton!
     
-    // MARK: - Constants
-    
     // MARK: - Data
     private var cancellables: [AnyCancellable] = []
 	private var imdbURL: String?

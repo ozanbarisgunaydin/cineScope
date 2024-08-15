@@ -15,6 +15,8 @@
                 <outlet property="headerView" destination="nsI-St-QpD" id="nVm-Zf-iFd"/>
                 <outlet property="linksView" destination="ba7-wd-Ray" id="Mex-SF-S6c"/>
                 <outlet property="scrollView" destination="0zj-Qx-9aB" id="T4c-Cq-2YR"/>
+                <outlet property="scrollViewTopPadding" destination="Ws3-Gp-fYO" id="1UV-M6-XeN"/>
+                <outlet property="similarsView" destination="cBM-2k-A6k" id="1dB-Z9-nub"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,16 +26,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zj-Qx-9aB">
-                    <rect key="frame" x="0.0" y="189" width="393" height="629"/>
+                    <rect key="frame" x="0.0" y="163" width="393" height="655"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Jfd-6p-hoi">
-                            <rect key="frame" x="16" y="16" width="361" height="224"/>
+                            <rect key="frame" x="16" y="16" width="361" height="304"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ba7-wd-Ray" customClass="MovieLinksView" customModule="Detail">
                                     <rect key="frame" x="0.0" y="0.0" width="361" height="64"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" priority="249" constant="64" id="IRa-gx-KSh"/>
+                                        <constraint firstAttribute="height" priority="249" constant="100" id="IRa-gx-KSh"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-wK-dGh" customClass="MovieDescriptionView" customModule="Detail">
@@ -48,6 +50,13 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="249" constant="64" id="Jaq-vU-dYU"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cBM-2k-A6k" customClass="MovieSimilarsView" customModule="Detail">
+                                    <rect key="frame" x="0.0" y="240" width="361" height="64"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="249" constant="256" id="z12-8a-K35"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -75,7 +84,7 @@
                 <constraint firstItem="0zj-Qx-9aB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3dl-yu-hGL"/>
                 <constraint firstItem="nsI-St-QpD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LNK-oz-sCa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0zj-Qx-9aB" secondAttribute="bottom" id="P63-eh-m8O"/>
-                <constraint firstItem="0zj-Qx-9aB" firstAttribute="top" secondItem="nsI-St-QpD" secondAttribute="bottom" constant="2" id="Ws3-Gp-fYO"/>
+                <constraint firstItem="0zj-Qx-9aB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="104" id="Ws3-Gp-fYO"/>
                 <constraint firstItem="nsI-St-QpD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Y8E-rz-f0h"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nsI-St-QpD" secondAttribute="trailing" id="fPl-hu-Y6s"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0zj-Qx-9aB" secondAttribute="trailing" id="t1j-Nh-8Ze"/>

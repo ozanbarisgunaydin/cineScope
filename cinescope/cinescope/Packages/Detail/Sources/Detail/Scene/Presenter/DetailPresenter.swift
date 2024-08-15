@@ -20,10 +20,12 @@ protocol DetailPresenterProtocol: BasePresenterProtocol {
     var linksPublisher: Published<MovieLinksContent?>.Publisher { get }
     var overviewPublisher: Published<String?>.Publisher { get }
     var genresPublisher: Published<[Genre]?>.Publisher { get }
+    var similarMoviesPublisher: Published<[SimilarMovieContent]?>.Publisher { get }
     /// Functions
     func fetchContent()
     func routeToWeb(with url: String)
     func routeToGenre(with id: Int)
+    func routeToMovieDetail(with id: Int)
 }
 
 // MARK: - DetailPresenter
@@ -41,9 +43,12 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
     var overviewPublisher: Published<String?>.Publisher { $overviewContent }
     @Published var genresContent: [Genre]?
     var genresPublisher: Published<[Genre]?>.Publisher { $genresContent }
+    @Published var similarMoviesContent: [SimilarMovieContent]?
+    var similarMoviesPublisher: Published<[SimilarMovieContent]?>.Publisher { $similarMoviesContent }
     
     // MARK: - Privates
     private var movieID: Int
+    private var movie: Movie?
     
     // MARK: - Init
     init(
@@ -63,6 +68,7 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
 extension DetailPresenter {
     final func fetchContent() {
         fetchMovieDetail()
+        fetchSimilarMovies()
     }
     
     final func routeToWeb(with url: String) {
@@ -72,9 +78,13 @@ extension DetailPresenter {
     final func routeToGenre(with id: Int) {
         // TODO: - Routing the genre based search screen
     }
+    
+    final func routeToMovieDetail(with id: Int) {
+        // TODO: - Routing the genre based search screen
+    }
 }
 
-// MARK: - Helpers
+// MARK: - Fetchers
 private extension DetailPresenter {
     final func fetchMovieDetail() {
         isLoading.send(true)
@@ -91,34 +101,68 @@ private extension DetailPresenter {
             }
         },receiveValue: { [weak self] movie in
             guard let self else { return }
-            setHeaderContent(with: movie)
-            setLinksContent(with: movie)
+            self.movie = movie
+            setHeaderContent()
+            setLinksContent()
             overviewContent = movie.overview
             genresContent = movie.genres
         })
         .store(in: &cancellables)
     }
     
-    final func setHeaderContent(with movie: Movie) {
+    final func fetchSimilarMovies() {
+        isLoading.send(true)
+        interactor.fetchSimilarMovies(with: movieID).sink(receiveCompletion: {[weak self] completion in
+            guard let self else { return }
+            switch completion {
+            case .finished:
+                isLoading.send(false)
+            case .failure(let error):
+                showServiceFailure(
+                    errorMessage: error.friendlyMessage,
+                    shouldGoBackOnDismiss: true
+                )
+            }
+        },receiveValue: { [weak self] similarMovies in
+            guard let self else { return }
+            setSimilarMoviesContent(with: similarMovies)
+        })
+        .store(in: &cancellables)
+    }
+}
+
+// MARK: - Helpers
+private extension DetailPresenter {
+    final func setHeaderContent() {
         headerContent = MovieHeaderContent(
-            title: movie.title,
-            originalTitle: movie.originalTitle,
-            posterImageURL: movie.posterImageURL,
-            releaseDate: movie.releaseDate?.convertDateFormat(),
-            budget: movie.budget?.toAbbreviatedDollarCurrency(),
-            revenue: movie.revenue?.toAbbreviatedDollarCurrency(),
+            title: movie?.title,
+            originalTitle: movie?.originalTitle,
+            posterImageURL: movie?.posterImageURL,
+            releaseDate: movie?.releaseDate?.convertDateFormat(),
+            budget: movie?.budget?.toAbbreviatedDollarCurrency(),
+            revenue: movie?.revenue?.toAbbreviatedDollarCurrency(),
             vote: VoteContent(
-                average: movie.voteAverage.roundedStringWithSlashTen,
-                count: String(movie.voteCount ?? 0)
+                average: movie?.voteAverage.roundedStringWithSlashTen,
+                count: String(movie?.voteCount ?? 0)
             )
         )
     }
     
-    final func setLinksContent(with movie: Movie) {
+    final func setLinksContent() {
         linksContent = MovieLinksContent(
-            backgroundImageURL: movie.backDropImageURL,
-            imdbURL: movie.imdbID.imdbURL,
-            homePageURL: movie.homepage
+            backgroundImageURL: movie?.backDropImageURL,
+            imdbURL: movie?.imdbID.imdbURL,
+            homePageURL: movie?.homepage
         )
+    }
+    
+    final func setSimilarMoviesContent(with fetchedMovies: [Movie]?) {
+        similarMoviesContent = fetchedMovies?.compactMap { movie in
+            return SimilarMovieContent(
+                imageURL: movie.posterImageURL,
+                name: movie.title,
+                id: movie.id
+            )
+        }
     }
 }

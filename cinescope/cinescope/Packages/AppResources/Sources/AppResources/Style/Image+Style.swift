@@ -21,6 +21,10 @@ public extension UIImage {
         return UIImage(named: "circleConnection", in: Bundle.module, compatibleWith: .current)
     }
     
+    static var circleEmptyMovie: UIImage? {
+        return UIImage(named: "circleEmptyMovie", in: Bundle.module, compatibleWith: .current)
+    }
+    
     // MARK: - Chevron
     static var chevronLeft: UIImage? {
         return UIImage(named: "chevronLeft", in: Bundle.module, compatibleWith: .current)

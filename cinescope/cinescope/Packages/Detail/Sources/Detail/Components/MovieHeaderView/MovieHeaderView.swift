@@ -32,6 +32,10 @@ final class MovieHeaderView: UIView, NibOwnerLoadable {
     @IBOutlet private weak var revenueTitleLabel: UILabel!
     @IBOutlet private weak var revenueLabel: UILabel!
     
+    // MARK: - Constants
+    static let expendedHeight: CGFloat = 250
+    static let collapsedHeight: CGFloat = 80
+
     // MARK: - Init
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -57,15 +61,23 @@ extension MovieHeaderView {
     
     final func changeImage(isCollapsedStage: Bool) {
         guard isCollapsedStage != detailStack.isHidden else { return }
-        detailStack.isHidden = isCollapsedStage
-        originalTitleLabel.isHidden = isCollapsedStage || originalTitleLabel.text == titleLabel.text
-
-        UIView.animate(withDuration: Constants.Duration.animation) { [weak self] in
+        
+        let detectedPosterHeight: CGFloat = isCollapsedStage ? MovieHeaderView.collapsedHeight : MovieHeaderView.expendedHeight
+        let detectedTitleFont: UIFont? = isCollapsedStage ? .bold(28) : .bold(24)
+        let detectedBackgroundColor: UIColor? = isCollapsedStage ? .backgroundPrimary.withAlphaComponent(0.6) : .backgroundPrimary
+        
+        DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            posterHeight.constant =  isCollapsedStage ? 80 : 250
-            titleLabel.font = isCollapsedStage ? .bold(28) : .bold(24)
-            backgroundColor = isCollapsedStage ? .backgroundPrimary.withAlphaComponent(0.6) : .backgroundPrimary
-            layoutIfNeeded()
+            
+            detailStack.isHidden = isCollapsedStage
+            originalTitleLabel.isHidden = isCollapsedStage || originalTitleLabel.text == titleLabel.text
+            UIView.animate(withDuration: Constants.Duration.animation) { [weak self] in
+                guard let self else { return }
+                posterHeight.constant =  detectedPosterHeight
+                titleLabel.font = detectedTitleFont
+                backgroundColor = detectedBackgroundColor
+                layoutIfNeeded()
+            }
         }
     }
 }
@@ -73,9 +85,14 @@ extension MovieHeaderView {
 // MARK: - Configuration
 private extension MovieHeaderView {
     final func setupViews() {
+        setInitalHeight()
         configureContainerView()
         configureImageViews()
         configureLabels()
+    }
+    
+    final func setInitalHeight() {
+        posterHeight.constant = MovieHeaderView.expendedHeight
     }
     
     final func configureContainerView() {

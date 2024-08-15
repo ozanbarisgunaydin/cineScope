@@ -12,6 +12,17 @@
         }
       }
     },
+    "detail.similars" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Similar Movies"
+          }
+        }
+      }
+    },
     "detail.title" : {
       "extractionState" : "manual",
       "localizations" : {
