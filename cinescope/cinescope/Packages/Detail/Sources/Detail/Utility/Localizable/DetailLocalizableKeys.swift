@@ -27,6 +27,8 @@ public enum DetailLocalizableKey: String, LocalizableProtocol {
     case genres = "detail.genres"
     /// Similar Movies
     case similars = "detail.similars"
+    /// Production Companies
+    case companaies = "detail.companaies"
 
     
     // MARK: - Header

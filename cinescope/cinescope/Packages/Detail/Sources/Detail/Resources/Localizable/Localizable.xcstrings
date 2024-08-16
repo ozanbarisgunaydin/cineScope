@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "detail.companaies" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Production Companies"
+          }
+        }
+      }
+    },
     "detail.genres" : {
       "extractionState" : "manual",
       "localizations" : {

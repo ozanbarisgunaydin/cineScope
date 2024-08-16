@@ -29,4 +29,8 @@ public extension UIImage {
     static var hyperlink: UIImage? {
         return UIImage(named: "hyperlink", in: Bundle.module, compatibleWith: .current)
     }
+    
+    static var placholderCompany: UIImage? {
+        return UIImage(named: "placholderCompany", in: Bundle.module, compatibleWith: .current)
+    }
 }

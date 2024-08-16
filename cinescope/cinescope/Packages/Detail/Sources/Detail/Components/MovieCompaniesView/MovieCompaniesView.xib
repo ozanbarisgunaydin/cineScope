@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieCompaniesView" customModule="Detail">
+            <connections>
+                <outlet property="collectionHeight" destination="H96-HF-JSb" id="MdS-1m-Jyj"/>
+                <outlet property="collectionView" destination="tvx-wI-P8c" id="Bhi-UY-cS0"/>
+                <outlet property="titleView" destination="CPR-f8-qBF" id="LvE-o6-i6f"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="347"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XGw-Dm-o9f">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="347"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPR-f8-qBF" customClass="MovieSectionTitleView" customModule="Detail">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="33"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="33" id="hr1-op-yuo"/>
+                            </constraints>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="tvx-wI-P8c">
+                            <rect key="frame" x="0.0" y="45" width="393" height="302"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="302" id="H96-HF-JSb"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kH4-UI-8rM">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="XGw-Dm-o9f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0H5-hT-PVe"/>
+                <constraint firstAttribute="trailing" secondItem="XGw-Dm-o9f" secondAttribute="trailing" id="SZn-JF-8c5"/>
+                <constraint firstAttribute="bottom" secondItem="XGw-Dm-o9f" secondAttribute="bottom" id="Xzp-dn-kjL"/>
+                <constraint firstItem="XGw-Dm-o9f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dCK-LP-z5k"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-133.58778625954199" y="-148.94366197183101"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

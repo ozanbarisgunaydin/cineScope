@@ -32,6 +32,9 @@ final class MovieHeaderView: UIView, NibOwnerLoadable {
     @IBOutlet private weak var revenueTitleLabel: UILabel!
     @IBOutlet private weak var revenueLabel: UILabel!
     
+    // MARK: - Data
+    private var isAnimationCompleted = true
+    
     // MARK: - Constants
     static let expendedHeight: CGFloat = 250
     static let collapsedHeight: CGFloat = 80
@@ -60,25 +63,9 @@ extension MovieHeaderView {
     }
     
     final func changeImage(isCollapsedStage: Bool) {
-        guard isCollapsedStage != detailStack.isHidden else { return }
-        
-        let detectedPosterHeight: CGFloat = isCollapsedStage ? MovieHeaderView.collapsedHeight : MovieHeaderView.expendedHeight
-        let detectedTitleFont: UIFont? = isCollapsedStage ? .bold(28) : .bold(24)
-        let detectedBackgroundColor: UIColor? = isCollapsedStage ? .backgroundPrimary.withAlphaComponent(0.6) : .backgroundPrimary
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            
-            detailStack.isHidden = isCollapsedStage
-            originalTitleLabel.isHidden = isCollapsedStage || originalTitleLabel.text == titleLabel.text
-            UIView.animate(withDuration: Constants.Duration.animation) { [weak self] in
-                guard let self else { return }
-                posterHeight.constant =  detectedPosterHeight
-                titleLabel.font = detectedTitleFont
-                backgroundColor = detectedBackgroundColor
-                layoutIfNeeded()
-            }
-        }
+        guard isAnimationCompleted,
+              isCollapsedStage != detailStack.isHidden else { return }
+        changeViewState(for: isCollapsedStage)
     }
 }
 
@@ -137,5 +124,37 @@ private extension MovieHeaderView {
         revenueTitleLabel.font = .medium(14)
         revenueTitleLabel.textColor = .lightText
         revenueTitleLabel.text = L10nMovieHeader.revenue.localized()
+    }
+}
+
+// MARK: - Configuration
+private extension MovieHeaderView {
+    final func changeViewState(for isCollapsedStage: Bool) {
+        isAnimationCompleted = false
+        
+        let detectedPosterHeight: CGFloat = isCollapsedStage ? MovieHeaderView.collapsedHeight : MovieHeaderView.expendedHeight
+        let detectedTitleFont: UIFont? = isCollapsedStage ? .bold(28) : .bold(24)
+        let detectedBackgroundColor: UIColor? = isCollapsedStage ? .darkText : .backgroundPrimary
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            detailStack.isHidden = isCollapsedStage
+            originalTitleLabel.isHidden = isCollapsedStage || originalTitleLabel.text == titleLabel.text
+            
+            UIView.animate(
+                withDuration: Constants.Duration.animation,
+                animations: { [weak self] in
+                    guard let self else { return }
+                    posterHeight.constant =  detectedPosterHeight
+                    titleLabel.font = detectedTitleFont
+                    backgroundColor = detectedBackgroundColor
+                    layoutIfNeeded()
+                },
+                completion: { [weak self] isCompleted in
+                    guard let self else { return }
+                    isAnimationCompleted = isCompleted
+                }
+            )
+        }
     }
 }

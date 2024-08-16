@@ -149,6 +149,22 @@ public struct ProductionCompany: Codable {
         case name
         case originCountry = "origin_country"
     }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decodeIfPresent(Int.self, forKey: .id)
+        self.logoPath = try container.decodeIfPresent(String.self, forKey: .logoPath)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.originCountry = try container.decodeIfPresent(String.self, forKey: .originCountry)
+        
+        logoImageURL = if let logoPath {
+            "\(NetworkingConstants.BaseURL.image)\(logoPath)"
+        } else {
+            nil
+        }
+    }
+    
+    public var logoImageURL: String?
 }
 
 // MARK: - ProductionCountry

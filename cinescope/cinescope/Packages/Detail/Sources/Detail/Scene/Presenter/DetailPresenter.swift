@@ -21,11 +21,13 @@ protocol DetailPresenterProtocol: BasePresenterProtocol {
     var overviewPublisher: Published<String?>.Publisher { get }
     var genresPublisher: Published<[Genre]?>.Publisher { get }
     var similarMoviesPublisher: Published<[SimilarMovieContent]?>.Publisher { get }
+    var companiesPublisher: Published<[MovieCompanyContent]?>.Publisher { get }
     /// Functions
     func fetchContent()
     func routeToWeb(with url: String)
     func routeToGenre(with id: Int)
     func routeToMovieDetail(with id: Int)
+    func routeToCompany(with id: Int)
 }
 
 // MARK: - DetailPresenter
@@ -45,6 +47,8 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
     var genresPublisher: Published<[Genre]?>.Publisher { $genresContent }
     @Published var similarMoviesContent: [SimilarMovieContent]?
     var similarMoviesPublisher: Published<[SimilarMovieContent]?>.Publisher { $similarMoviesContent }
+    @Published var companiesContent: [MovieCompanyContent]?
+    var companiesPublisher: Published<[MovieCompanyContent]?>.Publisher { $companiesContent }
     
     // MARK: - Privates
     private var movieID: Int
@@ -80,7 +84,11 @@ extension DetailPresenter {
     }
     
     final func routeToMovieDetail(with id: Int) {
-        // TODO: - Routing the genre based search screen
+        router?.navigate(.detail(id: id))
+    }
+    
+    final func routeToCompany(with id: Int) {
+        // TODO: - Routing the company based search screen
     }
 }
 
@@ -106,6 +114,7 @@ private extension DetailPresenter {
             setLinksContent()
             overviewContent = movie.overview
             genresContent = movie.genres
+            setCompaniesContent()
         })
         .store(in: &cancellables)
     }
@@ -162,6 +171,16 @@ private extension DetailPresenter {
                 imageURL: movie.posterImageURL,
                 name: movie.title,
                 id: movie.id
+            )
+        }
+    }
+    
+    final func setCompaniesContent() {
+        companiesContent = movie?.productionCompanies?.compactMap { company in
+            return MovieCompanyContent(
+                imageURL: company.logoImageURL,
+                name: company.name,
+                id: company.id
             )
         }
     }

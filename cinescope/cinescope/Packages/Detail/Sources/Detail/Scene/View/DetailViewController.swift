@@ -1,6 +1,6 @@
 //
 //  DetailViewController.swift
-//  
+//
 //
 //  Created by Ozan Barış Günaydın on 13.08.2024.
 //
@@ -17,26 +17,28 @@ protocol DetailViewProtocol: AnyObject  {
 final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Outlets
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var scrollViewTopPadding: NSLayoutConstraint!
     @IBOutlet private weak var headerView: MovieHeaderView!
     @IBOutlet private weak var linksView: MovieLinksView!
     @IBOutlet private weak var descriptionView: MovieDescriptionView!
     @IBOutlet private weak var genresView: MovieGenresView!
     @IBOutlet private weak var similarsView: MovieSimilarsView!
+    @IBOutlet private weak var companiesView: MovieCompaniesView!
     
     // MARK: - Constants
-    private let scrollCollapseLimit: CGFloat = .spacingMedium
     private let scrollHorizontalPadding: CGFloat = .spacingMedium
-    private var scrollAnimationLength: CGFloat {
-        return MovieHeaderView.expendedHeight - MovieHeaderView.collapsedHeight
+    private var headerCollapsedHeight: CGFloat {
+        return MovieHeaderView.collapsedHeight + .paddingLarge  + .spacingLarge
     }
-
+    private var headerTotalHeight: CGFloat {
+        return MovieHeaderView.expendedHeight + .paddingLarge + .spacingLarge
+    }
+        
     // MARK: - Components
     var presenter: DetailPresenterProtocol? {
         get { return basePresenter as? DetailPresenterProtocol }
         set { basePresenter = newValue }
     }
-
+    
     // MARK: - Life Cycles
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +60,7 @@ final class DetailViewController: BaseViewController, DetailViewProtocol {
         observeOverview()
         observeGenres()
         observeSimilarMovies()
+        observeProductionCompanies()
     }
     
     // MARK: - Init
@@ -134,8 +137,21 @@ private extension DetailViewController {
             })
         .store(in: &cancellables)
     }
+    
+    final func observeProductionCompanies() {
+        presenter?.companiesPublisher.sink(
+            receiveCompletion: { _ in },
+            receiveValue: { [weak self] companies in
+                guard let self,
+                      let companies else { return }
+                companiesView.configureWith(companies: companies) { [weak self] movieID in
+                    guard let self else { return }
+                    presenter?.routeToCompany(with: movieID)
+                }
+            })
+        .store(in: &cancellables)
+    }
 }
-
 
 // MARK: - Interface Configuration
 private extension DetailViewController {
@@ -144,31 +160,34 @@ private extension DetailViewController {
     }
     
     final func configureScrollView() {
-        scrollViewTopPadding.constant = MovieHeaderView.collapsedHeight + .paddingLarge
         scrollView.delegate = self
-        scrollView.contentInset.top = scrollAnimationLength
+        scrollView.showsVerticalScrollIndicator = false
+        
+        scrollView.contentInset.top = headerTotalHeight
         scrollView.contentInset.bottom = self.safeAreaBottomHeight + scrollHorizontalPadding
     }
 }
 
-
 // MARK: - UIScrollViewDelegate
 extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let isScrollLimitReached = scrollView.contentOffset.y > scrollCollapseLimit - scrollAnimationLength
-        headerView.changeImage(isCollapsedStage: isScrollLimitReached)
+        let isOnCollapsableArea = scrollView.contentOffset.y > -headerTotalHeight
+        headerView.changeImage(isCollapsedStage: isOnCollapsableArea)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let scrollLength = scrollView.contentOffset.y
-        guard scrollLength > scrollCollapseLimit - scrollAnimationLength,
-              scrollLength < scrollCollapseLimit else { return }
-        scrollView.setContentOffset(
-            CGPoint(
-                x: 0,
-                y: 0
-            ),
-            animated: true
-        )
+        let isOnCollapsableArea = scrollView.contentOffset.y > -headerTotalHeight
+        && scrollView.contentOffset.y < 0
+        guard isOnCollapsableArea else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            scrollView.setContentOffset(
+                CGPoint(
+                    x: 0,
+                    y: -headerCollapsedHeight
+                ),
+                animated: true
+            )
+        }
     }
 }

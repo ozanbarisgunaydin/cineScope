@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  MovieLinksContent.swift
+//
 //
 //  Created by Ozan Barış Günaydın on 14.08.2024.
 //
