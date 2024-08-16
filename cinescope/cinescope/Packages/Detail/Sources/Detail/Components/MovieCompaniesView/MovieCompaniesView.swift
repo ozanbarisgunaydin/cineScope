@@ -93,13 +93,13 @@ private extension MovieCompaniesView {
     final func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {[weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
             guard let self else { return nil }
-            return createGenreSection()
+            return createSection()
         }
         
         return layout
     }
     
-    final func createGenreSection() -> NSCollectionLayoutSection {
+    final func createSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .estimated(60),
             heightDimension: .absolute(Cell.cellHeight)

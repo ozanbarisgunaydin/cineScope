@@ -9,6 +9,7 @@ import Components
 import Detail
 import Splash
 import Home
+import Search
 import TabBar
 import UIKit
 
@@ -44,6 +45,8 @@ public final class AppRouter: BaseRouter {
             routeToDetail(with: id)
         case .safariController(url: let url):
             routeToSafariController(with: url)
+        case .search(type: let type):
+            routeToSearch(with: type)
         }
     }
 }

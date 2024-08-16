@@ -13,4 +13,5 @@ public enum AppRoutes {
     case listScreen
     case detail(id: Int)
     case safariController(url: String)
+    case search(type: SearchType)
 }

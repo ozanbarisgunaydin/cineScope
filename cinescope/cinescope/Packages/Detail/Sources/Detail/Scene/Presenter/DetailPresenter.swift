@@ -88,7 +88,7 @@ extension DetailPresenter {
     }
     
     final func routeToCompany(with id: Int) {
-        // TODO: - Routing the company based search screen
+        router?.navigate(.search(type: .company(id: String(id))))
     }
 }
 

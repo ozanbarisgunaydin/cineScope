@@ -16,6 +16,7 @@ public enum MovieAPI: MovieRouter {
     case getPeopleList
     case getDetail(movieID: Int)
     case getSimilarMovies(movieID: Int)
+    case getDiscoveredMovies(parameters: [String: Any])
 
     public var path: String? {
         switch self {
@@ -29,6 +30,8 @@ public enum MovieAPI: MovieRouter {
             return "movie/\(movieID)"
         case .getSimilarMovies(let movieID):
             return "movie/\(movieID)/similar"
+        case .getDiscoveredMovies:
+            return "discover/movie"
         }
     }
 
@@ -38,7 +41,8 @@ public enum MovieAPI: MovieRouter {
              .getMovieGenreList,
              .getPeopleList,
              .getDetail,
-             .getSimilarMovies:
+             .getSimilarMovies,
+             .getDiscoveredMovies:
             return .get
         }
     }
@@ -56,6 +60,13 @@ public enum MovieAPI: MovieRouter {
                 parameters: queryParameters,
                 encoding: URLEncoding(arrayEncoding: .noBrackets)
             )
+            
+        case .getDiscoveredMovies(let queryParameters):
+            return .requestParameters(
+                parameters: queryParameters,
+                encoding: URLEncoding(arrayEncoding: .noBrackets)
+            )
+            
         case .getMovieGenreList,
              .getPeopleList,
              .getDetail,

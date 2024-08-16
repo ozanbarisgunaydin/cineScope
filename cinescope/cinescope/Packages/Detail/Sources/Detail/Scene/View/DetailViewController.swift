@@ -8,12 +8,12 @@
 import Components
 import UIKit
 
-// MARK: - HomeViewControllerProtocol
+// MARK: - DetailViewProtocol
 protocol DetailViewProtocol: AnyObject  {
     var presenter: DetailPresenterProtocol? { get set }
 }
 
-// MARK: - HomeViewController
+// MARK: - DetailViewController
 final class DetailViewController: BaseViewController, DetailViewProtocol {
     // MARK: - Outlets
     @IBOutlet private weak var scrollView: UIScrollView!
