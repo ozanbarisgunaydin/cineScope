@@ -15,9 +15,12 @@ protocol SearchTabViewProtocol: AnyObject  {
 
 // MARK: - SearchTabViewController
 final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
+    // MARK: - Typealias
+    typealias Cell = SearchKeywordCellView
     // MARK: - Outlets
     @IBOutlet private weak var searchBackgroundView: UIView!
     @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     // MARK: - Components
     var presenter: SearchTabPresenterProtocol? {
@@ -26,23 +29,24 @@ final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
     }
 
     // MARK: - Life Cycles
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.fetchContent()
     }
     
     // MARK: - Interface Configuration
     override func configureInterface() {
         super.configureInterface()
         configureNavigationBar()
+        configureContainerView()
+        configureSearchBar()
+        configureCollectionView()
     }
     
     // MARK: - Observe
     override func observeContent() {
         super.observeContent()
-        configureNavigationBar()
-        configureContainerView()
-        configureSearchBar()
+        observeKeywordNotifier()
     }
     
     // MARK: - Init
@@ -52,6 +56,17 @@ final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private extension SearchTabViewController {
+    final func observeKeywordNotifier() {
+        presenter?.keywordNotifier
+            .sink { _ in } receiveValue: { [weak self] _ in
+                guard let self else { return }
+                collectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -73,6 +88,29 @@ private extension SearchTabViewController {
         searchBar.barTintColor = .primaryColor
         searchBar.searchTextField.textColor = .white
     }
+    
+    final func configureCollectionView() {
+        collectionView.backgroundColor = .clear
+        collectionView.collectionViewLayout = createLayout()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(
+            nibWithCellClass: Cell.self,
+            at: Bundle.module
+        )
+        
+        collectionView.contentInset = .init(
+            top: .paddingLarge,
+            left: .spacingLarge,
+            bottom: .paddingLarge,
+            right: .spacingLarge
+        )
+        collectionView.bounces = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+    }
 }
 
 // MARK: - Interface Configuration
@@ -85,5 +123,77 @@ extension SearchTabViewController: UISearchBarDelegate {
         guard let keyword = searchBar.text,
               !keyword.isEmpty else { return }
         presenter?.routeToSearch(with: keyword)
+    }
+}
+
+
+// MARK: - Helpers
+private extension SearchTabViewController {
+    final func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {[weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
+            guard let self else { return nil }
+            return createGenreSection()
+        }
+        
+        return layout
+    }
+    
+    final func createGenreSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(100),
+            heightDimension: .absolute(Cell.cellHeight)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(Cell.cellHeight)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+        group.interItemSpacing = .fixed(.spacingMedium)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = .spacingMedium
+        
+        return section
+    }
+}
+
+
+// MARK: - UICollectionViewDataSource
+extension SearchTabViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter?.getKeywordsCount() ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withClass: Cell.self,
+            for: indexPath
+        )
+        
+        if let keyword = presenter?.getKeyword(for: indexPath.row) {
+            cell.configureWith(keyword: keyword)
+        }
+        
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension SearchTabViewController: UICollectionViewDelegate {
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        presenter?.routeToSearch(on: indexPath.row)
     }
 }

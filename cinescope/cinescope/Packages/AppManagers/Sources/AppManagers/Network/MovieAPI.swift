@@ -20,6 +20,7 @@ public enum MovieAPI: MovieRouter {
     case getTopRatedMovies(parameters: [String: Any])
     case getUpComingMovies(parameters: [String: Any])
     case getSearchedMovies(parameters: [String: Any])
+    case getLastMovieKeywords
     
     public var path: String? {
         switch self {
@@ -45,6 +46,9 @@ public enum MovieAPI: MovieRouter {
             return "movie/upcoming"
         case .getSearchedMovies:
             return "search/movie"
+        case .getLastMovieKeywords:
+            let lastDiscoveredMovieID = SessionManager.shared.lastDiscoveredMovieID.value ?? "1"
+            return "movie/\(lastDiscoveredMovieID)/keywords"
         }
     }
 

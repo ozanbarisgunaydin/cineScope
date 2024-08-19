@@ -1,44 +1,43 @@
 //
-//  DetailGenreCellView.swift
+//  SearchKeywordCellView.swift
 //
 //
-//  Created by Ozan Barış Günaydın on 14.08.2024.
+//  Created by Ozan Barış Günaydın on 19.08.2024.
 //
 
 import Components
 import UIKit
 
-// MARK: - DetailGenreCellView
-final class DetailGenreCellView: UICollectionViewCell, NibLoadable {
+// MARK: - SearchKeywordCellView
+final class SearchKeywordCellView: UICollectionViewCell, NibLoadable {
     // MARK: - Module
     public static var module = Bundle.module
     
     // MARK: - UI Components
-    @IBOutlet private weak var typeLabel: UILabel!
+    @IBOutlet private weak var keywordLabel: UILabel!
     @IBOutlet private weak var gradientView: UIView!
     
     // MARK: - Constant
     static let cellHeight: CGFloat = 32
-
+    
     // MARK: - Initialization
     public override func awakeFromNib() {
         super.awakeFromNib()
         setupViews()
     }
-    
 }
 
 // MARK: - Publics
-extension DetailGenreCellView {
+extension SearchKeywordCellView {
     final func configureWith(
-        genreTitle: String
+        keyword: String
     ) {
-        typeLabel.text = genreTitle
+        keywordLabel.text = keyword
     }
 }
 
 // MARK: - Configuration
-private extension DetailGenreCellView {
+private extension SearchKeywordCellView {
     final func setupViews() {
         configureContainerView()
         configureLabel()
@@ -62,7 +61,8 @@ private extension DetailGenreCellView {
     }
     
     final func configureLabel() {
-        typeLabel.textColor = .white
-        typeLabel.font = .bold(12)
+        keywordLabel.textColor = .white
+        keywordLabel.font = .bold(12)
     }
 }
+

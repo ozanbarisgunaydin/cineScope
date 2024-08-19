@@ -52,7 +52,11 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
     var companiesPublisher: Published<[MovieCompanyContent]?>.Publisher { $companiesContent }
     
     // MARK: - Privates
-    private var movieID: Int
+    private var movieID: Int {
+        didSet {
+            SessionManager.shared.lastDiscoveredMovieID.send("\(movieID)")
+        }
+    }
     private var movie: Movie?
     
     // MARK: - Init

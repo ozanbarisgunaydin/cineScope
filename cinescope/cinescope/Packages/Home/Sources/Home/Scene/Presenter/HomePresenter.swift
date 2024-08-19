@@ -163,7 +163,9 @@ extension HomePresenter {
 private extension HomePresenter {
     final func setMoviesPosterPaths(with movieList: [Movie]?)  {
         guard let movieList,
-              !movieList.isEmpty else { return }
+              !movieList.isEmpty,
+              let firstID = movieList.first?.id else { return }
+        SessionManager.shared.lastDiscoveredMovieID.send("\(firstID)")
         banners = movieList.compactMap { movie in
             return BannerContent(
                 title: movie.title,

@@ -16,15 +16,23 @@ public class SessionManager: SessionManagerProtocol {
 
     // MARK: - Private Variables
     private var cancellables: [AnyCancellable] = []
-    private var timer: Timer?
-    private var initialServerDate: Date?
 
     // MARK: - Init
-    private init() { }
+    private init() {
+        observeLastDiscoveredMovieID()
+    }
 
     // MARK: - Publics Variables
-
-    // MARK: - Public Functions
-    public func clear() {
-    }
+    public var lastDiscoveredMovieID = CurrentValueSubject<String?, Error>(nil)
  }
+
+// MARK: - Helpers
+private extension SessionManager {
+    final func observeLastDiscoveredMovieID() {
+        lastDiscoveredMovieID
+            .sink { _ in } receiveValue: { movieID in
+                UserManager.shared.lastDiscoveredMovieID = movieID
+            }
+            .store(in: &cancellables)
+    }
+}

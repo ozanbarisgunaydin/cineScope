@@ -12,8 +12,8 @@ import Network
 
 // MARK: - SearchTabInteractorProtocol
 protocol SearchTabInteractorProtocol {
-    /// Variables
     /// Functions
+    func fetchKeywords() -> AnyPublisher<[String]?, BaseError>
 }
 
 // MARK: - SearchTabInteractor
@@ -22,5 +22,22 @@ final class SearchTabInteractor: SearchTabInteractorProtocol {
     private let network = NetworkManager.shared
     
     // MARK: - Functions
+    final func fetchKeywords() -> AnyPublisher<[String]?, BaseError> {
+        return Future<[String]?, BaseError> { [weak self] promise in
+            guard let self else { return }
+            self.network.request(
+                router: MovieAPI.getLastMovieKeywords,
+                model: MovieKeywordsResponse.self
+            ) { result in
+                switch result {
+                case .success(let response):
+                    promise(.success(response.keywords?.compactMap({ $0.name })))
+                case .failure(let error):
+                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
     
 }
