@@ -19,6 +19,7 @@ public enum MovieAPI: MovieRouter {
     case getPopularSearchMovies(parameters: [String: Any])
     case getTopRatedMovies(parameters: [String: Any])
     case getUpComingMovies(parameters: [String: Any])
+    case getSearchedMovies(parameters: [String: Any])
     
     public var path: String? {
         switch self {
@@ -42,6 +43,8 @@ public enum MovieAPI: MovieRouter {
             return "movie/top_rated"
         case .getUpComingMovies:
             return "movie/upcoming"
+        case .getSearchedMovies:
+            return "search/movie"
         }
     }
 
@@ -60,7 +63,8 @@ public enum MovieAPI: MovieRouter {
              let .getNowPlayingMovies(queryParameters),
              let .getPopularSearchMovies(queryParameters),
              let .getTopRatedMovies(queryParameters),
-             let .getUpComingMovies(queryParameters):
+             let .getUpComingMovies(queryParameters),
+             let .getSearchedMovies(queryParameters):
             genericParameters.merge(queryParameters) { current, new in new}
             return .requestParameters(
                 parameters: genericParameters,

@@ -97,6 +97,9 @@ extension SearchPresenter {
             
         case .upComing:
             fetchCategoryMovies(publisher: interactor.fetchUpComingMovies())
+            
+        case .query:
+            fetchSearchedMovies(with: searchType.parameter)
 
         default:
             fetchDisoveredMovies(with: searchType.parameter)
@@ -137,6 +140,26 @@ private extension SearchPresenter {
     final func fetchCategoryMovies(publisher: AnyPublisher<[Movie]?, BaseError>) {
         isLoading.send(true)
         publisher.sink(receiveCompletion: {[weak self] completion in
+            guard let self else { return }
+            switch completion {
+            case .finished:
+                isLoading.send(false)
+            case .failure(let error):
+                showServiceFailure(
+                    errorMessage: error.friendlyMessage,
+                    shouldGoBackOnDismiss: true
+                )
+            }
+        },receiveValue: { [weak self] movies in
+            guard let self else { return }
+            fillContent(with: movies)
+        })
+        .store(in: &cancellables)
+    }
+    
+    final func fetchSearchedMovies(with parameters: [String: Any]) {
+        isLoading.send(true)
+        interactor.fetchSearchedMovies(with: parameters).sink(receiveCompletion: {[weak self] completion in
             guard let self else { return }
             switch completion {
             case .finished:
@@ -200,5 +223,4 @@ private extension SearchPresenter {
         
         return uniqueItems
     }
-
 }

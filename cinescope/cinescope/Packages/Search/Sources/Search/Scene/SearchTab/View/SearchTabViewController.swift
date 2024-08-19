@@ -15,6 +15,9 @@ protocol SearchTabViewProtocol: AnyObject  {
 
 // MARK: - SearchTabViewController
 final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
+    // MARK: - Outlets
+    @IBOutlet private weak var searchBackgroundView: UIView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     // MARK: - Components
     var presenter: SearchTabPresenterProtocol? {
@@ -37,7 +40,9 @@ final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
     // MARK: - Observe
     override func observeContent() {
         super.observeContent()
-        
+        configureNavigationBar()
+        configureContainerView()
+        configureSearchBar()
     }
     
     // MARK: - Init
@@ -54,5 +59,31 @@ final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
 private extension SearchTabViewController {
     final func configureNavigationBar() {
         shouldShowNavigationBar = false
+    }
+    
+    final func configureContainerView() {
+        view.backgroundColor = .black
+    }
+    
+    final func configureSearchBar() {
+        searchBar.delegate = self
+        searchBar.placeholder = L10nSearch.searchPlaceholder.localized()
+        
+        searchBackgroundView.backgroundColor = .primaryColor
+        searchBar.barTintColor = .primaryColor
+        searchBar.searchTextField.textColor = .white
+    }
+}
+
+// MARK: - Interface Configuration
+extension SearchTabViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("⭕️ \(searchText.lowercased())")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let keyword = searchBar.text,
+              !keyword.isEmpty else { return }
+        presenter?.routeToSearch(with: keyword)
     }
 }

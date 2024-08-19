@@ -20,6 +20,7 @@ protocol SearchInteractorProtocol {
     func fetchPopularMovies() -> AnyPublisher<[Movie]?, BaseError>
     func fetchTopRatedMovies() -> AnyPublisher<[Movie]?, BaseError>
     func fetchUpComingMovies() -> AnyPublisher<[Movie]?, BaseError>
+    func fetchSearchedMovies(with parameters: [String: Any]) -> AnyPublisher<[Movie]?, BaseError>
 }
 
 // MARK: - SearchInteractor
@@ -34,7 +35,6 @@ final class SearchInteractor: SearchInteractorProtocol {
         return currentPage < totalPage
     }
 
-    
     // MARK: - Functions
     final func fetchDiscoveredMovies(with parameters: [String: Any]) -> AnyPublisher<[Movie]?, BaseError> {
         return Future<[Movie]?, BaseError> { [weak self] promise in
@@ -44,13 +44,7 @@ final class SearchInteractor: SearchInteractorProtocol {
                 model: MovieListResponse.self
             ) { [weak self] result in
                 guard let self else { return }
-                switch result {
-                case .success(let response):
-                    totalPage = response.totalPages ?? 1
-                    promise(.success(response.results))
-                case .failure(let error):
-                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
-                }
+                handleMovieListResponse(result: result, promise: promise)
             }
         }
         .eraseToAnyPublisher()
@@ -64,13 +58,7 @@ final class SearchInteractor: SearchInteractorProtocol {
                 model: MovieListResponse.self
             ) { [weak self] result in
                 guard let self else { return }
-                switch result {
-                case .success(let response):
-                    totalPage = response.totalPages ?? 1
-                    promise(.success(response.results))
-                case .failure(let error):
-                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
-                }
+                handleMovieListResponse(result: result, promise: promise)
             }
         }
         .eraseToAnyPublisher()
@@ -84,13 +72,7 @@ final class SearchInteractor: SearchInteractorProtocol {
                 model: MovieListResponse.self
             ) { [weak self] result in
                 guard let self else { return }
-                switch result {
-                case .success(let response):
-                    totalPage = response.totalPages ?? 1
-                    promise(.success(response.results))
-                case .failure(let error):
-                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
-                }
+                handleMovieListResponse(result: result, promise: promise)
             }
         }
         .eraseToAnyPublisher()
@@ -104,13 +86,7 @@ final class SearchInteractor: SearchInteractorProtocol {
                 model: MovieListResponse.self
             ) { [weak self] result in
                 guard let self else { return }
-                switch result {
-                case .success(let response):
-                    totalPage = response.totalPages ?? 1
-                    promise(.success(response.results))
-                case .failure(let error):
-                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
-                }
+                handleMovieListResponse(result: result, promise: promise)
             }
         }
         .eraseToAnyPublisher()
@@ -124,13 +100,21 @@ final class SearchInteractor: SearchInteractorProtocol {
                 model: MovieListResponse.self
             ) { [weak self] result in
                 guard let self else { return }
-                switch result {
-                case .success(let response):
-                    totalPage = response.totalPages ?? 1
-                    promise(.success(response.results))
-                case .failure(let error):
-                    promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
-                }
+                handleMovieListResponse(result: result, promise: promise)
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    final func fetchSearchedMovies(with parameters: [String: Any]) -> AnyPublisher<[Movie]?, BaseError>  {
+        return Future<[Movie]?, BaseError> { [weak self] promise in
+            guard let self else { return }
+            network.request(
+                router: MovieAPI.getSearchedMovies(parameters: getPaginationParameters(for: parameters)),
+                model: MovieListResponse.self
+            ) { [weak self] result in
+                guard let self else { return }
+                handleMovieListResponse(result: result, promise: promise)
             }
         }
         .eraseToAnyPublisher()
@@ -147,5 +131,18 @@ private extension SearchInteractor {
         updatedParameters["page"] = "\(currentPage)"
         
         return updatedParameters
+    }
+    
+    final func handleMovieListResponse(
+        result: Result<MovieListResponse, BaseResponseError<MovieListResponse>>,
+        promise: @escaping (Result<[Movie]?, BaseError>) -> Void
+    ) {
+        switch result {
+        case .success(let response):
+            self.totalPage = response.totalPages ?? 1
+            promise(.success(response.results))
+        case .failure(let error):
+            promise(.failure(BaseError(friendlyMessage: error.updatedFriendlyMessage)))
+        }
     }
 }

@@ -18,6 +18,7 @@ protocol SearchTabPresenterProtocol: BasePresenterProtocol {
     /// Variables
     
     /// Functions
+    func routeToSearch(with keyword: String)
 }
 
 // MARK: - SearchPresenter
@@ -39,5 +40,12 @@ final class SearchTabPresenter: BasePresenter, SearchTabPresenterProtocol {
         self.view = view
         self.interactor = interactor
         super.init(router: router)
+    }
+}
+
+// MARK: - Publics
+extension SearchTabPresenter {
+    final func routeToSearch(with keyword: String) {
+        router?.navigate(.search(type: .query(text: keyword)))
     }
 }
