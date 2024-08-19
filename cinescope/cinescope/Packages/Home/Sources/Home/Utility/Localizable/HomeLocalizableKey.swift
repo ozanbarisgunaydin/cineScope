@@ -10,7 +10,6 @@ import Foundation
 
 // MARK: - Typealias
 public typealias L10nHome = HomeLocalizableKey
-public typealias L10nHomeCategory = L10nHome.Category
 
 // MARK: - HomeLocalizableKey
 public enum HomeLocalizableKey: String, LocalizableProtocol {
@@ -25,22 +24,6 @@ public enum HomeLocalizableKey: String, LocalizableProtocol {
     case discover = "home.discover"
     /// Celebrities
     case celebrities = "home.celebrities"
-    
-    // MARK: - Category
-    public enum Category: String, LocalizableProtocol {
-        // MARK: - RawValue
-        public var stringValue: String {
-            return rawValue
-        }
-        /// Now Playings
-        case nowPlaying = "category.nowPlaying"
-        /// Populars
-        case popular = "category.popular"
-        /// Top Rateds
-        case topRated = "category.topRated"
-        /// Up Comings
-        case upComing = "category.upComing"
-    }
 }
 
 // MARK: - LocalizableProtocol

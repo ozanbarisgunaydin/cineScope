@@ -59,6 +59,8 @@ public extension UIImageView {
         }
 
         var options: KingfisherOptionsInfo = [
+            .processor(DownsamplingImageProcessor(size: self.bounds.size)),
+            .scaleFactor(UIScreen.main.scale),
             .targetCache(.default)
         ]
 
@@ -69,6 +71,11 @@ public extension UIImageView {
         if animated {
             options.append(.transition(.fade(0.3)))
         }
+        
+        let cache = ImageCache.default
+        cache.memoryStorage.config.totalCostLimit = 100 * 1024 * 1024 /// About 100Mb
+        cache.memoryStorage.config.expiration = .seconds(200) /// Expire cache after 200 seconds
+        KingfisherManager.shared.cache = cache
 
         kf.setImage(
             with: KF.ImageResource(downloadURL: url),

@@ -5,6 +5,7 @@
 //  Created by Ozan Barış Günaydın on 16.08.2024.
 //
 
+import AppResources
 import Components
 import UIKit
 
@@ -20,8 +21,6 @@ final class SearchViewController: BaseViewController, SearchViewProtocol {
     
     // MARK: - Outlets
     @IBOutlet private weak var collectionView: UICollectionView!
-
-    // MARK: - Constants
 
     // MARK: - Components
     var presenter: SearchPresenterProtocol? {
@@ -68,7 +67,7 @@ private extension SearchViewController {
             .sink { [weak self] content in
                 guard let self,
                       !content.isEmpty else { return }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
                     applySnapshot(with: content)
                 }
@@ -81,7 +80,7 @@ private extension SearchViewController {
 // MARK: - Interface Configuration
 private extension SearchViewController {
     final func configureNavigationBar() {
-        title = "Search"
+        title = presenter?.contentTitle
         view.backgroundColor = .backgroundPrimary
     }
     
@@ -179,7 +178,7 @@ private extension SearchViewController {
         section.contentInsets = NSDirectionalEdgeInsets(
             top: .spacingLarge,
             leading: .spacingLarge,
-            bottom: .spacingLarge,
+            bottom: .spacingLarge + self.safeAreaBottomHeight,
             trailing: .spacingLarge
         )
         section.interGroupSpacing = .spacingLarge
@@ -190,7 +189,19 @@ private extension SearchViewController {
 
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        presenter?.routeToDetail(for: indexPath.row)
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        guard indexPath.row == presenter?.lastIndex else { return }
+        presenter?.fetchContent()
     }
 }

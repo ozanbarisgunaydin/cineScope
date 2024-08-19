@@ -48,6 +48,8 @@ private extension BannerCellView {
     final func configureImageView() {
         contentImageView.contentMode = .scaleAspectFit
         contentImageView.cornerRadius = 20
+        contentImageView.borderColor = .white.withAlphaComponent(0.2)
+        contentImageView.borderWidth = 2
     }
     
     final func configureTitleLabel() {

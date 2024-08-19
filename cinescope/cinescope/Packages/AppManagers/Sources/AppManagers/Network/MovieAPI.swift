@@ -4,11 +4,9 @@
 //
 //  Created by Ozan Barış Günaydın on 25.12.2023.
 //
-
-import Foundation
-import Network
 import Alamofire
 import AppResources
+import Network
 
 public enum MovieAPI: MovieRouter {
     case getPopularMovies
@@ -17,7 +15,11 @@ public enum MovieAPI: MovieRouter {
     case getDetail(movieID: Int)
     case getSimilarMovies(movieID: Int)
     case getDiscoveredMovies(parameters: [String: Any])
-
+    case getNowPlayingMovies(parameters: [String: Any])
+    case getPopularSearchMovies(parameters: [String: Any])
+    case getTopRatedMovies(parameters: [String: Any])
+    case getUpComingMovies(parameters: [String: Any])
+    
     public var path: String? {
         switch self {
         case .getPopularMovies:
@@ -32,46 +34,44 @@ public enum MovieAPI: MovieRouter {
             return "movie/\(movieID)/similar"
         case .getDiscoveredMovies:
             return "discover/movie"
+        case .getNowPlayingMovies:
+            return "movie/now_playing"
+        case .getPopularSearchMovies:
+            return "movie/popular"
+        case .getTopRatedMovies:
+            return "movie/top_rated"
+        case .getUpComingMovies:
+            return "movie/upcoming"
         }
     }
 
     public var method: HTTPMethod {
         switch self {
-        case .getPopularMovies,
-             .getMovieGenreList,
-             .getPeopleList,
-             .getDetail,
-             .getSimilarMovies,
-             .getDiscoveredMovies:
+        default:
             return .get
         }
     }
 
     public var task: HTTPTask {
+        var genericParameters = GenericMovieRequestParameters().asDictionary() ?? [:]
+        
         switch self {
-        case .getPopularMovies:
-            let queryParameters: [String: Any] = [
-                "include_adult": "false",
-                "include_video": "false",
-                "page": "1",
-                "sort_by": "popularity"
-            ]
+        case let .getDiscoveredMovies(queryParameters),
+             let .getNowPlayingMovies(queryParameters),
+             let .getPopularSearchMovies(queryParameters),
+             let .getTopRatedMovies(queryParameters),
+             let .getUpComingMovies(queryParameters):
+            genericParameters.merge(queryParameters) { current, new in new}
             return .requestParameters(
-                parameters: queryParameters,
+                parameters: genericParameters,
                 encoding: URLEncoding(arrayEncoding: .noBrackets)
             )
             
-        case .getDiscoveredMovies(let queryParameters):
+        default:
             return .requestParameters(
-                parameters: queryParameters,
+                parameters: genericParameters,
                 encoding: URLEncoding(arrayEncoding: .noBrackets)
             )
-            
-        case .getMovieGenreList,
-             .getPeopleList,
-             .getDetail,
-             .getSimilarMovies:
-            return .requestPlain
         }
     }
 }

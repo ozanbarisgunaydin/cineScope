@@ -9,6 +9,7 @@ import AppManagers
 import Combine
 import Components
 import Foundation
+import Utility
 
 // MARK: - DetailPresenterProtocol
 protocol DetailPresenterProtocol: BasePresenterProtocol {
@@ -88,7 +89,12 @@ extension DetailPresenter {
     }
     
     final func routeToCompany(with id: Int) {
-        router?.navigate(.search(type: .company(id: String(id))))
+        guard let company = movie?.productionCompanies?.first(where: { $0.id == id }) else { return }
+        let searchContent = NonQuerySearh(
+            id: "\(company.id ?? 0)",
+            title: company.name
+        )
+        router?.navigate(.search(type: .company(content: searchContent)))
     }
 }
 

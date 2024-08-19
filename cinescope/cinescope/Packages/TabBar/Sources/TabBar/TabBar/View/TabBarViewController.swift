@@ -47,7 +47,7 @@ public final class TabBarViewController: UITabBarController {
     }
 
     // MARK: - Base Components
-    weak var router: TabBarRouter?
+    public weak var router: TabBarRouter?
 
     // MARK: - Life Cycles
     public override func viewDidLoad() {

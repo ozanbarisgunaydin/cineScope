@@ -20,7 +20,6 @@ final public class GenreHeaderView: UICollectionReusableView, NibLoadable {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: CustomLabel!
-    @IBOutlet private weak var contentButton: UIButton!
     @IBOutlet private weak var gradientView: UIView!
 
     // MARK: Constants
@@ -28,7 +27,6 @@ final public class GenreHeaderView: UICollectionReusableView, NibLoadable {
 
     // MARK: - Data
     private var cancellables: [AnyCancellable] = []
-    private var selectionCallback: (() -> Void)?
 
     // MARK: - Initialization
     public override func awakeFromNib() {
@@ -40,11 +38,9 @@ final public class GenreHeaderView: UICollectionReusableView, NibLoadable {
 // MARK: - Configuration
 extension GenreHeaderView {
     final func configureWith(
-        title: String?,
-        selectionCallback: (() -> Void)?
+        title: String?
     ) {
         titleLabel.text = title
-        self.selectionCallback = selectionCallback
     }
 }
 
@@ -54,7 +50,6 @@ private extension GenreHeaderView {
         configureContainerView()
         configureImageView()
         configureTitle()
-        configureContentButton()
         configureGradientView()
     }
 
@@ -83,17 +78,6 @@ private extension GenreHeaderView {
     final func configureTitle() {
         titleLabel.font = .bold(16)
         titleLabel.textColor = .white
-    }
-
-    final func configureContentButton() {
-        contentButton.setTitleForAllStates("")
-        contentButton
-            .publisher(for: .touchUpInside)
-            .sink { [weak self] _ in
-                guard let self else { return }
-                self.selectionCallback?()
-            }
-            .store(in: &cancellables)
     }
 
     final func configureGradientView() {

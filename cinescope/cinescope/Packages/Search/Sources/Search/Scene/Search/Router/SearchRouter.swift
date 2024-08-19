@@ -42,4 +42,22 @@ final public class SearchRouter: BaseRouter {
         view.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(view, animated: true)
     }
+    
+    public override func getModule() -> UIViewController {
+        let view = SearchViewController()
+        let interactor = SearchInteractor()
+        let router = self
+        let presenter = SearchPresenter(
+            view: view,
+            interactor: interactor,
+            router: router, 
+            searchType: searchType
+        )
+        
+        view.presenter = presenter
+        router.viewController = view
+        
+        navigationController.setViewControllers([view], animated: false)
+        return navigationController
+    }
 }

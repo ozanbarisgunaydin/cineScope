@@ -5,11 +5,12 @@
 //  Created by Ozan Barış Günaydın on 18.12.2023.
 //
 
+import AppResources
+import Components
+import Home
+import Search
 import UIKit
 import Utility
-import Components
-import AppResources
-import Home
 
 // MARK: - TabBarRouter
 public final class TabBarRouter: BaseRouter {
@@ -24,7 +25,7 @@ public final class TabBarRouter: BaseRouter {
     
     // MARK: - Publics
     public let homeRouter: HomeRouter
-    public let searchRouter: HomeRouter
+    public let searchRouter: SearchTabRouter
     public let favoritesRouter: HomeRouter
 
     public var routers: [BaseRouter] {
@@ -69,7 +70,7 @@ public final class TabBarRouter: BaseRouter {
         )
         searchNC.tabBarItem.imageInsets = middleTabtemInset
 
-        searchRouter = HomeRouter(delegate: delegate, searchNC)
+        searchRouter = SearchTabRouter(delegate: delegate, searchNC)
         searchNC.tabBarItem.tag = Constants.TabBarIndex.search.rawValue
 
         /// Favorites

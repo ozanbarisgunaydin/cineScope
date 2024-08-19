@@ -5,6 +5,7 @@
 //  Created by Ozan Barış Günaydın on 11.08.2024.
 //
 
+import AppResources
 import Foundation
 import UIKit.UIImage
 
@@ -106,13 +107,13 @@ enum CategoryType: Int, Hashable {
     var title: String {
         switch self {
         case .nowPlaying:
-            L10nHomeCategory.nowPlaying.localized()
+            L10nCategory.nowPlaying.localized()
         case .popular:
-            L10nHomeCategory.popular.localized()
+            L10nCategory.popular.localized()
         case .topRated:
-            L10nHomeCategory.topRated.localized()
+            L10nCategory.topRated.localized()
         case .upComing:
-            L10nHomeCategory.upComing.localized()
+            L10nCategory.upComing.localized()
         }
     }    
     

@@ -14,7 +14,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Common"),
-        .package(path: "../Home")
+        .package(path: "../Home"),
+        .package(path: "../Search")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -23,7 +24,8 @@ let package = Package(
             name: "TabBar",
             dependencies: [
                 "Common",
-                "Home"
+                "Home",
+                "Search"
             ],
             resources: [
                 .process("Resources")

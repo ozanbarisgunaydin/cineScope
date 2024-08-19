@@ -49,22 +49,13 @@
                                 <constraint firstItem="6D2-4v-UK8" firstAttribute="leading" secondItem="hPv-3d-Sr7" secondAttribute="leading" id="y7S-us-cbu"/>
                             </constraints>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zJ-Yi-5HY">
-                            <rect key="frame" x="0.0" y="0.0" width="104" height="114"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title=" "/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstItem="hPv-3d-Sr7" firstAttribute="top" secondItem="Ncj-tX-dXz" secondAttribute="top" constant="12" id="6Lh-wI-7CW"/>
-                        <constraint firstItem="0zJ-Yi-5HY" firstAttribute="top" secondItem="Ncj-tX-dXz" secondAttribute="top" id="Dbh-RN-ui5"/>
-                        <constraint firstItem="0zJ-Yi-5HY" firstAttribute="leading" secondItem="Ncj-tX-dXz" secondAttribute="leading" id="DjL-6j-C1F"/>
                         <constraint firstItem="hPv-3d-Sr7" firstAttribute="leading" secondItem="Ncj-tX-dXz" secondAttribute="leading" constant="12" id="Etf-nh-REd"/>
-                        <constraint firstAttribute="bottom" secondItem="0zJ-Yi-5HY" secondAttribute="bottom" id="Hg4-hA-ltK"/>
                         <constraint firstAttribute="trailing" secondItem="hPv-3d-Sr7" secondAttribute="trailing" constant="12" id="Too-np-HTH"/>
                         <constraint firstAttribute="bottom" secondItem="hPv-3d-Sr7" secondAttribute="bottom" constant="12" id="a6l-fh-8m8"/>
-                        <constraint firstAttribute="trailing" secondItem="0zJ-Yi-5HY" secondAttribute="trailing" id="tkb-IT-vms"/>
                     </constraints>
                 </view>
             </subviews>
@@ -87,7 +78,6 @@
             <connections>
                 <outlet property="backgroundView" destination="wFw-Zp-dVB" id="RlV-RR-gmT"/>
                 <outlet property="containerView" destination="Ncj-tX-dXz" id="EKc-7i-dib"/>
-                <outlet property="contentButton" destination="0zJ-Yi-5HY" id="yec-Ax-u5H"/>
                 <outlet property="gradientView" destination="5lc-Wx-xqi" id="3rZ-yR-Epr"/>
                 <outlet property="imageView" destination="QZh-oe-XuH" id="vO5-lF-L9T"/>
                 <outlet property="titleLabel" destination="6D2-4v-UK8" id="15R-mh-ljl"/>

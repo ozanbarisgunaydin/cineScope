@@ -32,28 +32,28 @@ extension HomeViewController {
             }
             switch item {
             case .genre(let content):
-                let marketCell = collectionView.dequeueReusableCell(
+                let genreCell = collectionView.dequeueReusableCell(
                     withClass: GenreCell.self,
                     for: indexPath
                 )
-                marketCell.configureWith(content: content)
-                return marketCell
+                genreCell.configureWith(content: content)
+                return genreCell
 
             case .category(let content):
-                let gameUniverseCell = collectionView.dequeueReusableCell(
+                let categoryCell = collectionView.dequeueReusableCell(
                     withClass: CategoryCell.self,
                     for: indexPath
                 )
-                gameUniverseCell.configureWith(type: content)
-                return gameUniverseCell
+                categoryCell.configureWith(type: content)
+                return categoryCell
 
             case .person(let content):
-                let populerMatchCell = collectionView.dequeueReusableCell(
+                let personCell = collectionView.dequeueReusableCell(
                     withClass: PersonCell.self,
                     for: indexPath
                 )
-                populerMatchCell.configureWith(content: content)
-                return populerMatchCell
+                personCell.configureWith(content: content)
+                return personCell
             }
         }
 
@@ -72,11 +72,7 @@ extension HomeViewController {
                     withClass: GenreHeader.self,
                     for: indexPath
                 )
-                headerView.configureWith(title: content) { [weak self] in
-                    guard let self else { return }
-                    // TODO: - Live Bet Header selection can handled with this block.
-                    print("Genre selected on \(self)")
-                }
+                headerView.configureWith(title: content)
                 return headerView
 
             case .categories(let title),

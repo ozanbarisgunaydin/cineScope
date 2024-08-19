@@ -38,6 +38,7 @@ public extension LocalizableProtocol {
 public typealias L10nGeneric = GenericLocalizableKey
 public typealias L10nError = L10nGeneric.Error
 public typealias L10nEmptyState = L10nGeneric.EmptyState
+public typealias L10nCategory = L10nGeneric.Category
 
 // MARK: - GenericLocalizableKey
 public enum GenericLocalizableKey: String, LocalizableProtocol {
@@ -86,6 +87,22 @@ public enum GenericLocalizableKey: String, LocalizableProtocol {
         case title = "emptyState.title"
         /// The content will be prepared when it is ready.
         case message = "emptyState.message"
+    }
+    
+    // MARK: - Category
+    public enum Category: String, LocalizableProtocol {
+        // MARK: - RawValue
+        public var stringValue: String {
+            return rawValue
+        }
+        /// Now Playings
+        case nowPlaying = "category.nowPlaying"
+        /// Populars
+        case popular = "category.popular"
+        /// Top Rateds
+        case topRated = "category.topRated"
+        /// Up Comings
+        case upComing = "category.upComing"
     }
 }
 

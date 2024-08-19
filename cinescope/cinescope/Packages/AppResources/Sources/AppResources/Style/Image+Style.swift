@@ -47,4 +47,9 @@ public extension UIImage {
     static var patternBase: UIImage? {
         return UIImage(named: "patternBase", in: Bundle.module, compatibleWith: .current)
     }
+    
+    // MARK: - Placeholder
+    static var placeholderPoster: UIImage? {
+        return UIImage(named: "placeHolderPoster", in: Bundle.module, compatibleWith: .current)
+    }
 }

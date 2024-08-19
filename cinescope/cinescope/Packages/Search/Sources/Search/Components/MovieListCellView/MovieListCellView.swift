@@ -28,7 +28,6 @@ final class MovieListCellView: UICollectionViewCell, NibLoadable {
         super.awakeFromNib()
         setupViews()
     }
-    
 }
 
 // MARK: - Publics
@@ -40,7 +39,18 @@ extension MovieListCellView {
         vote: String?
     ) {
         titleLabel.text = title
-        posterImageView.loadImage(with: posterURL)
+        posterImageView.loadImage(
+            with: posterURL,
+            placeholderImage: .placeholderPoster
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success:
+                overlayImageView.isHidden = false
+            case .failure:
+                overlayImageView.isHidden = true
+            }
+        }
         yearLabel.text = year
         voteLabel.text = vote
     }
@@ -67,8 +77,8 @@ private extension MovieListCellView {
     
     final func configureLabels() {
         titleLabel.font = .bold(14)
-        titleLabel.numberOfLines = 3
-        
+        titleLabel.numberOfLines = 0
+
         yearLabel.font = .medium(12)
         yearLabel.textColor = .lightText
         

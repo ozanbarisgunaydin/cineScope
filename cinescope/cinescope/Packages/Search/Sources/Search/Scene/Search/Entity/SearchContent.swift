@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SearchContent
 class SearchContent {
     let sectionType: SearchSectionType
-    let items: [SearchItemType]
+    var items: [SearchItemType]
     
     init(
         sectionType: SearchSectionType,
@@ -42,6 +42,14 @@ enum SearchSectionType: Hashable {
 // MARK: - SearchItemType
 enum SearchItemType: Hashable {
     case movie(cellContent: MovieListCellContent)
+    
+    // MARK: - Hashable
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .movie(let cellContent):
+            hasher.combine(cellContent.id)
+        }
+    }
 }
 
 // MARK: - MovieListCellContent
@@ -51,4 +59,9 @@ struct MovieListCellContent: Hashable {
     let posterURL: String?
     let year: String?
     let vote: String?
+    
+    // MARK: - Hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
