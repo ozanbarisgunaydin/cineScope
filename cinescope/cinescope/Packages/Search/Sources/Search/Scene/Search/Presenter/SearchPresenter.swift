@@ -169,7 +169,7 @@ private extension SearchPresenter {
             return SearchItemType.movie(cellContent: content)
         }
         
-        if content.isEmpty {
+        if content.isEmpty || (content.first?.items ?? []).isEmpty {
             content = [
                 SearchContent(
                     sectionType: .movieList,
@@ -178,8 +178,27 @@ private extension SearchPresenter {
             ]
         } else {
             let updatedContent = content
-            updatedContent.first?.items.append(contentsOf: items)
+            var existedItems = updatedContent.first?.items ?? []
+            existedItems.append(contentsOf: items)
+            updatedContent.first?.items = removeDuplicates(from: existedItems)
             content = updatedContent
         }
     }
+    
+    final func removeDuplicates(from items: [SearchItemType]) -> [SearchItemType] {
+        var seenIDs = Set<Int>()
+        var uniqueItems = [SearchItemType]()
+        
+        for item in items {
+            if case let .movie(cellContent) = item {
+                if let id = cellContent.id, !seenIDs.contains(id) {
+                    seenIDs.insert(id)
+                    uniqueItems.append(item)
+                }
+            }
+        }
+        
+        return uniqueItems
+    }
+
 }
