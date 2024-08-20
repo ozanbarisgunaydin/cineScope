@@ -15,6 +15,9 @@ This project demonstrates the implementation of the VIPER with a modular structu
 - **Diffable Data Source**: Uses Diffable Data Source to manage collection view data with ease and efficiency.
 - **Modular Design**: The project is structured using Swift Package Manager (SPM) for better modularity and reusability.
 
+### Sample of Autolayout:
+<img width="1328" alt="autoLayout" src="https://github.com/user-attachments/assets/6440ff71-a7fd-4340-9bfa-b0e847e1562d">
+
 ### Sample of project file organization:
 <img src="https://github.com/user-attachments/assets/1212354a-cf2d-4d21-a266-26667f6fe3e1" alt="files" width="500"/>
 
@@ -25,12 +28,12 @@ This project demonstrates the implementation of the VIPER with a modular structu
 - **Splash Module**: Handles the initial loading sequence of the application. A Lottie animation used for the transaction duration from splash to tabBar screens.
 
 https://github.com/user-attachments/assets/cb964406-b360-4dcc-a761-4f5718cd18c0
-- **Home Module**: The main interface displaying a list of items using Compositional Layout and Diffable Data Source.
+- **Home Module**: The main interface displaying a list of items using `Compositional Layout` and `Diffable Data Source`.
 
 https://github.com/user-attachments/assets/1e216f40-882e-44d8-a5b8-d1eb6e1f5c3d
 
 
-- **Movie Detail Module**: Selected movie's detail informations content screen. UIScrollView and separated section views used. The items are interactable: it routes users to search screens according to the selected item's type.
+- **Movie Detail Module**: Selected movie's detail informations content screen. `UIScrollView` and separated section views used. The items are interactable: it routes users to search screens according to the selected item's type.
 
 https://github.com/user-attachments/assets/f09f4656-eb5b-4638-8fab-3cea7fc66c6c
 
@@ -38,11 +41,12 @@ https://github.com/user-attachments/assets/f09f4656-eb5b-4638-8fab-3cea7fc66c6c
 
 https://github.com/user-attachments/assets/2be8b08a-cba3-425d-bd4a-c846821c5430
 
+- **Favorites Module**: A list screen which is shows the favorite movies of user. `Diffable Data Source` used for dynamic data changes. In addition the `UICollectionLayoutListConfiguration` is used for the swipe to un-favorite action. The data is simply stored with `UserDefaults`.
+
+https://github.com/user-attachments/assets/db730655-c0db-40d9-bbdd-840476a02336
+
+
 ### Work In Progress
-
-- **Favorites Module**: Will manage the user's favorite movies.
-
-## Upcoming Features
 
 - **Unit Tests**: Comprehensive unit tests will be added to ensure the reliability and robustness of the code.
 
