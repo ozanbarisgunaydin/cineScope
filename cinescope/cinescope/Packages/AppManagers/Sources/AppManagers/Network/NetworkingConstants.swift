@@ -8,10 +8,6 @@
 import Foundation
 
 public enum NetworkingConstants {
-    public enum Authorization {
-        public static let apiKey = "{Please put here your API key or Token}"
-    }
-    
     public enum BaseURL {
         public static let service = "https://api.themoviedb.org/3"
         public static let image = "https://image.tmdb.org/t/p/w500"

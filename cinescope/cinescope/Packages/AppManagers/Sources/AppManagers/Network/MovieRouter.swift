@@ -26,7 +26,7 @@ public extension MovieRouter {
         defaultHeaders.add(
             HTTPHeader(
                 name: NetworkConstants.HTTPHeaderFieldKey.authorization,
-                value: NetworkingConstants.Authorization.apiKey
+                value: APIConstant.Authorization.apiKey
             )
         )
         return defaultHeaders
