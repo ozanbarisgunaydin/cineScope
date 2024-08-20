@@ -200,9 +200,9 @@ private extension SearchViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: .spacingLarge,
-            leading: 0,
+            leading: .spacingLarge,
             bottom: .spacingLarge + self.safeAreaBottomHeight,
-            trailing: 0
+            trailing: .spacingLarge
         )
         section.interGroupSpacing = .spacingLarge
         
