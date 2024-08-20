@@ -144,10 +144,15 @@ private extension DetailViewController {
             receiveValue: { [weak self] companies in
                 guard let self,
                       let companies else { return }
-                companiesView.configureWith(companies: companies) { [weak self] movieID in
-                    guard let self else { return }
-                    presenter?.routeToCompany(with: movieID)
+                if companies.isEmpty {
+                    companiesView.isHidden = true
+                } else {
+                    companiesView.configureWith(companies: companies) { [weak self] movieID in
+                        guard let self else { return }
+                        presenter?.routeToCompany(with: movieID)
+                    }
                 }
+  
             })
         .store(in: &cancellables)
     }
@@ -157,6 +162,22 @@ private extension DetailViewController {
 private extension DetailViewController {
     final func configureNavigationBar() {
         title = L10nDetail.title.localized()
+
+        let favoriteButton = UIBarButtonItem(
+            image: getFavoriteIcon(),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        favoriteButton
+            .publisher()
+            .sink { [weak self] _ in
+                guard let self else { return }
+                presenter?.isFavorie = !(presenter?.isFavorie ?? false)
+                favoriteButton.image = getFavoriteIcon()
+            }
+            .store(in: &cancellables)
+        navigationItem.rightBarButtonItem = favoriteButton
     }
     
     final func configureScrollView() {
@@ -165,6 +186,13 @@ private extension DetailViewController {
         
         scrollView.contentInset.top = headerTotalHeight
         scrollView.contentInset.bottom = self.safeAreaBottomHeight + scrollHorizontalPadding
+    }
+}
+
+// MARK: - Interface Configuration
+private extension DetailViewController {
+    final func getFavoriteIcon() -> UIImage? {
+        return presenter?.isFavorie ?? false ? .iconFavorited : .iconUnfavorited
     }
 }
 

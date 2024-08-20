@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "emptyState.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check your search content and make another request."
+          }
+        }
+      }
+    },
+    "emptyState.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no result."
+          }
+        }
+      }
+    },
     "search.placeholder" : {
       "extractionState" : "manual",
       "localizations" : {

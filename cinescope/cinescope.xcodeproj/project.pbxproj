@@ -18,6 +18,7 @@
 		0697109C2C6397C600A705C7 /* Database in Resources */ = {isa = PBXBuildFile; fileRef = 069710922C6397C500A705C7 /* Database */; };
 		0697109F2C6397C600A705C7 /* Network in Resources */ = {isa = PBXBuildFile; fileRef = 069710952C6397C500A705C7 /* Network */; };
 		069710A02C6397C600A705C7 /* Common in Resources */ = {isa = PBXBuildFile; fileRef = 069710962C6397C600A705C7 /* Common */; };
+		06A997672C74B2F700FEC6AE /* Favorites in Resources */ = {isa = PBXBuildFile; fileRef = 06A997662C74B2F700FEC6AE /* Favorites */; };
 		06BD8EBB2C6FE5BB00F29E3C /* Search in Resources */ = {isa = PBXBuildFile; fileRef = 06BD8EBA2C6FE5BB00F29E3C /* Search */; };
 		06D131B82C6A188D00619763 /* TabBar in Resources */ = {isa = PBXBuildFile; fileRef = 06D131B72C6A188D00619763 /* TabBar */; };
 		06E48DF32C63898A000A0BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48DF22C63898A000A0BAE /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		069710922C6397C500A705C7 /* Database */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Database; sourceTree = "<group>"; };
 		069710952C6397C500A705C7 /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Network; sourceTree = "<group>"; };
 		069710962C6397C600A705C7 /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Common; sourceTree = "<group>"; };
+		06A997662C74B2F700FEC6AE /* Favorites */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Favorites; sourceTree = "<group>"; };
 		06BD8EBA2C6FE5BB00F29E3C /* Search */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Search; sourceTree = "<group>"; };
 		06D131B72C6A188D00619763 /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TabBar; sourceTree = "<group>"; };
 		06E48DEF2C63898A000A0BAE /* cinescope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cinescope.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +77,7 @@
 		0630AF172C63BDA6002BF2CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				06A997662C74B2F700FEC6AE /* Favorites */,
 				06BD8EBA2C6FE5BB00F29E3C /* Search */,
 				06F582392C6AB377008A0870 /* Detail */,
 				0630AF212C642C2E002BF2CA /* Home */,
@@ -248,6 +251,7 @@
 				0630AF192C63BDD2002BF2CA /* Splash in Resources */,
 				0697109F2C6397C600A705C7 /* Network in Resources */,
 				0697109C2C6397C600A705C7 /* Database in Resources */,
+				06A997672C74B2F700FEC6AE /* Favorites in Resources */,
 				06E48DFF2C63898D000A0BAE /* Base in Resources */,
 				069710A02C6397C600A705C7 /* Common in Resources */,
 				06F5823A2C6AB377008A0870 /* Detail in Resources */,

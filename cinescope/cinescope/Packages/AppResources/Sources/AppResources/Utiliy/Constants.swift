@@ -34,4 +34,11 @@ public enum Constants {
         /// 2
         case favorites = 2
     }
+    
+    public enum Default {
+        /// 238 - `The Godfather`
+        public static let movieID = 238
+        /// 41.000
+        public static let maxIDLimit = 41000
+    }
 }

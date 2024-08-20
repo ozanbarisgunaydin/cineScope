@@ -6,6 +6,7 @@
 //
 
 import AppManagers
+import AppResources
 import Combine
 import Components
 import Foundation
@@ -165,7 +166,7 @@ private extension HomePresenter {
         guard let movieList,
               !movieList.isEmpty,
               let firstID = movieList.first?.id else { return }
-        SessionManager.shared.lastDiscoveredMovieID.send("\(firstID)")
+        setLastDiscoveredMovieID(with: firstID)
         banners = movieList.compactMap { movie in
             return BannerContent(
                 title: movie.title,
@@ -173,6 +174,12 @@ private extension HomePresenter {
                 movieID: movie.id
             )
         }
+    }
+    
+    /// Checks the saved movieID's existance. If it is not setted then sets the first discovered movies ID.
+    final func setLastDiscoveredMovieID(with firstDiscoveredID: Int) {
+        guard UserManager.shared.lastDiscoveredMovieID == nil else { return }
+        SessionManager.shared.lastDiscoveredMovieID.send("\(firstDiscoveredID)")
     }
     
     final func prepareCollectionContent(
@@ -223,9 +230,13 @@ private extension HomePresenter {
         )
     }
     
-    final func getPersonContent(with peopleList: [PeopleContent]?) -> HomeContent? {
-        self.peopleList = peopleList
-        let items: [HomeItemType] = peopleList?.compactMap { people in
+    final func getPersonContent(with fetchedPeopleList: [PeopleContent]?) -> HomeContent? {
+        let filteredPeopleList = fetchedPeopleList?.filter({ people in
+            people.name == people.originalName
+            && (people.id ?? 0) <= Constants.Default.maxIDLimit
+        })
+        peopleList = filteredPeopleList
+        let items: [HomeItemType] = filteredPeopleList?.compactMap { people in
             let personContent = PersonContent(
                 artistName: people.name,
                 profileImageURL: people.profileImageURL,

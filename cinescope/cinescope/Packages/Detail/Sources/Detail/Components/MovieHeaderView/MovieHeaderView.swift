@@ -55,7 +55,10 @@ extension MovieHeaderView {
         titleLabel.text = content.title
         originalTitleLabel.text = content.originalTitle
         originalTitleLabel.isHidden = content.title == content.originalTitle
-        posterImageView.loadImage(with: content.posterImageURL)
+        posterImageView.loadImage(
+            with: content.posterImageURL,
+            placeholderImage: .placeholderPoster
+        )
         releaseDateLabel.text = content.releaseDate
         budgetLabel.text = content.budget
         revenueLabel.text = content.revenue

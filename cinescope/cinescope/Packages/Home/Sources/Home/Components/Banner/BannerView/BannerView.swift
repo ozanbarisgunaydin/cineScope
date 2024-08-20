@@ -31,7 +31,7 @@ final class BannerView: UIView, NibOwnerLoadable {
     // MARK: - Constants
     private let pageMultiplierConstant = 100
     private let autoScrollWaitingSecond: Double = 10
-    private let widthToHeightRatio: CGFloat = 281 / 500
+    static let widthToHeightRatio: CGFloat = 281 / 500
 
     // MARK: - Data
     private var bannerSelectionCallback: ((Int) -> Void)?
@@ -288,7 +288,7 @@ extension BannerView: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let width: CGFloat = .screenWidth - (.spacingLarge * 2)
-        let height = width * widthToHeightRatio
+        let height = width * BannerView.widthToHeightRatio
 
         return CGSize(width: width, height: height)
     }

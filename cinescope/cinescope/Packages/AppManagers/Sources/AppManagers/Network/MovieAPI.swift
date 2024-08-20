@@ -29,7 +29,7 @@ public enum MovieAPI: MovieRouter {
         case .getMovieGenreList:
             return "genre/movie/list"
         case .getPeopleList:
-            return "person/popular"
+            return "trending/person/week"
         case .getDetail(let movieID):
             return "movie/\(movieID)"
         case .getSimilarMovies(let movieID):
@@ -47,7 +47,8 @@ public enum MovieAPI: MovieRouter {
         case .getSearchedMovies:
             return "search/movie"
         case .getLastMovieKeywords:
-            let lastDiscoveredMovieID = SessionManager.shared.lastDiscoveredMovieID.value ?? "1"
+            let defaultMovieID = "\(Constants.Default.movieID)"
+            let lastDiscoveredMovieID = UserManager.shared.lastDiscoveredMovieID ?? defaultMovieID
             return "movie/\(lastDiscoveredMovieID)/keywords"
         }
     }

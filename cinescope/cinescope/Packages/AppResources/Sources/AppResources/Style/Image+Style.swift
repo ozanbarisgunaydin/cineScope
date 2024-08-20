@@ -34,6 +34,12 @@ public extension UIImage {
     static var iconClose: UIImage? {
         return UIImage(named: "iconClose", in: Bundle.module, compatibleWith: .current)
     }
+    static var iconFavorited: UIImage? {
+        return UIImage(systemName: "heart.fill")
+    }
+    static var iconUnfavorited: UIImage? {
+        return UIImage(systemName: "heart")
+    }
     
     // MARK: - Logo
     static var appLogo: UIImage? {

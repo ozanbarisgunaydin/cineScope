@@ -44,12 +44,12 @@ private extension SearchKeywordCellView {
     }
     
     final func configureContainerView() {
-        backgroundColor = .primaryColor.withAlphaComponent(0.4)
+        backgroundColor = .darkGray.withAlphaComponent(0.4)
         
         gradientView.setGradientBackground(
             colors: [
                 .white.withAlphaComponent(0.1),
-                .white.withAlphaComponent(0.2),
+                .backgroundRed.withAlphaComponent(0.2),
                 .white.withAlphaComponent(0.1)
             ],
             locations: [0, 0.5, 1]
@@ -61,8 +61,8 @@ private extension SearchKeywordCellView {
     }
     
     final func configureLabel() {
-        keywordLabel.textColor = .white
-        keywordLabel.font = .bold(12)
+        keywordLabel.textColor = .white.withAlphaComponent(0.8)
+        keywordLabel.font = .mediumItalic(14)
     }
 }
 

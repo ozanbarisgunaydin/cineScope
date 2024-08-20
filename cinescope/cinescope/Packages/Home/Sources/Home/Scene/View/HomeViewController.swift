@@ -97,7 +97,7 @@ private extension HomeViewController {
             .sink { [weak self] content in
                 guard let self,
                       !content.isEmpty else { return }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Duration.animation) { [weak self] in
                     guard let self else { return }
                     applySnapshot(with: content)
                 }
@@ -171,14 +171,15 @@ private extension HomeViewController {
     }
     
     final func setScrollInsets() {
-        let bannerMaxY = bannerView.convert(
+        let bannerViewMinY = bannerView.convert(
             CGPoint(
                 x: 0,
-                y: bannerView.bounds.maxY
+                y: bannerView.bounds.minY
             ),
             to: view
-        ).y + .paddingMedium
-        let bannerYOffset = bannerMaxY - collectionView.frame.minY
+        ).y
+        let bannerViewPadding = bannerViewMinY + (UIScreen.main.bounds.width * BannerView.widthToHeightRatio) + .spacingMedium
+        let bannerYOffset = bannerViewPadding - collectionView.frame.minY
         collectionView.contentInset = .init(
             top: bannerYOffset,
             left: 0,
@@ -195,7 +196,6 @@ private extension HomeViewController {
             ],
             locations: [0, 1]
         )
-        
     }
 }
 

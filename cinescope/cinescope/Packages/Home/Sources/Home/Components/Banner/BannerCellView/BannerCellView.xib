@@ -45,4 +45,9 @@
             <point key="canvasLocation" x="-2.2900763358778624" y="-276.05633802816902"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="V9A-4J-bPb">
+            <size key="intrinsicContentSize" width="42.333333333333336" height="21.333333333333332"/>
+        </designable>
+    </designables>
 </document>

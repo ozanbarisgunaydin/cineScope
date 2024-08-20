@@ -15,7 +15,8 @@ let package = Package(
     dependencies: [
         .package(path: "../Common"),
         .package(path: "../Home"),
-        .package(path: "../Search")
+        .package(path: "../Search"),
+        .package(path: "../Favorites")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -25,7 +26,8 @@ let package = Package(
             dependencies: [
                 "Common",
                 "Home",
-                "Search"
+                "Search",
+                "Favorites"
             ],
             resources: [
                 .process("Resources")

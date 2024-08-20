@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,21 +10,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="OzO-fr-cTk" customClass="SearchKeywordCellView" customModule="Search">
-            <rect key="frame" x="0.0" y="0.0" width="108" height="24"/>
+            <rect key="frame" x="0.0" y="0.0" width="108" height="32"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsC-PG-D4z">
-                    <rect key="frame" x="0.0" y="0.0" width="208" height="24"/>
+                    <rect key="frame" x="0.0" y="0.0" width="308" height="32"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khl-ua-mqc">
-                    <rect key="frame" x="8" y="8" width="92" height="8"/>
+                    <rect key="frame" x="8" y="8" width="92" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="Jdc-RA-zo7"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="khl-ua-mqc" secondAttribute="bottom" constant="8" id="BDh-mq-QAY"/>
@@ -33,7 +31,7 @@
                 <constraint firstItem="khl-ua-mqc" firstAttribute="top" secondItem="OzO-fr-cTk" secondAttribute="top" constant="8" id="YLd-ys-o4I"/>
                 <constraint firstAttribute="trailing" secondItem="khl-ua-mqc" secondAttribute="trailing" constant="8" id="lld-1g-Hse"/>
                 <constraint firstItem="gsC-PG-D4z" firstAttribute="top" secondItem="OzO-fr-cTk" secondAttribute="top" id="lvn-9c-u2V"/>
-                <constraint firstAttribute="trailing" secondItem="gsC-PG-D4z" secondAttribute="trailing" constant="-100" id="uSQ-6m-9xl"/>
+                <constraint firstAttribute="trailing" secondItem="gsC-PG-D4z" secondAttribute="trailing" constant="-200" id="uSQ-6m-9xl"/>
                 <constraint firstItem="gsC-PG-D4z" firstAttribute="leading" secondItem="OzO-fr-cTk" secondAttribute="leading" id="xiX-Hs-exR"/>
                 <constraint firstItem="khl-ua-mqc" firstAttribute="leading" secondItem="OzO-fr-cTk" secondAttribute="leading" constant="8" id="zOp-6W-ssu"/>
             </constraints>

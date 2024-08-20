@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -22,45 +22,45 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zj-Qx-9aB">
-                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                    <rect key="frame" x="0.0" y="59" width="430" height="873"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Jfd-6p-hoi">
-                            <rect key="frame" x="16" y="0.0" width="361" height="384"/>
+                            <rect key="frame" x="16" y="0.0" width="398" height="384"/>
                             <subviews>
                                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ba7-wd-Ray" customClass="MovieLinksView" customModule="Detail">
-                                    <rect key="frame" x="0.0" y="0.0" width="361" height="64"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="398" height="64"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="249" constant="100" id="IRa-gx-KSh"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX1-wK-dGh" customClass="MovieDescriptionView" customModule="Detail">
-                                    <rect key="frame" x="0.0" y="80" width="361" height="64"/>
+                                    <rect key="frame" x="0.0" y="80" width="398" height="64"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="249" constant="64" id="eGg-5q-Vcu"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOc-BY-Nc8" customClass="MovieGenresView" customModule="Detail">
-                                    <rect key="frame" x="0.0" y="160" width="361" height="64"/>
+                                    <rect key="frame" x="0.0" y="160" width="398" height="64"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="249" constant="64" id="Jaq-vU-dYU"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBM-2k-A6k" customClass="MovieSimilarsView" customModule="Detail">
-                                    <rect key="frame" x="0.0" y="240" width="361" height="64"/>
+                                    <rect key="frame" x="0.0" y="240" width="398" height="64"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="249" constant="256" id="z12-8a-K35"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGw-YR-xoF" customClass="MovieCompaniesView" customModule="Detail">
-                                    <rect key="frame" x="0.0" y="320" width="361" height="64"/>
+                                    <rect key="frame" x="0.0" y="320" width="398" height="64"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="249" constant="256" id="65E-KE-n0j"/>
@@ -78,7 +78,7 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsI-St-QpD" customClass="MovieHeaderView" customModule="Detail">
-                    <rect key="frame" x="0.0" y="59" width="393" height="128"/>
+                    <rect key="frame" x="0.0" y="59" width="430" height="128"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="249" constant="128" id="hFO-9C-qno"/>

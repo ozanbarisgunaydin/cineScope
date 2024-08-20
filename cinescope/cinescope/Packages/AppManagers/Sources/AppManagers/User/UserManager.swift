@@ -25,12 +25,21 @@ public class UserManager: UserManagerProtocol {
         get { userDefaults.lastDiscoveredMovieID }
         set { userDefaults.lastDiscoveredMovieID = newValue }
     }
+    
+    public var favorites: [FavoriteCellContent] {
+        get { userDefaults.favorites }
+        set { 
+            userDefaults.favorites = newValue
+            SessionManager.shared.favorites.send(newValue)
+        }
+    }
 }
 
 // MARK: - UserDefaults
 private extension UserDefaults {
     private enum Keys {
         static let lastDiscoveredMovieID: String = "lastDiscoveredMovieID"
+        static let favorites: String = "favorites"
     }
     
     var lastDiscoveredMovieID: String? {
@@ -39,6 +48,15 @@ private extension UserDefaults {
         }
         set {
             save(item: newValue, forKey: Keys.lastDiscoveredMovieID)
+        }
+    }
+    
+    var favorites: [FavoriteCellContent] {
+        get {
+            return read([FavoriteCellContent].self, with: Keys.favorites) ?? []
+        }
+        set {
+            save(item: newValue, forKey: Keys.favorites)
         }
     }
 }

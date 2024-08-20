@@ -65,61 +65,41 @@ extension UIControl {
 
 
 extension UIBarButtonItem {
-    final public class InteractionSubscription<S: Subscriber>: Subscription where S.Input == Void {
-        private let subscriber: S?
-        private var barButton: UIBarButtonItem
-        private let event: UIControl.Event
+    public class BarButtonItemSubscription<S: Subscriber>: Subscription where S.Input == Void {
+        private var subscriber: S?
+        private let barButtonItem: UIBarButtonItem
         
-        init(
-            title: String,
-            subscriber: S,
-            event: UIControl.Event
-        ) {
+        init(subscriber: S, barButtonItem: UIBarButtonItem) {
             self.subscriber = subscriber
-            self.event = event
-            barButton = UIBarButtonItem()
-            defer {
-                barButton = UIBarButtonItem(
-                    title: title,
-                    style: .done,
-                    target: self,
-                    action: #selector(handleEvent)
-                )
-            }
-        }
-        
-        @objc func handleEvent(_ sender: UIControl) {
-            _ = self.subscriber?.receive(())
+            self.barButtonItem = barButtonItem
+            barButtonItem.target = self
+            barButtonItem.action = #selector(eventHandler)
         }
         
         public func request(_ demand: Subscribers.Demand) {}
         
-        public func cancel() {}
+        public func cancel() {
+            subscriber = nil
+        }
+        
+        @objc private func eventHandler() {
+            _ = subscriber?.receive(())
+        }
     }
     
-    public struct InteractionPublisher: Publisher {
+    public struct BarButtonItemPublisher: Publisher {
         public typealias Output = Void
         public typealias Failure = Never
         
-        private let event: UIControl.Event
-        private let title: String
+        let barButtonItem: UIBarButtonItem
         
-        public init(event: UIControl.Event, title: String) {
-            self.event = event
-            self.title = title
-        }
-        
-        public func receive<S>(subscriber: S) where S: Subscriber, Never == S.Failure, Void == S.Input {
-            let subscription = InteractionSubscription(
-                title: title,
-                subscriber: subscriber,
-                event: event
-            )
+        public func receive<S>(subscriber: S) where S: Subscriber, S.Input == Void, S.Failure == Never {
+            let subscription = BarButtonItemSubscription(subscriber: subscriber, barButtonItem: barButtonItem)
             subscriber.receive(subscription: subscription)
         }
     }
     
-    public func publisher(for event: UIControl.Event) -> UIBarButtonItem.InteractionPublisher {
-        InteractionPublisher(event: event, title: self.title ?? String())
+    public func publisher() -> BarButtonItemPublisher {
+        BarButtonItemPublisher(barButtonItem: self)
     }
 }

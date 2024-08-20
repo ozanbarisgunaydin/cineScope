@@ -29,8 +29,8 @@ final class SearchTabViewController: BaseViewController, SearchTabViewProtocol {
     }
 
     // MARK: - Life Cycles
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         presenter?.fetchContent()
     }
     
@@ -78,6 +78,14 @@ private extension SearchTabViewController {
     
     final func configureContainerView() {
         view.backgroundColor = .black
+        view.setGradientBackground(
+            colors: [
+                .black.withAlphaComponent(0.7),
+                .darkGray.withAlphaComponent(0.2),
+                .lightGray.withAlphaComponent(0.3)
+            ],
+            locations: [0, 0.5, 1]
+        )
     }
     
     final func configureSearchBar() {
@@ -105,7 +113,7 @@ private extension SearchTabViewController {
             top: .paddingLarge,
             left: .spacingLarge,
             bottom: .paddingLarge,
-            right: .spacingLarge
+            right: -.spacingLarge
         )
         collectionView.bounces = false
         collectionView.showsVerticalScrollIndicator = false
@@ -115,10 +123,6 @@ private extension SearchTabViewController {
 
 // MARK: - Interface Configuration
 extension SearchTabViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("⭕️ \(searchText.lowercased())")
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text,
               !keyword.isEmpty else { return }

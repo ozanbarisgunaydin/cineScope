@@ -24,6 +24,22 @@ public class SessionManager: SessionManagerProtocol {
 
     // MARK: - Publics Variables
     public var lastDiscoveredMovieID = CurrentValueSubject<String?, Error>(nil)
+    public var favorites = CurrentValueSubject<[FavoriteCellContent], Error>(UserManager.shared.favorites)
+    
+    // MARK: - Public Methods
+    public func removeFromFavorites(_ movie: FavoriteCellContent) {
+        var existedFavorites = UserManager.shared.favorites
+        guard existedFavorites.contains(movie) else { return }
+        existedFavorites.removeAll(where: {$0.id == movie.id })
+        UserManager.shared.favorites = existedFavorites
+    }
+    
+    public func addToFavorites(_ movie: FavoriteCellContent) {
+        var existedFavorites = UserManager.shared.favorites
+        guard !existedFavorites.contains(movie) else { return }
+        existedFavorites.append(movie)
+        UserManager.shared.favorites = existedFavorites
+    }
  }
 
 // MARK: - Helpers

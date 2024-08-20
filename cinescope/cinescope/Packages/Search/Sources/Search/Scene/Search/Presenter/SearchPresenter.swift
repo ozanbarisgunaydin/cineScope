@@ -41,7 +41,7 @@ final class SearchPresenter: BasePresenter, SearchPresenterProtocol {
     var contentTitle: String? {
         switch searchType {
         case .query(text: let text):
-            return text
+            return "``\(text)``"
         case let .company(content),
              let .genres(content),
              let  .people(content):

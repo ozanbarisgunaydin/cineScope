@@ -5,6 +5,7 @@
 //  Created by Ozan Barış Günaydın on 19.08.2024.
 //
 
+import AppManagers
 import Combine
 import Components
 import Foundation
@@ -51,12 +52,20 @@ final class SearchTabPresenter: BasePresenter, SearchTabPresenterProtocol {
 
 // MARK: - Publics
 extension SearchTabPresenter {
-    final func fetchContent() {
-        fetchKeywords()
+    final func subscribeLastDiscoveredKeyword() {
+        SessionManager.shared.lastDiscoveredMovieID.sink { _ in } receiveValue: { [weak self] movieID in
+            guard let self,
+                  movieID != nil else { return }
+            fetchKeywords()
+        }
+        .store(in: &cancellables)
     }
     
-    final func routeToSearch(with keyword: String) {
-        router?.navigate(.search(type: .query(text: keyword)))
+    final func fetchContent() {
+        fetchKeywords() { [weak self] in
+            guard let self else { return }
+            subscribeLastDiscoveredKeyword()
+        }
     }
     
     final func getKeywordsCount() -> Int? {
@@ -71,14 +80,20 @@ extension SearchTabPresenter {
         guard let keyword = getKeyword(for: index) else { return }
         routeToSearch(with: keyword)
     }
+    
+    final func routeToSearch(with keyword: String) {
+        router?.navigate(.search(type: .query(text: keyword)))
+    }
 }
 
 // MARK: - Helpers
 private extension SearchTabPresenter {
-    final func fetchKeywords() {
+    final func fetchKeywords(requestCompletion: (() -> Void)? = nil) {
+        guard UserManager.shared.lastDiscoveredMovieID != nil else { return }
         isLoading.send(true)
-        interactor.fetchKeywords().sink(receiveCompletion: {[weak self] completion in
+        interactor.fetchKeywords().sink(receiveCompletion: { [weak self] completion in
             guard let self else { return }
+            requestCompletion?()
             switch completion {
             case .finished:
                 isLoading.send(false)

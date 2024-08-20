@@ -21,6 +21,8 @@ final class SearchViewController: BaseViewController, SearchViewProtocol {
     
     // MARK: - Outlets
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var emptyStateViewContainer: UIView!
+    @IBOutlet private weak var emptyStateView: EmptyStateView!
 
     // MARK: - Components
     var presenter: SearchPresenterProtocol? {
@@ -42,6 +44,7 @@ final class SearchViewController: BaseViewController, SearchViewProtocol {
         super.configureInterface()
         configureNavigationBar()
         configureCollectionView()
+        configureEmptyView()
     }
     
     // MARK: - Observe
@@ -101,12 +104,32 @@ private extension SearchViewController {
         
         configureDataSource()
     }
+    
+    final func configureEmptyView() {
+        emptyStateView.configureWith(
+            icon: .circleEmptyMovie,
+            title: L10nSearchEmpty.title.localized(),
+            message: L10nSearchEmpty.message.localized()
+        )
+        emptyStateView.isHidden = false
+        
+        emptyStateViewContainer.isHidden = true
+        emptyStateViewContainer.cornerRadius = 12
+        emptyStateViewContainer.borderColor = .separator
+        emptyStateViewContainer.borderWidth = 4
+        emptyStateViewContainer.backgroundColor = .white.withAlphaComponent(0.2)
+    }
 }
 
 
 // MARK: - Diffable Data Source
 extension SearchViewController {
     final func applySnapshot(with data: [SearchContent]) {
+        let isContentFilled = !(data.first?.items ?? []).isEmpty
+        emptyStateViewContainer.isHidden = isContentFilled
+        collectionView.isHidden = !isContentFilled
+        
+        guard isContentFilled else { return }
         var snapshot = NSDiffableDataSourceSnapshot<SearchSectionType, AnyHashable>()
         
         snapshot.appendSections(data.map { $0.sectionType })
@@ -129,17 +152,17 @@ extension SearchViewController {
             }
             switch item {
             case .movie(let content):
-                let marketCell = collectionView.dequeueReusableCell(
+                let movieCell = collectionView.dequeueReusableCell(
                     withClass: Cell.self,
                     for: indexPath
                 )
-                marketCell.configureWith(
+                movieCell.configureWith(
                     title: content.title,
                     posterURL: content.posterURL,
                     year: content.year,
                     vote: content.vote
                 )
-                return marketCell
+                return movieCell
             }
         }
     }
@@ -177,9 +200,9 @@ private extension SearchViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: .spacingLarge,
-            leading: .spacingLarge,
+            leading: 0,
             bottom: .spacingLarge + self.safeAreaBottomHeight,
-            trailing: .spacingLarge
+            trailing: 0
         )
         section.interGroupSpacing = .spacingLarge
         

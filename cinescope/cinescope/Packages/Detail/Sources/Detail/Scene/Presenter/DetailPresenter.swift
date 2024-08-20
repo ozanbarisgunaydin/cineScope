@@ -23,6 +23,7 @@ protocol DetailPresenterProtocol: BasePresenterProtocol {
     var genresPublisher: Published<[Genre]?>.Publisher { get }
     var similarMoviesPublisher: Published<[SimilarMovieContent]?>.Publisher { get }
     var companiesPublisher: Published<[MovieCompanyContent]?>.Publisher { get }
+    var isFavorie: Bool { get set }
     /// Functions
     func fetchContent()
     func routeToWeb(with url: String)
@@ -51,12 +52,20 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
     @Published var companiesContent: [MovieCompanyContent]?
     var companiesPublisher: Published<[MovieCompanyContent]?>.Publisher { $companiesContent }
     
-    // MARK: - Privates
-    private var movieID: Int {
-        didSet {
-            SessionManager.shared.lastDiscoveredMovieID.send("\(movieID)")
+    // MARK: - Public Variable
+    var isFavorie: Bool {
+        get {
+            let favoriteIDList = UserManager.shared.favorites.compactMap { $0.id }
+            return favoriteIDList.contains(movieID)
+        }
+
+        set {
+            changeFavoriteStatus(to: newValue)
         }
     }
+    
+    // MARK: - Privates
+    private var movieID: Int
     private var movie: Movie?
     
     // MARK: - Init
@@ -76,6 +85,7 @@ final class DetailPresenter: BasePresenter, DetailPresenterProtocol {
 // MARK: - Publics
 extension DetailPresenter {
     final func fetchContent() {
+        SessionManager.shared.lastDiscoveredMovieID.send("\(movieID)")
         fetchMovieDetail()
         fetchSimilarMovies()
     }
@@ -85,7 +95,18 @@ extension DetailPresenter {
     }
     
     final func routeToGenre(with id: Int) {
-        // TODO: - Routing the genre based search screen
+        guard let genre = movie?.genres?.first(where: { $0.id == id }),
+              let genreID = genre.id else { return }
+        router?.navigate(
+            .search(
+                type: .genres(
+                    content: NonQuerySearh(
+                        id: "\(genreID)",
+                        title: genre.name
+                    )
+                )
+            )
+        )
     }
     
     final func routeToMovieDetail(with id: Int) {
@@ -192,6 +213,25 @@ private extension DetailPresenter {
                 name: company.name,
                 id: company.id
             )
+        }
+    }
+    
+    final func getFavoriteContent() -> FavoriteCellContent {
+        return FavoriteCellContent(
+            backdropImageURL: movie?.backDropImageURL,
+            title: movie?.title,
+            date: movie?.releaseDate?.yearComponent,
+            vote: movie?.voteAverage.roundedStringWithSlashTen,
+            id: movieID
+        )
+    }
+    
+    final func changeFavoriteStatus(to favoriteStatus: Bool) {
+        let favoriteContent = getFavoriteContent()
+        if favoriteStatus {
+            SessionManager.shared.addToFavorites(favoriteContent)
+        } else {
+            SessionManager.shared.removeFromFavorites(favoriteContent)
         }
     }
 }

@@ -10,10 +10,10 @@ import Foundation
 
 // MARK: - PeopleListResponse
 struct PeopleListResponse: Codable {
-    var page: Int?
-    var results: [PeopleContent]?
-    var totalPages: Int?
-    var totalResults: Int?
+    let page: Int?
+    let results: [PeopleContent]?
+    let totalPages: Int?
+    let totalResults: Int?
     
     enum CodingKeys: String, CodingKey {
         case page
@@ -26,14 +26,15 @@ struct PeopleListResponse: Codable {
 // MARK: - PeopleContent
 struct PeopleContent: Codable {
     // MARK: - Properties
-    var adult: Bool?
-    var gender: Int?
-    var id: Int?
-    var knownFor: [Movie]?
-    var knownForDepartment: String?
-    var name: String?
-    var popularity: Double?
-    var profilePath: String?
+    let adult: Bool?
+    let gender: Int?
+    let id: Int?
+    let knownFor: [Movie]?
+    let knownForDepartment: String?
+    let name: String?
+    let originalName: String?
+    let popularity: Double?
+    let profilePath: String?
     
     // MARK: - CodingKeys
     enum CodingKeys: String, CodingKey {
@@ -43,6 +44,7 @@ struct PeopleContent: Codable {
         case knownFor = "known_for"
         case knownForDepartment = "known_for_department"
         case name
+        case originalName = "original_name"
         case popularity
         case profilePath = "profile_path"
     }
@@ -56,6 +58,7 @@ struct PeopleContent: Codable {
         self.knownFor = try container.decodeIfPresent([Movie].self, forKey: .knownFor)
         self.knownForDepartment = try container.decodeIfPresent(String.self, forKey: .knownForDepartment)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.originalName = try container.decodeIfPresent(String.self, forKey: .originalName)
         self.popularity = try container.decodeIfPresent(Double.self, forKey: .popularity)
         self.profilePath = try container.decodeIfPresent(String.self, forKey: .profilePath)
         

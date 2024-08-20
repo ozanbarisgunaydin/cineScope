@@ -7,6 +7,7 @@
 
 import AppResources
 import Components
+import Favorites
 import Home
 import Search
 import UIKit
@@ -26,7 +27,7 @@ public final class TabBarRouter: BaseRouter {
     // MARK: - Publics
     public let homeRouter: HomeRouter
     public let searchRouter: SearchTabRouter
-    public let favoritesRouter: HomeRouter
+    public let favoritesRouter: FavoritesRouter
 
     public var routers: [BaseRouter] {
         return [
@@ -81,7 +82,7 @@ public final class TabBarRouter: BaseRouter {
             selectedImage: .favoritesTabSelected
         )
         favoritesNC.tabBarItem.imageInsets = tabItemInset
-        favoritesRouter = HomeRouter(delegate: delegate, favoritesNC)
+        favoritesRouter = FavoritesRouter(delegate: delegate, favoritesNC)
         favoritesNC.tabBarItem.tag = Constants.TabBarIndex.favorites.rawValue
         
         super.init(delegate: delegate, navigationController)

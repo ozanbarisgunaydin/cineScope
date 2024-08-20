@@ -10,9 +10,10 @@ import Foundation
 
 // MARK: - Typealias
 typealias L10nSearch = SearchLocalizableKey
+typealias L10nSearchEmpty = L10nSearch.EmptyState
 
-// MARK: - DetailLocalizableKey
-public enum SearchLocalizableKey: String, LocalizableProtocol {
+// MARK: - SearchLocalizableKey
+enum SearchLocalizableKey: String, LocalizableProtocol {
     // MARK: - RawValue
     public var stringValue: String {
         return rawValue
@@ -20,6 +21,20 @@ public enum SearchLocalizableKey: String, LocalizableProtocol {
     
     /// Search movies...
     case searchPlaceholder = "search.placeholder"
+    
+    // MARK: - EmptyState
+    enum EmptyState: String, LocalizableProtocol {
+        // MARK: - RawValue
+        public var stringValue: String {
+            return rawValue
+        }
+        
+        // MARK: - Keys
+        /// There is no result.
+        case title = "emptyState.title"
+        /// Please check your search content and make another request.
+        case message = "emptyState.message"
+    }
 }
 
 // MARK: - LocalizableProtocol

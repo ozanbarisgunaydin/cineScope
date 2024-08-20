@@ -35,7 +35,10 @@ extension SimilarMovieCellView {
         imageURL: String?,
         title: String?
     ) {
-        posterImageView.loadImage(with: imageURL)
+        posterImageView.loadImage(
+            with: imageURL,
+            placeholderImage: .placeholderPoster
+        )
         titleLabel.text = title
     }
 }

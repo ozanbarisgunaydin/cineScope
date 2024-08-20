@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="DNR-ic-SId" id="JJ7-CY-MZc"/>
+                <outlet property="emptyStateView" destination="asI-At-h1D" id="G6H-HX-erp"/>
+                <outlet property="emptyStateViewContainer" destination="DnQ-5Y-cE5" id="zAr-Kl-rr3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,14 +31,36 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DnQ-5Y-cE5">
+                    <rect key="frame" x="12" y="322.66666666666669" width="369" height="232.00000000000006"/>
+                    <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asI-At-h1D" customClass="EmptyStateView" customModule="Components">
+                            <rect key="frame" x="16" y="16" width="337" height="200"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" priority="249" constant="200" id="ueD-AH-d0s"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="asI-At-h1D" secondAttribute="bottom" constant="16" id="6p0-rl-azU"/>
+                        <constraint firstItem="asI-At-h1D" firstAttribute="top" secondItem="DnQ-5Y-cE5" secondAttribute="top" constant="16" id="NWw-N6-fpI"/>
+                        <constraint firstAttribute="trailing" secondItem="asI-At-h1D" secondAttribute="trailing" constant="16" id="Xwt-Ar-AOz"/>
+                        <constraint firstItem="asI-At-h1D" firstAttribute="leading" secondItem="DnQ-5Y-cE5" secondAttribute="leading" constant="16" id="kbP-Ev-enW"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="DNR-ic-SId" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="0O0-Us-3do"/>
+                <constraint firstItem="DnQ-5Y-cE5" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="1na-m4-Fhz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DNR-ic-SId" secondAttribute="trailing" id="6un-7R-8Fz"/>
+                <constraint firstItem="DnQ-5Y-cE5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="fdf-gR-1cX"/>
                 <constraint firstItem="DNR-ic-SId" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gW2-CS-yYl"/>
                 <constraint firstAttribute="bottom" secondItem="DNR-ic-SId" secondAttribute="bottom" id="gd1-4Y-pvX"/>
+                <constraint firstAttribute="trailing" secondItem="DnQ-5Y-cE5" secondAttribute="trailing" constant="12" id="zJ4-cf-zrq"/>
             </constraints>
             <point key="canvasLocation" x="54" y="-11"/>
         </view>
