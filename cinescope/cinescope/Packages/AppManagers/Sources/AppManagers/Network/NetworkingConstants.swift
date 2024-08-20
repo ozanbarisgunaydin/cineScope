@@ -9,7 +9,7 @@ import Foundation
 
 public enum NetworkingConstants {
     public enum Authorization {
-        public static let apiKey = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjA2YzU0MzNiZmJhM2YwNjgzYTE4MTUwZGUwZTI4MyIsIm5iZiI6MTcyMzMxOTgzOS42NjA2MDYsInN1YiI6IjYyMzU4NTc4ZDdjZDA2MDA0NWEyMGRkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3cTyRWrafTz5C4WSRw30yURCCea2mnpkeSSctsL-rcY"
+        public static let apiKey = "{Please put here your API key or Token}"
     }
     
     public enum BaseURL {
