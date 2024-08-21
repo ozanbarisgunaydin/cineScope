@@ -247,7 +247,7 @@ private extension HomePresenter {
         
         guard !items.isEmpty else { return nil }
         return HomeContent(
-            sectionType: .reviews(headerTitle: L10nHome.celebrities.localized()),
+            sectionType: .celebrities(headerTitle: L10nHome.celebrities.localized()),
             items: items
         )
     }

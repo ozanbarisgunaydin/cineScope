@@ -52,7 +52,7 @@ public extension UIImageView {
             }
         }
 
-        guard let url = url else {
+        guard let url else {
             image = phImage
             completion?(.failure(.requestError(reason: .emptyRequest)))
             return

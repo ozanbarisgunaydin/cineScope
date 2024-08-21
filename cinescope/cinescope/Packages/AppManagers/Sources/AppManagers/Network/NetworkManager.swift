@@ -6,18 +6,12 @@
 //
 
 import Foundation
-import Combine
 import Network
-import AppResources
-import Alamofire
 
 // MARK: - NetworkManager
 public class NetworkManager {
     // MARK: - Shared
     public static var shared = NetworkManager()
-
-    // MARK: - Init
-    private init() { }
 
     // MARK: - Privates
     private let network = NetworkClient()
@@ -32,7 +26,7 @@ public class NetworkManager {
     ///   - router: The router conforming to `RouterProtocol` that defines the details of the network request.
     ///   - model: The type of the expected response model conforming to `Decodable`.
     ///   - completion: A closure to be executed when the network request is complete, providing a result of type `NetworkResult<T>`.
-    final public func request<R: RouterProtocol, T: Decodable>(
+    public func request<R: RouterProtocol, T: Decodable>(
         router: R,
         model: T.Type,
         completion: @escaping NetworkCompletion<T>

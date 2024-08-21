@@ -9,7 +9,7 @@ import AppManagers
 import Foundation
 
 // MARK: - PeopleListResponse
-struct PeopleListResponse: Codable {
+struct PeopleListResponse: Equatable, Codable {
     let page: Int?
     let results: [PeopleContent]?
     let totalPages: Int?
@@ -24,7 +24,7 @@ struct PeopleListResponse: Codable {
 }
 
 // MARK: - PeopleContent
-struct PeopleContent: Codable {
+struct PeopleContent: Equatable, Codable {
     // MARK: - Properties
     let adult: Bool?
     let gender: Int?

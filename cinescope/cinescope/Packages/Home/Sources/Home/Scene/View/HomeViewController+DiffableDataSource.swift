@@ -5,6 +5,7 @@
 //  Created by Ozan Barış Günaydın on 10.08.2024.
 //
 
+import AppResources
 import UIKit
 
 // MARK: - Diffable Data Source
@@ -18,7 +19,10 @@ extension HomeViewController {
             snapshot.appendItems(content.items, toSection: content.sectionType)
         }
 
-        dataSource?.apply(snapshot)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Duration.animation) { [weak self] in
+            guard let self else { return }
+            dataSource?.apply(snapshot)
+        }
     }
 
     final func configureDataSource() {
@@ -76,7 +80,7 @@ extension HomeViewController {
                 return headerView
 
             case .categories(let title),
-                 .reviews(let title):
+                 .celebrities(let title):
                 let headerView = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
                     withClass: TitleHeader.self,

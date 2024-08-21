@@ -37,7 +37,7 @@ extension HomeViewController {
             return createGenreListSection(for: itemCount)
         case .categories:
             return createCategoriesSection()
-        case .reviews:
+        case .celebrities:
             return createPersonsSection()
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Genre
-public struct Genre: Codable {
+public struct Genre: Equatable, Codable {
     public let id: Int?
     public let name: String?
 }

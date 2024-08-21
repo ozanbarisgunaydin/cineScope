@@ -21,7 +21,7 @@ protocol HomeInteractorProtocol {
 // MARK: - HomeInteractor
 final class HomeInteractor: HomeInteractorProtocol {
     // MARK: - Private Variables
-    private let network = NetworkManager.shared
+    var network = NetworkManager.shared
 
     // MARK: - Functions
     func fetchPopularMovies() -> AnyPublisher<[Movie]?, BaseError> {

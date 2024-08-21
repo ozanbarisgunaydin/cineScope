@@ -1,0 +1,114 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "id": 15135,
+            "name": "Alain Delon",
+            "original_name": "Alain Delon",
+            "media_type": "person",
+            "adult": false,
+            "popularity": 132.789,
+            "gender": 2,
+            "known_for_department": "Acting",
+            "profile_path": "/uxjpuwpp2zsFs7ONFX3ueDLEZMc.jpg",
+            "known_for": [
+                {
+                    "backdrop_path": "/znLq5iyuMVvHwDdgZf6HyVUNjWB.jpg",
+                    "id": 5511,
+                    "title": "Le Samouraï",
+                    "original_title": "Le Samouraï",
+                    "overview": "After carrying out a flawlessly planned hit, Jef Costello, a contract killer with samurai instincts, finds himself caught between a persistent police investigator and a ruthless employer, and not even his armor of fedora and trench coat can protect him.",
+                    "poster_path": "/5Fa6o5nfUPEatQ9b3OwEvdEdR7T.jpg",
+                    "media_type": "movie",
+                    "adult": false,
+                    "original_language": "fr",
+                    "genre_ids": [
+                        80,
+                        53
+                    ],
+                    "popularity": 47.139,
+                    "release_date": "1967-10-25",
+                    "video": false,
+                    "vote_average": 7.781,
+                    "vote_count": 1031
+                },
+                {
+                    "backdrop_path": "/nfSaFuQkLqnCrwf300wM3xIY5sT.jpg",
+                    "id": 11657,
+                    "title": "Le Cercle Rouge",
+                    "original_title": "Le Cercle rouge",
+                    "overview": "When French criminal Corey gets released from prison, he resolves to never return. He is quickly pulled back into the underworld, however, after a chance encounter with escaped murderer Vogel. Along with former policeman and current alcoholic Jansen, they plot an intricate jewel heist. All the while, quirky Police Commissioner Mattei, who was the one to lose custody of Vogel, is determined to find him.",
+                    "poster_path": "/w56La43IJnGpLepgqfGCAZsbQPp.jpg",
+                    "media_type": "movie",
+                    "adult": false,
+                    "original_language": "fr",
+                    "genre_ids": [
+                        80,
+                        53
+                    ],
+                    "popularity": 40.755,
+                    "release_date": "1970-10-19",
+                    "video": false,
+                    "vote_average": 7.625,
+                    "vote_count": 605
+                },
+                {
+                    "backdrop_path": "/oc7FZ5DFRYa7wMm1q20yqljmSsm.jpg",
+                    "id": 8422,
+                    "title": "Rocco and His Brothers",
+                    "original_title": "Rocco e i suoi fratelli",
+                    "overview": "When a impoverished widow’s family moves to the big city, two of her five sons become romantic rivals with deadly results.",
+                    "poster_path": "/pngL8AraChIDOiWnKF2o3S9kJzJ.jpg",
+                    "media_type": "movie",
+                    "adult": false,
+                    "original_language": "it",
+                    "genre_ids": [
+                        18,
+                        10749
+                    ],
+                    "popularity": 27.191,
+                    "release_date": "1960-10-07",
+                    "video": false,
+                    "vote_average": 8.061,
+                    "vote_count": 569
+                }
+            ]
+        },
+        {
+            "id": 3732609,
+            "name": "Joel Haver",
+            "original_name": "Joel Haver",
+            "media_type": "person",
+            "adult": false,
+            "popularity": 3.416,
+            "gender": 2,
+            "known_for_department": "Directing",
+            "profile_path": "/j3S8SPHjKeSY0QMzg9SAxURY2HU.jpg",
+            "known_for": [
+                {
+                    "backdrop_path": "/nlB8sZg5eqwn0K3pk3h5CxLLkB5.jpg",
+                    "id": 1019105,
+                    "title": "The Paloni Show! Halloween Special!",
+                    "original_title": "The Paloni Show! Halloween Special!",
+                    "overview": "Leroy, Reggie and Cheruce Paloni host a Halloween special full of spooky shorts from a group of up-and-coming animators.",
+                    "poster_path": "/y9LjwvEZDFWojjyKXdHb20A6526.jpg",
+                    "media_type": "movie",
+                    "adult": false,
+                    "original_language": "en",
+                    "genre_ids": [
+                        16,
+                        35,
+                        27
+                    ],
+                    "popularity": 47.919,
+                    "release_date": "2022-10-17",
+                    "video": false,
+                    "vote_average": 6.2,
+                    "vote_count": 30
+                }
+            ]
+        }
+    ],
+    "total_pages": 1000,
+    "total_results": 20000
+}

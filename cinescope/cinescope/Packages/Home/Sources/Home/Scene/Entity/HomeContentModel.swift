@@ -28,7 +28,7 @@ enum HomeSectionType: Hashable {
     // MARK: - Cases
     case genreList(headerTitle: String? = nil)
     case categories(headerTitle: String? = nil)
-    case reviews(headerTitle: String? = nil)
+    case celebrities(headerTitle: String? = nil)
     
     // MARK: - Hashable
     var identifier: String {
@@ -37,12 +37,8 @@ enum HomeSectionType: Hashable {
             return "genreList"
         case .categories:
             return "categories"
-        case .reviews(let title):
-            if let title {
-                return "reviews_\(title)"
-            } else {
-                return "reviews_nil"
-            }
+        case .celebrities:
+            return "celebrities"
         }
     }
     

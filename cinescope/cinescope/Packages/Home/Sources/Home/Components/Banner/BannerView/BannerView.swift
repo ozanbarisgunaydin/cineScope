@@ -18,7 +18,7 @@ final class BannerView: UIView, NibOwnerLoadable {
     private typealias Cell = BannerCellView
 
     // MARK: - UI Components
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet private weak var pageControl: StackedPageControl!
 
     // MARK: - Global Variables
@@ -214,7 +214,8 @@ private extension BannerView {
     /// Takes the row and return moded by dataSource count of collectionView.
     /// - Parameter row: Int value of row for collection view.
     /// - Returns: Int value for moded by campaigns count which is the dataSource of collectionView.
-    final func getModedRow(_ row: Int) -> Int {
+    final func getModedRow(_ row: Int) -> Int? {
+        guard !banners.isEmpty else { return nil }
         let modedRow = row % (banners.count)
         return shouldInfiniteScroll ? modedRow : row
     }
@@ -223,7 +224,7 @@ private extension BannerView {
     /// - Parameter row: Int value for collection view's current indexPath.row.
     /// - Returns: Return the real value of row for cell's loading.
     final func getIndexRow(_ row: Int) -> Int {
-        let detectedRow = row == 0 ? 0 : getModedRow(row)
+        let detectedRow = row == 0 ? 0 : getModedRow(row) ?? 0
         return shouldInfiniteScroll ? detectedRow : row
     }
 
@@ -248,7 +249,7 @@ private extension BannerView {
 extension BannerView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let bannerSelectionCallback,
-              let movieID = banners[safe: getModedRow(indexPath.row)]?.movieID else { return }
+              let movieID = banners[safe: getModedRow(indexPath.row) ?? 0]?.movieID else { return }
         bannerSelectionCallback(movieID)
     }
 }

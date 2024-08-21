@@ -39,7 +39,7 @@ final class HomeViewController: BaseViewController, HomeViewProtocol {
     var dataSource: UICollectionViewDiffableDataSource<HomeSectionType, AnyHashable>?
     
     // MARK: - Global Variables
-    private var shouldGiveScrollOffset = false
+    var shouldGiveScrollOffset = false
     private var scrollOffset: CGFloat = 0
 
     // MARK: - Life Cycles
@@ -83,13 +83,12 @@ final class HomeViewController: BaseViewController, HomeViewProtocol {
 // MARK: - Observers
 private extension HomeViewController {
     final func observeBanners() {
-        presenter?.bannerPublisher.sink(receiveCompletion: { completion in
-            print(completion)
-        }, receiveValue: { [weak self] banners in
-            guard let self else { return }
-            bannerView.setContentWith(banners: banners)
-        })
-        .store(in: &cancellables)
+        presenter?.bannerPublisher
+            .sink { [weak self]  banners in
+                guard let self else { return }
+                bannerView.setContentWith(banners: banners)
+            }
+            .store(in: &cancellables)
     }
     
     final func observeCollectionContent() {
@@ -97,11 +96,7 @@ private extension HomeViewController {
             .sink { [weak self] content in
                 guard let self,
                       !content.isEmpty else { return }
-                DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Duration.animation) { [weak self] in
-                    guard let self else { return }
-                    applySnapshot(with: content)
-                }
-         
+                applySnapshot(with: content)
             }
             .store(in: &cancellables)
     }

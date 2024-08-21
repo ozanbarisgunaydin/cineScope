@@ -23,7 +23,7 @@ public struct MovieListResponse: Codable {
 }
 
 // MARK: - Movie
-public struct Movie: Codable {
+public struct Movie: Equatable, Codable {
     // MARK: - Properties
     public let adult: Bool?
     public let backdropPath: String?
@@ -131,7 +131,7 @@ public struct Movie: Codable {
 }
 
 // MARK: - BelongsToCollection
-public struct BelongsToCollection: Codable {
+public struct BelongsToCollection: Equatable, Codable {
     public let id: Int?
     public let name: String?
     public let posterPath: String?
@@ -146,7 +146,7 @@ public struct BelongsToCollection: Codable {
 }
 
 // MARK: - ProductionCompany
-public struct ProductionCompany: Codable {
+public struct ProductionCompany: Equatable, Codable {
     public let id: Int?
     public let logoPath: String?
     public let name: String?
@@ -177,7 +177,7 @@ public struct ProductionCompany: Codable {
 }
 
 // MARK: - ProductionCountry
-public struct ProductionCountry: Codable {
+public struct ProductionCountry: Equatable, Codable {
     public let iso31661: String?
     public let name: String?
     
@@ -188,7 +188,7 @@ public struct ProductionCountry: Codable {
 }
 
 // MARK: - SpokenLanguage
-public struct SpokenLanguage: Codable {
+public struct SpokenLanguage: Equatable, Codable {
     public let englishName: String?
     public let iso6391: String?
     public let name: String?
