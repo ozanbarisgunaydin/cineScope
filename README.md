@@ -28,7 +28,7 @@ This project demonstrates the implementation of the VIPER with a modular structu
 - **Splash Module**: Handles the initial loading sequence of the application. A Lottie animation used for the transaction duration from splash to tabBar screens.
 
 https://github.com/user-attachments/assets/cb964406-b360-4dcc-a761-4f5718cd18c0
-- **Home Module**: The main interface displaying a list of items using `Compositional Layout` and `Diffable Data Source`.
+- **Home Module**: The main interface displaying a list of items using `Compositional Layout` and `Diffable Data Source`. 
 
 https://github.com/user-attachments/assets/1e216f40-882e-44d8-a5b8-d1eb6e1f5c3d
 
@@ -45,11 +45,19 @@ https://github.com/user-attachments/assets/2be8b08a-cba3-425d-bd4a-c846821c5430
 
 https://github.com/user-attachments/assets/db730655-c0db-40d9-bbdd-840476a02336
 
+## Unit Test
 
-### Work In Progress
+The `Home` module of the CineScope project includes comprehensive unit tests to ensure the robustness and reliability of its functionalities. The unit tests cover various aspects of the Home module, including:
 
-- **Unit Tests**: Comprehensive unit tests will be added to ensure the reliability and robustness of the code.
+-	Content Fetching: Validates the correct fetching and handling of movies, movie genres, people lists, and category data.
+-	Routing: Ensures that navigation actions trigger the expected routes and interactions.
+-	UI Interaction Flows: Tests user interface interactions, such as selection of categories and genres, to confirm they result in the correct behavior.
 
+### Testing Frameworks and Tools
+
+-	XCTest: Utilized for creating and managing unit tests.
+-	Combine: Used for handling asynchronous events and data streams within the tests with help of the `XCWaiter`.
+-	Mocking: Mock objects and stubs are employed to simulate and control various scenarios and dependencies. Local JSON files used for the simulating fetched datas.
 
 ## Dependicies
 
