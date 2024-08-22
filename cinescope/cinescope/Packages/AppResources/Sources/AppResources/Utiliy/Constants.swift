@@ -11,19 +11,6 @@ public enum Constants {
     public enum Duration {
         /// 0.3
         public static let animation: Double = 0.3
-        /// 3
-        public static let toast: Double = 3
-    }
-
-    public enum DatePicker {
-        /// -18
-        public static let date: Int = -18
-        /// -120
-        public static let minDate: Int = -120
-        /// -18
-        public static let maxDate: Int = -18
-        /// dd.MM.yyyy
-        public static let dateFormat = "dd.MM.yyyy"
     }
 
     public enum TabBarIndex: Int {
@@ -40,5 +27,10 @@ public enum Constants {
         public static let movieID = 238
         /// 41.000
         public static let maxIDLimit = 41000
+    }
+    
+    public enum Resource {
+        /// splashAnimation
+        public static let splashAnimationKey = "splashAnimation"
     }
 }

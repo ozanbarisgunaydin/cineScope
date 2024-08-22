@@ -1,5 +1,5 @@
 //
-//  PersonContent.swift
+//  PersonContentModel.swift
 //
 //
 //  Created by Ozan Barış Günaydın on 11.08.2024.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - PersonContent
-struct PersonContent: Hashable, Codable {
+// MARK: - PersonContentModel
+struct PersonContentModel: Hashable, Codable {
     let artistName: String?
     let profileImageURL: String?
     let knownedMoviePosters: [String?]

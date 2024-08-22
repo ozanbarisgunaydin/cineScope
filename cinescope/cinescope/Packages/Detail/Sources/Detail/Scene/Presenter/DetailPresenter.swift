@@ -177,7 +177,7 @@ private extension DetailPresenter {
         headerContent = MovieHeaderContent(
             title: movie?.title,
             originalTitle: movie?.originalTitle,
-            posterImageURL: movie?.posterImageURL,
+            posterImageURL: movie?.largePosterImageURL,
             releaseDate: movie?.releaseDate?.convertDateFormat(),
             budget: movie?.budget?.toAbbreviatedDollarCurrency(),
             revenue: movie?.revenue?.toAbbreviatedDollarCurrency(),

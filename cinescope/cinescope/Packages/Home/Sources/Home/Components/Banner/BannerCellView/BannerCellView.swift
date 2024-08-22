@@ -31,7 +31,7 @@ final class BannerCellView: UICollectionViewCell, NibLoadable {
 // MARK: - Publics
 extension BannerCellView {
     final func configureWith(
-        content: BannerContent?
+        content: BannerContentModel?
     ) {
         setImage(with: content?.imageURL)
         titleLabel.text = content?.title

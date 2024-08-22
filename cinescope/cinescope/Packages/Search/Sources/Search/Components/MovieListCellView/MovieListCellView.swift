@@ -33,14 +33,11 @@ final class MovieListCellView: UICollectionViewCell, NibLoadable {
 // MARK: - Publics
 extension MovieListCellView {
     final func configureWith(
-        title: String?,
-        posterURL: String?,
-        year: String?,
-        vote: String?
+        content: MovieListCellContent
     ) {
-        titleLabel.text = title
+        titleLabel.text = content.title
         posterImageView.loadImage(
-            with: posterURL,
+            with: content.posterURL,
             placeholderImage: .placeholderPoster
         ) { [weak self] result in
             guard let self else { return }
@@ -51,8 +48,8 @@ extension MovieListCellView {
                 overlayImageView.isHidden = true
             }
         }
-        yearLabel.text = year
-        voteLabel.text = vote
+        yearLabel.text = content.year
+        voteLabel.text = content.vote
     }
 }
 
@@ -66,8 +63,8 @@ private extension MovieListCellView {
     
     final func configureContainerView() {
         borderColor = .white.withAlphaComponent(0.8)
-        borderWidth = 2
-        cornerRadius = 12
+        borderWidth = 1
+        cornerRadius = 4
     }
     
     final func configureImageViews() {

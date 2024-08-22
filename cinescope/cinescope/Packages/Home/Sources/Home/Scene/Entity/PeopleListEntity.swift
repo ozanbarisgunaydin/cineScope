@@ -1,5 +1,5 @@
 //
-//  PeopleResponse.swift
+//  PeopleListEntity.swift
 //
 //
 //  Created by Ozan Barış Günaydın on 12.08.2024.
@@ -8,8 +8,8 @@
 import AppManagers
 import Foundation
 
-// MARK: - PeopleListResponse
-struct PeopleListResponse: Equatable, Codable {
+// MARK: - PeopleListEntity
+struct PeopleListEntity: Equatable, Codable {
     let page: Int?
     let results: [PeopleContent]?
     let totalPages: Int?
@@ -64,10 +64,32 @@ struct PeopleContent: Equatable, Codable {
         
         
         profileImageURL = if let profilePath {
-            "\(NetworkingConstants.BaseURL.image)\(profilePath)"
+            "\(NetworkingConstants.BaseURL.Image.medium)\(profilePath)"
         } else {
             nil
         }
+    }
+    
+    init(
+        adult: Bool? = nil,
+        gender: Int? = nil,
+        id: Int? = nil,
+        knownFor: [Movie] = [],
+        knownForDepartment: String? = nil,
+        name: String? = nil,
+        originalName: String? = nil,
+        popularity: Double? = nil,
+        profilePath: String? = nil
+    ) {
+        self.adult = adult
+        self.gender = gender
+        self.id = id
+        self.knownFor = knownFor
+        self.knownForDepartment = knownForDepartment
+        self.name = name
+        self.originalName = originalName
+        self.popularity = popularity
+        self.profilePath = profilePath
     }
     
     // MARK: - Custom Properties

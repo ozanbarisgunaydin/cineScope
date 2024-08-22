@@ -49,9 +49,9 @@ enum HomeSectionType: Hashable {
 
 // MARK: - HomeItemType
 enum HomeItemType: Hashable {
-    case genre(cellContent: HomeGenreType)
+    case genre(cellContent: GenreType)
     case category(cellContent: CategoryType)
-    case person(cellContent: PersonContent)
+    case person(cellContent: PersonContentModel)
 }
 
 // MARK: - HomeGenreListContent

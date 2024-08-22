@@ -12,10 +12,11 @@ import UIKit
 
 // MARK: - SplashViewProtocol
 protocol SplashViewProtocol: AnyObject {
+    var presenter: SplashPresenterProtocol? { get set }
 }
 
 // MARK: - SplashViewController
-final class SplashViewController: BaseViewController {
+final class SplashViewController: BaseViewController, SplashViewProtocol {
     // MARK: - Components
     var presenter: SplashPresenterProtocol? {
         get { return basePresenter as? SplashPresenterProtocol }
@@ -58,7 +59,10 @@ private extension SplashViewController {
     }
     
     final func configureWelcomeAnimation() {
-        let animation = LottieAnimation.named("splashAnimation", bundle: AppResources.bundle)
+        let animation = LottieAnimation.named(
+            Constants.Resource.splashAnimationKey,
+            bundle: AppResources.bundle
+        )
         
         let animationView = LottieAnimationView(animation: animation)
         animationView.loopMode = .loop
@@ -79,9 +83,4 @@ private extension SplashViewController {
             presenter?.routeToTabBar()
         }
     }
-}
-
-// MARK: - SplashViewControllerProtocol
-extension SplashViewController: SplashViewProtocol {
-    /* no - op */
 }

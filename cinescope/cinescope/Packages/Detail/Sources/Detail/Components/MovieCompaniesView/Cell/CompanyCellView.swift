@@ -19,7 +19,7 @@ final class CompanyCellView: UICollectionViewCell, NibLoadable {
     @IBOutlet private weak var nameLabel: UILabel!
     
     // MARK: - Constant
-    static let cellHeight: CGFloat = 70
+    static let cellHeight: CGFloat = 90
     
     // MARK: - Initialization
     public override func awakeFromNib() {

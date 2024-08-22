@@ -29,7 +29,7 @@ final class GenreCellView: UICollectionViewCell, NibLoadable {
 // MARK: - Publics
 extension GenreCellView {
     final func configureWith(
-        content: HomeGenreType
+        content: GenreType
     ) {
         imageView.image = content.image
         titleLabel.text = content.rawValue

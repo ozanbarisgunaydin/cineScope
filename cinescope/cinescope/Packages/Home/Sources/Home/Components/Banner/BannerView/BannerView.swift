@@ -37,7 +37,7 @@ final class BannerView: UIView, NibOwnerLoadable {
     private var bannerSelectionCallback: ((Int) -> Void)?
     private var shouldAutoScroll = false
     private var shouldInfiniteScroll = false
-    private var banners: [BannerContent] = [] {
+    private var banners: [BannerContentModel] = [] {
         didSet {
             collectionView.reloadData { [weak self] in
                 guard let self else { return }
@@ -94,7 +94,7 @@ extension BannerView {
     /// - Parameters:
     ///   - banners: Array of Banner's model value for banner items.
     final func setContentWith(
-        banners: [BannerContent]
+        banners: [BannerContentModel]
     ) {
         self.banners = banners
         pageControl.numberOfPages = banners.count

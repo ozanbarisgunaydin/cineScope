@@ -47,7 +47,7 @@ final class HomeInteractor: HomeInteractorProtocol {
             guard let self else { return }
             self.network.request(
                 router: MovieAPI.getMovieGenreList,
-                model: GenreListResponse.self
+                model: GenreListEntity.self
             ) { result in
                 switch result {
                 case .success(let response):
@@ -65,7 +65,7 @@ final class HomeInteractor: HomeInteractorProtocol {
             guard let self else { return }
             self.network.request(
                 router: MovieAPI.getPeopleList,
-                model: PeopleListResponse.self
+                model: PeopleListEntity.self
             ) { result in
                 switch result {
                 case .success(let response):

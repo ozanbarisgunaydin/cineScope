@@ -17,7 +17,7 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
     var view: HomeViewProtocol? { get set }
     var interactor: HomeInteractorProtocol { get set }
     /// Variables
-    var bannerPublisher: Published<[BannerContent]>.Publisher { get }
+    var bannerPublisher: Published<[BannerContentModel]>.Publisher { get }
     var contentPublisher: Published<[HomeContent]>.Publisher { get }
     /// Functions
     func fetchContent()
@@ -35,8 +35,8 @@ final class HomePresenter: BasePresenter, HomePresenterProtocol {
     var interactor: HomeInteractorProtocol
     
     // MARK: - Published Variables
-    @Published var banners: [BannerContent] = []
-    var bannerPublisher: Published<[BannerContent]>.Publisher { $banners }
+    @Published var banners: [BannerContentModel] = []
+    var bannerPublisher: Published<[BannerContentModel]>.Publisher { $banners }
     @Published var content: [HomeContent] = []
     var contentPublisher: Published<[HomeContent]>.Publisher { $content }
     
@@ -162,15 +162,18 @@ extension HomePresenter {
 
 // MARK: - Helpers
 private extension HomePresenter {
+    /// Sets the poster paths for movies by converting the given movie list into banner content.
+    /// If the movie list is valid and non-empty, it updates the last discovered movie ID with the first movie's ID and creates a list of `BannerContent` from the movie titles and backdrop image URLs.
+    /// - Parameter movieList: An optional array of `Movie` objects containing information such as title, ID, and backdrop image URL. If the array is empty or nil, the method will return without making changes.
     final func setMoviesPosterPaths(with movieList: [Movie]?)  {
         guard let movieList,
               !movieList.isEmpty,
               let firstID = movieList.first?.id else { return }
         setLastDiscoveredMovieID(with: firstID)
         banners = movieList.compactMap { movie in
-            return BannerContent(
+            return BannerContentModel(
                 title: movie.title,
-                imageURL: movie.backDropImageURL,
+                imageURL: movie.bannerImageURL,
                 movieID: movie.id
             )
         }
@@ -182,6 +185,12 @@ private extension HomePresenter {
         SessionManager.shared.lastDiscoveredMovieID.send("\(firstDiscoveredID)")
     }
     
+    /// Prepares the collection content by processing genres and people lists into `HomeContent` objects.
+    /// The method assigns the genres to the instance property, converts the genres and people lists into content sections, and adds them to a temporary collection.
+    /// This temporary collection is then assigned to the `content` property.
+    /// - Parameters:
+    ///   - genres: An optional array of `Genre` objects to be converted into a `HomeContent` section. If `nil`, no genre section will be added.
+    ///   - peopleList: An optional array of `PeopleContent` objects to be converted into a `HomeContent` section. If `nil`, no people section will be added.
     final func prepareCollectionContent(
         genres: [Genre]?,
         peopleList: [PeopleContent]?
@@ -201,9 +210,16 @@ private extension HomePresenter {
         content = temporaryContent
     }
     
+    /// Creates a `HomeContent` object representing a list of genres.
+    ///
+    /// This method processes an optional array of `Genre` objects, converting them into `HomeGenre` and `HomeItemType` objects for display in a home content section.
+    /// If the array is empty or `nil`, the method returns `nil`.
+    ///
+    /// - Parameter movieGenres: An optional array of `Genre` objects to be converted. Each genre's `id` and `name` are used to create `HomeGenre` objects. If `movieGenres` is `nil`, an empty array is used.
+    /// - Returns: An optional `HomeContent` object. If there are genres to display, it contains a section with a header title and a list of genre items. If there are no genres, the method returns `nil`.
     final func getGenreContent(with movieGenres: [Genre]?) -> HomeContent? {
         let homeTypeGenreList: [HomeGenre] = (movieGenres ?? []).compactMap { genre in
-            return HomeGenre(id: genre.id, name: HomeGenreType(rawValue: genre.name ?? ""))
+            return HomeGenre(id: genre.id, name: GenreType(rawValue: genre.name ?? ""))
         }
         let genreItems: [HomeItemType] = homeTypeGenreList.compactMap { genre in
                 .genre(cellContent: genre.name ?? .unknown)
@@ -216,6 +232,11 @@ private extension HomePresenter {
         )
     }
     
+    /// Creates a `HomeContent` object for displaying a predefined list of categories.
+    ///
+    /// This method constructs a `HomeContent` object that includes a section of categories, each represented as a `HomeItemType.category` item. The section is titled "Discover" and contains items for various movie categories.
+    ///
+    /// - Returns: A `HomeContent` object with a section that includes a header title and a list of predefined categories. The categories are: "Now Playing," "Top Rated," "Upcoming," and "Popular."
     final func getCategoryContent() -> HomeContent {
         return HomeContent(
             sectionType: .categories(
@@ -230,6 +251,13 @@ private extension HomePresenter {
         )
     }
     
+    /// Generates a `HomeContent` object for displaying a list of people.
+    ///
+    /// This method processes an optional array of `PeopleContent` objects, filtering and converting them into `HomeItemType` objects for display in a home content section.
+    /// The filtering criteria include that the person's name must match their original name, and their ID must be within a predefined limit. Only valid people are included in the resulting content.
+    ///
+    /// - Parameter fetchedPeopleList: An optional array of `PeopleContent` objects to be processed. Each person is filtered based on name and ID criteria. If `fetchedPeopleList` is `nil`, an empty array is used.
+    /// - Returns: An optional `HomeContent` object. If there are valid people to display, it contains a section with a header title and a list of person items. If there are no valid people, the method returns `nil`.
     final func getPersonContent(with fetchedPeopleList: [PeopleContent]?) -> HomeContent? {
         let filteredPeopleList = fetchedPeopleList?.filter({ people in
             people.name == people.originalName
@@ -237,7 +265,7 @@ private extension HomePresenter {
         })
         peopleList = filteredPeopleList
         let items: [HomeItemType] = filteredPeopleList?.compactMap { people in
-            let personContent = PersonContent(
+            let personContent = PersonContentModel(
                 artistName: people.name,
                 profileImageURL: people.profileImageURL,
                 knownedMoviePosters: people.knownFor?.compactMap { $0.backDropImageURL } ?? []

@@ -11,6 +11,9 @@ import Foundation
 
 // MARK: - SplashPresenterProtocol
 protocol SplashPresenterProtocol: BasePresenterProtocol {
+    /// Components
+    var view: SplashViewProtocol? { get set }
+    var interactor: SplashInteractorProtocol { get set }
     /// Functions
     func routeToTabBar()
 }

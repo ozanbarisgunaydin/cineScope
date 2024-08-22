@@ -1,27 +1,15 @@
 //
-//  GenreListResponse.swift
+//  GenreType.swift
 //
 //
-//  Created by Ozan Barış Günaydın on 11.08.2024.
+//  Created by Ozan Barış Günaydın on 22.08.2024.
 //
 
-import AppManagers
 import Foundation
 import UIKit.UIImage
 
-// MARK: - GenreListResponse
-struct GenreListResponse: Codable {
-    let genres: [Genre]?
-}
-
-// MARK: - HomeGenre
-struct HomeGenre: Codable {
-    let id: Int?
-    let name: HomeGenreType?
-}
-
-// MARK: - HomeGenreListContent
-enum HomeGenreType: String, Codable, Hashable {
+// MARK: - GenreType
+enum GenreType: String, Codable, Hashable {
     // MARK: - Cases
     case action = "Action"
     case adventure = "Adventure"
@@ -95,7 +83,7 @@ enum HomeGenreType: String, Codable, Hashable {
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
-        self = HomeGenreType(rawValue: rawValue) ?? .unknown
+        self = GenreType(rawValue: rawValue) ?? .unknown
     }
     
     // MARK: - Hashable

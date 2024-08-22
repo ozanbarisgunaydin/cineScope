@@ -31,7 +31,7 @@ final class SearchViewController: BaseViewController, SearchViewProtocol {
     }
     
     // MARK: - Data
-    var dataSource: UICollectionViewDiffableDataSource<SearchSectionType, AnyHashable>?
+    var dataSource: UICollectionViewDiffableDataSource<SearchSectionType, SearchItemType>?
 
     // MARK: - Life Cycles
     override public func viewDidLoad() {
@@ -70,11 +70,7 @@ private extension SearchViewController {
             .sink { [weak self] content in
                 guard let self,
                       !content.isEmpty else { return }
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    applySnapshot(with: content)
-                }
-                
+                applySnapshot(with: content)
             }
             .store(in: &cancellables)
     }
@@ -130,7 +126,7 @@ extension SearchViewController {
         collectionView.isHidden = !isContentFilled
         
         guard isContentFilled else { return }
-        var snapshot = NSDiffableDataSourceSnapshot<SearchSectionType, AnyHashable>()
+        var snapshot = NSDiffableDataSourceSnapshot<SearchSectionType, SearchItemType>()
         
         snapshot.appendSections(data.map { $0.sectionType })
         
@@ -142,26 +138,16 @@ extension SearchViewController {
     }
     
     final func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<SearchSectionType, AnyHashable>(
+        dataSource = UICollectionViewDiffableDataSource<SearchSectionType, SearchItemType>(
             collectionView: collectionView
         ) { collectionView, indexPath, item in
-            guard
-                let item = item as? SearchItemType
-            else {
-                return UICollectionViewCell()
-            }
             switch item {
             case .movie(let content):
                 let movieCell = collectionView.dequeueReusableCell(
                     withClass: Cell.self,
                     for: indexPath
                 )
-                movieCell.configureWith(
-                    title: content.title,
-                    posterURL: content.posterURL,
-                    year: content.year,
-                    vote: content.vote
-                )
+                movieCell.configureWith(content: content)
                 return movieCell
             }
         }

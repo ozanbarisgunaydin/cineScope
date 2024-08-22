@@ -18,7 +18,7 @@ public extension UIImageView {
         animated: Bool = true,
         placeholder: String? = nil,
         placeholderImage: UIImage? = nil,
-        shouldKeepCurrentWhileLoading: Bool = false,
+        shouldKeepCurrentWhileLoading: Bool = true,
         completion: (Completion)? = nil
     ) {
         loadImage(
@@ -61,6 +61,7 @@ public extension UIImageView {
         var options: KingfisherOptionsInfo = [
             .processor(DownsamplingImageProcessor(size: self.bounds.size)),
             .scaleFactor(UIScreen.main.scale),
+            .cacheOriginalImage,
             .targetCache(.default)
         ]
 
@@ -73,8 +74,14 @@ public extension UIImageView {
         }
         
         let cache = ImageCache.default
-        cache.memoryStorage.config.totalCostLimit = 100 * 1024 * 1024 /// About 100Mb
-        cache.memoryStorage.config.expiration = .seconds(200) /// Expire cache after 200 seconds
+        cache.memoryStorage.config.totalCostLimit = 128 * 1024 * 1024
+        cache.memoryStorage.config.countLimit = 128
+        cache.memoryStorage.config.expiration = .seconds(60)
+        cache.memoryStorage.config.cleanInterval = 30
+
+        cache.diskStorage.config.sizeLimit = 256 * 1024 * 1024
+        cache.diskStorage.config.expiration = .never
+
         KingfisherManager.shared.cache = cache
 
         kf.setImage(

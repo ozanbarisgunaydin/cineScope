@@ -35,7 +35,7 @@ final class PersonCellView: UICollectionViewCell, NibLoadable {
 // MARK: - Publics
 extension PersonCellView {
     final func configureWith(
-        content: PersonContent
+        content: PersonContentModel
     ) {
         personImageView.loadImage(with: content.profileImageURL)
         nameLabel.text = content.artistName
