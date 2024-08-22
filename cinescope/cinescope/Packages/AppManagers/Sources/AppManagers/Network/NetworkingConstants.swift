@@ -9,7 +9,16 @@ import Foundation
 
 public enum NetworkingConstants {
     public enum BaseURL {
+        /// `https://api.themoviedb.org/3`
         public static let service = "https://api.themoviedb.org/3"
-        public static let image = "https://image.tmdb.org/t/p/w500"
+        
+        public enum Image {
+            /// Width: `200`
+            public static let small = "https://image.tmdb.org/t/p/w200"
+            /// Width: `300`
+            public static let medium = "https://image.tmdb.org/t/p/w300"
+            /// Width: `500`
+            public static let large = "https://image.tmdb.org/t/p/w500"
+        }
     }
 }

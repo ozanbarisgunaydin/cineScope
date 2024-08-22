@@ -113,13 +113,25 @@ public struct Movie: Equatable, Codable {
         self.voteCount = try container.decodeIfPresent(Int.self, forKey: .voteCount)
         
         backDropImageURL = if let backdropPath {
-            "\(NetworkingConstants.BaseURL.image)\(backdropPath)"
+            "\(NetworkingConstants.BaseURL.Image.small)\(backdropPath)"
+        } else {
+            nil
+        }
+        
+        bannerImageURL = if let backdropPath {
+            "\(NetworkingConstants.BaseURL.Image.large)\(backdropPath)"
         } else {
             nil
         }
         
         posterImageURL = if let posterPath {
-            "\(NetworkingConstants.BaseURL.image)\(posterPath)"
+            "\(NetworkingConstants.BaseURL.Image.small)\(posterPath)"
+        } else {
+            nil
+        }
+        
+        largePosterImageURL = if let posterPath {
+            "\(NetworkingConstants.BaseURL.Image.large)\(posterPath)"
         } else {
             nil
         }
@@ -127,7 +139,9 @@ public struct Movie: Equatable, Codable {
     
     // MARK: - Custom Properties
     public var backDropImageURL: String?
+    public var bannerImageURL: String?
     public var posterImageURL: String?
+    public var largePosterImageURL: String?
 }
 
 // MARK: - BelongsToCollection
@@ -167,7 +181,7 @@ public struct ProductionCompany: Equatable, Codable {
         self.originCountry = try container.decodeIfPresent(String.self, forKey: .originCountry)
         
         logoImageURL = if let logoPath {
-            "\(NetworkingConstants.BaseURL.image)\(logoPath)"
+            "\(NetworkingConstants.BaseURL.Image.small)\(logoPath)"
         } else {
             nil
         }

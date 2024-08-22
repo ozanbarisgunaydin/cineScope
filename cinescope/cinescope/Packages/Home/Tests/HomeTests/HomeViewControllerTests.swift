@@ -28,7 +28,7 @@ final class HomeViewControllerTests: XCTestCase {
         XCTAssertTrue(presenter.isFetchContentCalled)
     }
     
-    func testViewDidAppear_shouldChangesScrollOffsetBoolean() {
+    func testViewDidAppear_ShouldChangesScrollOffsetBoolean() {
         sut.beginAppearanceTransition(true, animated: false)
         sut.endAppearanceTransition()
         XCTAssertTrue(sut.shouldGiveScrollOffset)

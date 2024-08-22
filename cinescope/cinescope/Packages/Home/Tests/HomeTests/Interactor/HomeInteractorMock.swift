@@ -12,11 +12,14 @@ import Foundation
 import Network
 @testable import Home
 
-class HomeInteractorMock: HomeInteractorProtocol {
+// MARK: - HomeInteractorMock
+final class HomeInteractorMock: HomeInteractorProtocol {
+    // MARK: - Variables
     var fetchPopularMoviesResult: Result<[Movie]?, BaseError>?
     var fetchMovieGenresResult: Result<[Genre]?, BaseError>?
     var fetchPeopleListResult: Result<[PeopleContent]?, BaseError>?
     
+    // MARK: - Functions
     func fetchPopularMovies() -> AnyPublisher<[Movie]?, BaseError> {
         return Future<[Movie]?, BaseError> { promise in
             if let result = self.fetchPopularMoviesResult {

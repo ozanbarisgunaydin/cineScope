@@ -15,7 +15,7 @@ import Foundation
 class HomePresenterMock: HomePresenterProtocol {
     // MARK: - Base Parameters
     var isLoading = PassthroughSubject<Bool, any Error>()
-    var alert = PassthroughSubject<Components.AlertContent?, any Error>()
+    var alert = PassthroughSubject<AlertContent?, any Error>()
     var cancellables: [AnyCancellable] = []
     var router: BaseRouterProtocol?
     
@@ -24,8 +24,8 @@ class HomePresenterMock: HomePresenterProtocol {
     var interactor: HomeInteractorProtocol = HomeInteractorMock()
     
     // MARK: - Published Parameters
-    @Published var banners: [BannerContent] = []
-    var bannerPublisher: Published<[BannerContent]>.Publisher { $banners }
+    @Published var banners: [BannerContentModel] = []
+    var bannerPublisher: Published<[BannerContentModel]>.Publisher { $banners }
     @Published var content: [HomeContent] = []
     var contentPublisher: Published<[HomeContent]>.Publisher { $content }
 

@@ -10,9 +10,9 @@ import AppManagers
 @testable import Home
 
 final class HomeContentDataMock {
-    static func getBannerContent(movieID: Int) -> [BannerContent] {
+    static func getBannerContent(movieID: Int) -> [BannerContentModel] {
         return [
-            BannerContent(
+            BannerContentModel(
                 title: "title",
                 imageURL: "imageURL",
                 movieID: movieID
@@ -48,7 +48,7 @@ final class HomeContentDataMock {
                 sectionType: .celebrities(headerTitle: "celebrities"),
                 items: [
                     .person(
-                        cellContent: PersonContent(
+                        cellContent: PersonContentModel(
                             artistName: nil,
                             profileImageURL: nil,
                             knownedMoviePosters: []
@@ -67,13 +67,13 @@ final class HomeContentDataMock {
     
     static let getMovieGenres = MockDataManager().getData(
         from: "movie_genres_success_response",
-        type: GenreListResponse.self,
+        type: GenreListEntity.self,
         on: Bundle.module
     )
     
     static let getTrendPeople = MockDataManager().getData(
-        from: "movie_genres_success_response",
-        type: PeopleListResponse.self,
+        from: "trend_people_success_response",
+        type: PeopleListEntity.self,
         on: Bundle.module
     )
 }

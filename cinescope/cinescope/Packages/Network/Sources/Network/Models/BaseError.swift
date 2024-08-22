@@ -10,7 +10,9 @@ import Foundation
 public struct BaseError: Error {
     public let friendlyMessage: FriendlyMessage?
     
-    public init(friendlyMessage: FriendlyMessage?) {
+    public init(
+        friendlyMessage: FriendlyMessage? = nil
+    ) {
         self.friendlyMessage = friendlyMessage
     }
 }
