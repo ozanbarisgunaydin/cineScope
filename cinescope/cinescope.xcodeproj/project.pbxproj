@@ -22,7 +22,6 @@
 		06BD8EBB2C6FE5BB00F29E3C /* Search in Resources */ = {isa = PBXBuildFile; fileRef = 06BD8EBA2C6FE5BB00F29E3C /* Search */; };
 		06D131B82C6A188D00619763 /* TabBar in Resources */ = {isa = PBXBuildFile; fileRef = 06D131B72C6A188D00619763 /* TabBar */; };
 		06E48DF32C63898A000A0BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48DF22C63898A000A0BAE /* AppDelegate.swift */; };
-		06E48DF52C63898A000A0BAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48DF42C63898A000A0BAE /* SceneDelegate.swift */; };
 		06E48DFC2C63898D000A0BAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFB2C63898D000A0BAE /* Assets.xcassets */; };
 		06E48DFF2C63898D000A0BAE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 06E48DFE2C63898D000A0BAE /* Base */; };
 		06E48E112C639411000A0BAE /* AppDelegate+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E48E0D2C639411000A0BAE /* AppDelegate+Init.swift */; };
@@ -46,7 +45,6 @@
 		06D131B72C6A188D00619763 /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TabBar; sourceTree = "<group>"; };
 		06E48DEF2C63898A000A0BAE /* cinescope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cinescope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06E48DF22C63898A000A0BAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		06E48DF42C63898A000A0BAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		06E48DFB2C63898D000A0BAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06E48DFE2C63898D000A0BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06E48E002C63898D000A0BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = cinescope/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -110,7 +108,6 @@
 				06E48E072C6393BB000A0BAE /* Packages */,
 				06E48E092C6393CA000A0BAE /* Resources */,
 				06E48E082C6393C4000A0BAE /* Utility */,
-				06E48DF42C63898A000A0BAE /* SceneDelegate.swift */,
 			);
 			path = cinescope;
 			sourceTree = "<group>";
@@ -267,7 +264,6 @@
 			files = (
 				06E48E112C639411000A0BAE /* AppDelegate+Init.swift in Sources */,
 				06E48DF32C63898A000A0BAE /* AppDelegate.swift in Sources */,
-				06E48DF52C63898A000A0BAE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
