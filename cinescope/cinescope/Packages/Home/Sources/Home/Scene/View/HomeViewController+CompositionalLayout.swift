@@ -41,9 +41,7 @@ extension HomeViewController {
             return createPersonsSection()
         }
     }
-
-    /// Since this is the first section after banner it has a section padding for the custom scroll behovior.
-    /// If the first section is changes on design, the `bannerYOffset` distance addition needs to move the new first section.
+    
     final func createGenreListSection(for itemCount: Int) -> NSCollectionLayoutSection {
         let headerWidth = GenreHeader.viewSize.width
         let headerHeight = GenreHeader.viewSize.height
@@ -186,21 +184,5 @@ extension HomeViewController {
         )
 
         return header
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-extension HomeViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectedItemType = dataSource?.itemIdentifier(for: indexPath) as? HomeItemType else { return }
-
-        switch selectedItemType {
-        case .genre:
-            presenter?.routeToGenreSearch(on: indexPath.row)
-        case .category(let categoryType):
-            presenter?.routeToCategorySearch(on: categoryType)
-        case .person:
-            presenter?.routeToPeopleSearch(on: indexPath.row)
-        }
     }
 }

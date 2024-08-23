@@ -23,7 +23,7 @@ final class SplashViewController: BaseViewController, SplashViewProtocol {
         set { basePresenter = newValue }
     }
     // MARK: - Constants
-    private let length: CGFloat = 256
+    private let animationViewLength: CGFloat = 256
 
     // MARK: - Life Cycles
     override public func viewDidLoad() {
@@ -39,7 +39,7 @@ final class SplashViewController: BaseViewController, SplashViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - SetupUI
+    // MARK: - Interface Configuration
     public override func configureInterface() {
         super.configureInterface()
         configureNavigationBar()
@@ -58,6 +58,8 @@ private extension SplashViewController {
         view.backgroundColor = .backgroundPrimary
     }
     
+    /// Plays the splash animation.
+    ///  When after it plays onces triggers the routing to tabBar method.
     final func configureWelcomeAnimation() {
         let animation = LottieAnimation.named(
             Constants.Resource.splashAnimationKey,
@@ -74,8 +76,8 @@ private extension SplashViewController {
         view.addSubview(animationView)
         animationView.anchorCenterSuperview()
         NSLayoutConstraint.activate([
-            animationView.heightAnchor.constraint(equalToConstant: length),
-            animationView.widthAnchor.constraint(equalToConstant: length)
+            animationView.heightAnchor.constraint(equalToConstant: animationViewLength),
+            animationView.widthAnchor.constraint(equalToConstant: animationViewLength)
         ])
 
         animationView.play { [weak self] _ in

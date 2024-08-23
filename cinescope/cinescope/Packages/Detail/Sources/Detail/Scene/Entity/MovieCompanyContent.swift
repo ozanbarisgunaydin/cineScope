@@ -7,7 +7,9 @@
 
 import Foundation
 
+// MARK: - MovieHeaderContent
 struct MovieCompanyContent {
+    // MARK: - Properties
     var imageURL: String?
     var name: String?
     var id: Int?

@@ -92,3 +92,19 @@ extension HomeViewController {
         }
     }
 }
+
+// MARK: - UICollectionViewDelegate
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedItemType = dataSource?.itemIdentifier(for: indexPath) as? HomeItemType else { return }
+        
+        switch selectedItemType {
+        case .genre:
+            presenter?.routeToGenreSearch(on: indexPath.row)
+        case .category(let categoryType):
+            presenter?.routeToCategorySearch(on: categoryType)
+        case .person:
+            presenter?.routeToPeopleSearch(on: indexPath.row)
+        }
+    }
+}

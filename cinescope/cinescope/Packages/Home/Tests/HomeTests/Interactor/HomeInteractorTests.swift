@@ -104,7 +104,7 @@ final class HomeInteractorTests: XCTestCase {
     }
 }
 
-// MARK: - Private Extension for Test Helpers
+// MARK: - Helpers
 private extension HomeInteractorTests {
     func runTest<T: Decodable & Equatable>(
         method: AnyPublisher<[T]?, BaseError>,

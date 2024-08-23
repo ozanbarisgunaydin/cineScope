@@ -165,6 +165,9 @@ private extension HomeViewController {
         )
     }
     
+    /// Takes the banner view's position relative to view and arrange the top padding of the collectionView.
+    /// This process needed for the accurate position both views since the banner view is scrolled with collection view's scroll positions.
+    /// The scroll behavior applied for the Z layer modified visual needings.
     final func setScrollInsets() {
         let bannerViewMinY = bannerView.convert(
             CGPoint(
@@ -183,6 +186,7 @@ private extension HomeViewController {
         )
     }
     
+    /// Provides a fade out transaction on scroll when the scroll view or banner is scrolled on the bottom of logo image.
     final func configureFadeOutView() {
         collectionFadeOutView.setGradientBackground(
             colors: [
@@ -196,6 +200,9 @@ private extension HomeViewController {
 
 // MARK: - Helpers
 private extension HomeViewController {
+    /// Changes the banner view's position according the scroll's offset length.
+    ///
+    /// - Parameter scrollDistance: CGFloat value for the scroll view's (`collectionView`) position.
     final func applyBannerScrollOffset(on scrollDistance: CGFloat) {
         bannerView.transform = CGAffineTransform(
             translationX: 0,
@@ -203,6 +210,11 @@ private extension HomeViewController {
         )
     }
     
+    /// Changes dynamically the banners view's gradient mask according to the scroll position.
+    /// It takes the scroll offset value and apply custom gradient on the top of the banner view.
+    /// This methods provides a fading out layer below the logo view.
+    ///
+    /// - Parameter scrollDistance: CGFloat value for the scroll view's (`collectionView`) position.
     final func applyBannerGradientMask(on scrollDistance: CGFloat) {
         let shadowPadding: CGFloat = 32
         let gradientHeight: CGFloat = 8

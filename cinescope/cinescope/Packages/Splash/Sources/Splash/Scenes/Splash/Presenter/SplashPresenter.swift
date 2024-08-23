@@ -9,6 +9,13 @@ import Combine
 import Components
 import Foundation
 
+
+// MARK: - Note
+/// There is no business operantion on this module.
+/// There can be force / soft update data logics and remote constants fetcher methods.
+///
+/// The VIPER patterns folders created and modules prepared for the further developments.
+
 // MARK: - SplashPresenterProtocol
 protocol SplashPresenterProtocol: BasePresenterProtocol {
     /// Components

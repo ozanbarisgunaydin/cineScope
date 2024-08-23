@@ -8,6 +8,10 @@
 import Components
 import UIKit
 
+// MARK: - Note
+/// This scene's layout handled with `UIScrollView` & some custom views instead of `CompositionalLayout` & custom cells.
+/// It maded this way demostrating this behavior and expand collapse logics on header view
+
 // MARK: - DetailViewProtocol
 protocol DetailViewProtocol: AnyObject  {
     var presenter: DetailPresenterProtocol? { get set }

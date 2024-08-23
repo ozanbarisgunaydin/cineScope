@@ -59,6 +59,8 @@ final class HomePresenter: BasePresenter, HomePresenterProtocol {
 
 // MARK: - Publics
 extension HomePresenter {
+    /// Triggers the interactor data fetchers methods. They are zipped from 1 batch.
+    /// It means when all the requests completed the datas collected and needed publisher data filler methods called.
     final func fetchContent() {
         isLoading.send(true)
         

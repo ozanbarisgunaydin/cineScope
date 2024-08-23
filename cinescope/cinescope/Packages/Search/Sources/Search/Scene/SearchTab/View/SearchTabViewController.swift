@@ -130,7 +130,6 @@ extension SearchTabViewController: UISearchBarDelegate {
     }
 }
 
-
 // MARK: - Helpers
 private extension SearchTabViewController {
     final func createLayout() -> UICollectionViewLayout {

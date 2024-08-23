@@ -9,7 +9,12 @@ import Foundation
 import AppManagers
 @testable import Home
 
+// MARK: - HomeContentDataMock
 final class HomeContentDataMock {
+    // MARK: - Init
+    private init() { }
+    
+    // MARK: - Static Data Provider Methods
     static func getBannerContent(movieID: Int) -> [BannerContentModel] {
         return [
             BannerContentModel(

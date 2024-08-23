@@ -12,6 +12,15 @@ public typealias Completion = (Result<RetrieveImageResult, KingfisherError>) -> 
 public typealias Progress = DownloadProgressBlock
 
 public extension UIImageView {
+    /// Loads an image into the UIImageView from a given URL or URL string using Kingfisher.
+    /// - Parameters:
+    ///   - progressBlock: Optional block to monitor download progress.
+    ///   - urlString: URL string of the image to load.
+    ///   - animated: Boolean to determine if a fade animation should be applied on image load.
+    ///   - placeholder: Name of the placeholder image to show while loading.
+    ///   - placeholderImage: UIImage to use as a placeholder while loading.
+    ///   - shouldKeepCurrentWhileLoading: Boolean to keep the current image until the new one loads.
+    ///   - completion: Optional completion block to handle success or failure of the image load.
     func loadImage(
         progressBlock: Progress? = nil,
         with urlString: String?,
@@ -21,9 +30,18 @@ public extension UIImageView {
         shouldKeepCurrentWhileLoading: Bool = true,
         completion: (Completion)? = nil
     ) {
+        guard 
+            let urlString = urlString,
+            let url = URL(string: urlString)
+        else {
+            image = placeholderImage ?? (placeholder != nil ? UIImage(named: placeholder!) : nil)
+            completion?(.failure(.requestError(reason: .emptyRequest)))
+            return
+        }
+        
         loadImage(
             progressBlock: progressBlock,
-            with: URL(string: urlString ?? ""),
+            with: url,
             animated: animated,
             placeholder: placeholder,
             placeholderImage: placeholderImage,
@@ -31,7 +49,16 @@ public extension UIImageView {
             completion: completion
         )
     }
-
+    
+    /// Loads an image into the UIImageView from a given URL or URL string using Kingfisher.
+    /// - Parameters:
+    ///   - progressBlock: Optional block to monitor download progress.
+    ///   - url: URL of the image to load.
+    ///   - animated: Boolean to determine if a fade animation should be applied on image load.
+    ///   - placeholder: Name of the placeholder image to show while loading.
+    ///   - placeholderImage: UIImage to use as a placeholder while loading.
+    ///   - shouldKeepCurrentWhileLoading: Boolean to keep the current image until the new one loads.
+    ///   - completion: Optional completion block to handle success or failure of the image load.
     func loadImage(
         progressBlock: Progress? = nil,
         with url: URL?,
@@ -41,52 +68,32 @@ public extension UIImageView {
         shouldKeepCurrentWhileLoading: Bool = false,
         completion: (Completion)? = nil
     ) {
-        let phImage: UIImage?
-        if let placeholderImage = placeholderImage {
-            phImage = placeholderImage
-        } else {
-            if let placeholder = placeholder {
-                phImage = UIImage(imageLiteralResourceName: placeholder)
-            } else {
-                phImage = nil
-            }
-        }
-
-        guard let url else {
-            image = phImage
+        guard let url = url else {
+            image = placeholderImage ?? (placeholder != nil ? UIImage(named: placeholder!) : nil)
             completion?(.failure(.requestError(reason: .emptyRequest)))
             return
         }
-
+        
+        let phImage = placeholderImage ?? (placeholder != nil ? UIImage(named: placeholder!) : nil)
+        
         var options: KingfisherOptionsInfo = [
             .processor(DownsamplingImageProcessor(size: self.bounds.size)),
             .scaleFactor(UIScreen.main.scale),
             .cacheOriginalImage,
             .targetCache(.default)
         ]
-
+        
         if shouldKeepCurrentWhileLoading {
             options.append(.keepCurrentImageWhileLoading)
         }
-
+        
         if animated {
             options.append(.transition(.fade(0.3)))
         }
         
-        let cache = ImageCache.default
-        cache.memoryStorage.config.totalCostLimit = 128 * 1024 * 1024
-        cache.memoryStorage.config.countLimit = 128
-        cache.memoryStorage.config.expiration = .seconds(60)
-        cache.memoryStorage.config.cleanInterval = 30
-
-        cache.diskStorage.config.sizeLimit = 256 * 1024 * 1024
-        cache.diskStorage.config.expiration = .never
-
-        KingfisherManager.shared.cache = cache
-
         kf.setImage(
-            with: KF.ImageResource(downloadURL: url),
-            placeholder: placeholderImage,
+            with: url,
+            placeholder: phImage,
             options: options,
             progressBlock: progressBlock,
             completionHandler: completion

@@ -27,7 +27,7 @@ final class SearchTabInteractor: SearchTabInteractorProtocol {
             guard let self else { return }
             self.network.request(
                 router: MovieAPI.getLastMovieKeywords,
-                model: MovieKeywordsResponse.self
+                model: MovieKeywordListEntity.self
             ) { result in
                 switch result {
                 case .success(let response):

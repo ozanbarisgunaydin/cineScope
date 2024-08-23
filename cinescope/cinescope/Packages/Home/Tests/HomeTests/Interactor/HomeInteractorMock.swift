@@ -19,7 +19,7 @@ final class HomeInteractorMock: HomeInteractorProtocol {
     var fetchMovieGenresResult: Result<[Genre]?, BaseError>?
     var fetchPeopleListResult: Result<[PeopleContent]?, BaseError>?
     
-    // MARK: - Functions
+    // MARK: - Mocked Functions
     func fetchPopularMovies() -> AnyPublisher<[Movie]?, BaseError> {
         return Future<[Movie]?, BaseError> { promise in
             if let result = self.fetchPopularMoviesResult {

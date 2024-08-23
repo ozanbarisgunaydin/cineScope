@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 // MARK: - VoteContent
 struct VoteContent {
     var average: String?
