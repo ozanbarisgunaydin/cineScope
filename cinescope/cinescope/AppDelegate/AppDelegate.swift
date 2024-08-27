@@ -11,13 +11,13 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    lazy var appCoordinator = AppRouter(window: &window)
+    lazy var appRouter = AppRouter(window: &window)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         commonInit(application)
-        appCoordinator.start()
+        appRouter.start()
         
         return true
     }

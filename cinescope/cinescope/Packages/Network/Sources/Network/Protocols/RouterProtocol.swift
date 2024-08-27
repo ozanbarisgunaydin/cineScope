@@ -21,27 +21,26 @@ public protocol RouterProtocol: URLRequestConvertible {
 
 // MARK: - URLRequest
 extension RouterProtocol {
-    // swiftlint:disable cyclomatic_complexity
     public func asURLRequest() throws -> URLRequest {
         var url = baseURL
 
-        // Path
+        /// Path
         if let path {
             url = baseURL.appendingPathComponent(path)
         }
 
         var request = URLRequest(url: url)
 
-        // Method
+        /// Method
         request.httpMethod = method.rawValue
-        // Headers
+        /// Headers
         request.allHTTPHeaderFields = headers.dictionary
-        // Cache Policy
+        /// Cache Policy
         request.cachePolicy = cachePolicy
-        // Timeout
+        /// Timeout
         request.timeoutInterval = timeout
 
-        // Task
+        /// Task
         switch task {
         case .requestPlain, .uploadFile, .uploadMultipart, .downloadDestination:
             break
@@ -91,7 +90,6 @@ extension RouterProtocol {
 
         return request
     }
-    // swiftlint:enable cyclomatic_complexity
 }
 
 // MARK: - Hash

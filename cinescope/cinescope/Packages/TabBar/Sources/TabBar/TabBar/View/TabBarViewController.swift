@@ -2,7 +2,7 @@
 //  TabBarViewController.swift
 //
 //
-//  Created by Mert Karabulut on 20.02.2022.
+//  Created by Ozan Barış Günaydın on 8.08.2024.
 //
 
 import AppManagers

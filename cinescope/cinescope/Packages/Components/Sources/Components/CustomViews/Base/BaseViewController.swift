@@ -92,7 +92,7 @@ open class BaseViewController: UIViewController, BaseViewControllerProtocol, UIG
             .store(in: &cancellables)
     }
 
-    @objc open func didTapBackButton() {
+    open func didTapBackButton() {
         if isModal {
             dismiss(animated: true, completion: nil)
         } else {
@@ -129,8 +129,15 @@ public extension BaseViewController {
                 image: resizedBackButtonImage,
                 style: .plain,
                 target: self,
-                action: #selector(didTapBackButton)
-            )
+                action: nil
+            ) 
+                
+            backButton.publisher()
+                .sink { [weak self] _ in
+                    guard let self else { return }
+                    didTapBackButton()
+                }
+                .store(in: &cancellables)
 
             navigationItem.leftBarButtonItem = backButton
         } else {
