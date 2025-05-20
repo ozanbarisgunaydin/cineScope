@@ -135,7 +135,7 @@ extension HomeViewController {
     final func createPersonsSection() -> NSCollectionLayoutSection {
         let wantedItemSize = PersonCell.viewSize
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(wantedItemSize.width),
+            widthDimension: .estimated(wantedItemSize.width),
             heightDimension: .absolute(wantedItemSize.height)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

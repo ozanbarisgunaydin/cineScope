@@ -18,6 +18,7 @@ final class PersonCellView: UICollectionViewCell, NibLoadable {
     @IBOutlet private weak var personImageView: UIImageView!
     @IBOutlet private weak var nameContainerView: UIView!
     @IBOutlet private weak var nameLabel: CustomLabel!
+    @IBOutlet private weak var knowForMoviesStackView: UIStackView!
     @IBOutlet private weak var topMoviePoster: UIImageView!
     @IBOutlet private weak var middleMoviePoster: UIImageView!
     @IBOutlet private weak var bottomMoviePoster: UIImageView!
@@ -39,6 +40,7 @@ extension PersonCellView {
     ) {
         personImageView.loadImage(with: content.profileImageURL)
         nameLabel.text = content.artistName
+        knowForMoviesStackView.isHidden = content.knownedMoviePosters.isEmpty
         topMoviePoster.loadImage(with: content.knownedMoviePosters[safe: 0] ?? "")
         middleMoviePoster.loadImage(with: content.knownedMoviePosters[safe: 1] ?? "")
         bottomMoviePoster.loadImage(with: content.knownedMoviePosters[safe: 2] ?? "")
@@ -67,5 +69,4 @@ private extension PersonCellView {
         
         nameContainerView.backgroundColor = .black.withAlphaComponent(0.7)
     }
-   
 }
