@@ -31,7 +31,7 @@ final class FavoritesViewController: BaseViewController, FavoritesViewProtocol {
     }
     
     // MARK: - Data
-    var dataSource: UICollectionViewDiffableDataSource<FavoritesSectionType, AnyHashable>?
+    var dataSource: UICollectionViewDiffableDataSource<FavoritesSectionType, FavoritesItemType>?
     
     // MARK: - Life Cycles
     override public func viewDidLoad() {
@@ -136,7 +136,7 @@ extension FavoritesViewController {
         collectionView.isHidden = !isContentFilled
         
         guard isContentFilled else { return }
-        var snapshot = NSDiffableDataSourceSnapshot<FavoritesSectionType, AnyHashable>()
+        var snapshot = NSDiffableDataSourceSnapshot<FavoritesSectionType, FavoritesItemType>()
         
         snapshot.appendSections(data.map { $0.sectionType })
         
@@ -148,14 +148,9 @@ extension FavoritesViewController {
     }
     
     final func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<FavoritesSectionType, AnyHashable>(
+        dataSource = UICollectionViewDiffableDataSource<FavoritesSectionType, FavoritesItemType>(
             collectionView: collectionView
         ) { collectionView, indexPath, item in
-            guard
-                let item = item as? FavoritesItemType
-            else {
-                return UICollectionViewCell()
-            }
             switch item {
             case .movie(let content):
                 let movieCell = collectionView.dequeueReusableCell(

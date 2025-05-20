@@ -36,7 +36,7 @@ final class HomeViewController: BaseViewController, HomeViewProtocol {
     }
     
     // MARK: - Data
-    var dataSource: UICollectionViewDiffableDataSource<HomeSectionType, AnyHashable>?
+    var dataSource: UICollectionViewDiffableDataSource<HomeSectionType, HomeItemType>?
     
     // MARK: - Global Variables
     var shouldGiveScrollOffset = false

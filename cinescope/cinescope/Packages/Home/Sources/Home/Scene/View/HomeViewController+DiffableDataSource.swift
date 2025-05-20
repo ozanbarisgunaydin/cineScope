@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Diffable Data Source
 extension HomeViewController {
     final func applySnapshot(with data: [HomeContent]) {
-        var snapshot = NSDiffableDataSourceSnapshot<HomeSectionType, AnyHashable>()
+        var snapshot = NSDiffableDataSourceSnapshot<HomeSectionType, HomeItemType>()
 
         snapshot.appendSections(data.map { $0.sectionType })
 
@@ -26,14 +26,9 @@ extension HomeViewController {
     }
 
     final func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<HomeSectionType, AnyHashable>(
+        dataSource = UICollectionViewDiffableDataSource<HomeSectionType, HomeItemType>(
             collectionView: collectionView
         ) { collectionView, indexPath, item in
-            guard 
-                let item = item as? HomeItemType
-            else {
-                return UICollectionViewCell()
-            }
             switch item {
             case .genre(let content):
                 let genreCell = collectionView.dequeueReusableCell(
